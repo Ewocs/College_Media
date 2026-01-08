@@ -3,13 +3,12 @@
  * Issue #238: Performance Optimization - Component lazy loading wrapper
  */
 
-import { Suspense, lazy } from 'react';
-import SkeletonLoader from './SkeletonLoader';
+import { Suspense, lazy } from "react";
+import SkeletonLoader from "./SkeletonLoader";
 
 export const LazyComponent = ({
   importFunc,
   fallback = <SkeletonLoader />,
-  errorFallback = <div>Failed to load component</div>,
   ...props
 }) => {
   const Component = lazy(importFunc);

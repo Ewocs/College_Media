@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import QuizLayout from '../components/QuizLayout';
-import './GamifiedAssessment.css';
+import React, { useState } from "react";
+import QuizLayout from "../components/QuizLayout";
+import "./GamifiedAssessment.css";
 
 const GamifiedAssessmentPage = () => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -9,50 +9,55 @@ const GamifiedAssessmentPage = () => {
   // Sample questions data
   const sampleQuestions = [
     {
-      question: 'What is the capital of France?',
+      question: "What is the capital of France?",
+      hint: "It is known as the City of Light.",
       options: [
-        { text: 'London', isCorrect: false },
-        { text: 'Paris', isCorrect: true },
-        { text: 'Berlin', isCorrect: false },
-        { text: 'Madrid', isCorrect: false }
-      ]
+        { text: "London", isCorrect: false },
+        { text: "Paris", isCorrect: true },
+        { text: "Berlin", isCorrect: false },
+        { text: "Madrid", isCorrect: false },
+      ],
     },
     {
-      question: 'Which planet is known as the Red Planet?',
+      question: "Which planet is known as the Red Planet?",
+      hint: "It is the fourth planet from the Sun.",
       options: [
-        { text: 'Venus', isCorrect: false },
-        { text: 'Mars', isCorrect: true },
-        { text: 'Jupiter', isCorrect: false },
-        { text: 'Saturn', isCorrect: false }
-      ]
+        { text: "Venus", isCorrect: false },
+        { text: "Mars", isCorrect: true },
+        { text: "Jupiter", isCorrect: false },
+        { text: "Saturn", isCorrect: false },
+      ],
     },
     {
-      question: 'What is the largest ocean on Earth?',
+      question: "What is the largest ocean on Earth?",
+      hint: "It sits between Asia and the Americas.",
       options: [
-        { text: 'Atlantic Ocean', isCorrect: false },
-        { text: 'Indian Ocean', isCorrect: false },
-        { text: 'Arctic Ocean', isCorrect: false },
-        { text: 'Pacific Ocean', isCorrect: true }
-      ]
+        { text: "Atlantic Ocean", isCorrect: false },
+        { text: "Indian Ocean", isCorrect: false },
+        { text: "Arctic Ocean", isCorrect: false },
+        { text: "Pacific Ocean", isCorrect: true },
+      ],
     },
     {
       question: 'Who wrote "Romeo and Juliet"?',
+      hint: "A famous English playwright from Stratford-upon-Avon.",
       options: [
-        { text: 'William Shakespeare', isCorrect: true },
-        { text: 'Jane Austen', isCorrect: false },
-        { text: 'Charles Dickens', isCorrect: false },
-        { text: 'Mark Twain', isCorrect: false }
-      ]
+        { text: "William Shakespeare", isCorrect: true },
+        { text: "Jane Austen", isCorrect: false },
+        { text: "Charles Dickens", isCorrect: false },
+        { text: "Mark Twain", isCorrect: false },
+      ],
     },
     {
-      question: 'What is the chemical symbol for Gold?',
+      question: "What is the chemical symbol for Gold?",
+      hint: "It comes from the Latin word Aurum.",
       options: [
-        { text: 'Go', isCorrect: false },
-        { text: 'Gd', isCorrect: false },
-        { text: 'Au', isCorrect: true },
-        { text: 'Ag', isCorrect: false }
-      ]
-    }
+        { text: "Go", isCorrect: false },
+        { text: "Gd", isCorrect: false },
+        { text: "Au", isCorrect: true },
+        { text: "Ag", isCorrect: false },
+      ],
+    },
   ];
 
   const handleQuizComplete = (results) => {
@@ -97,7 +102,7 @@ const GamifiedAssessmentPage = () => {
               </div>
             </div>
 
-            <button 
+            <button
               className="gamified-start-button"
               onClick={() => setQuizStarted(true)}
             >
@@ -110,8 +115,9 @@ const GamifiedAssessmentPage = () => {
   }
 
   if (quizResults) {
-    const percentage = (quizResults.correctAnswers / quizResults.totalQuestions) * 100;
-    
+    const percentage =
+      (quizResults.correctAnswers / quizResults.totalQuestions) * 100;
+
     return (
       <div className="gamified-assessment-wrapper">
         <div className="results-container">
@@ -122,26 +128,43 @@ const GamifiedAssessmentPage = () => {
           <div className="results-card">
             <div className="score-display">
               <div className="score-circle">
-                <span className="score-percentage">{Math.round(percentage)}%</span>
+                <span className="score-percentage">
+                  {Math.round(percentage)}%
+                </span>
                 <span className="score-label">Score</span>
               </div>
             </div>
 
             <div className="results-details">
               <p className="results-summary">
-                You answered <strong>{quizResults.correctAnswers} out of {quizResults.totalQuestions}</strong> questions correctly!
+                You answered{" "}
+                <strong>
+                  {quizResults.correctAnswers} out of{" "}
+                  {quizResults.totalQuestions}
+                </strong>{" "}
+                questions correctly!
               </p>
 
               <div className="results-message">
-                {percentage === 100 && <p>🏆 Perfect Score! Outstanding performance!</p>}
-                {percentage >= 80 && percentage < 100 && <p>🌟 Excellent work! Keep it up!</p>}
-                {percentage >= 60 && percentage < 80 && <p>👍 Good job! You're doing great!</p>}
-                {percentage >= 40 && percentage < 60 && <p>💪 Not bad! Try again to improve!</p>}
-                {percentage < 40 && <p>📚 Keep studying! You'll do better next time!</p>}
+                {percentage === 100 && (
+                  <p>🏆 Perfect Score! Outstanding performance!</p>
+                )}
+                {percentage >= 80 && percentage < 100 && (
+                  <p>🌟 Excellent work! Keep it up!</p>
+                )}
+                {percentage >= 60 && percentage < 80 && (
+                  <p>👍 Good job! You're doing great!</p>
+                )}
+                {percentage >= 40 && percentage < 60 && (
+                  <p>💪 Not bad! Try again to improve!</p>
+                )}
+                {percentage < 40 && (
+                  <p>📚 Keep studying! You'll do better next time!</p>
+                )}
               </div>
             </div>
 
-            <button 
+            <button
               className="gamified-restart-button"
               onClick={handleRestartQuiz}
             >
@@ -155,10 +178,7 @@ const GamifiedAssessmentPage = () => {
 
   return (
     <div className="gamified-quiz-wrapper">
-      <QuizLayout 
-        questions={sampleQuestions}
-        onComplete={handleQuizComplete}
-      />
+      <QuizLayout questions={sampleQuestions} onComplete={handleQuizComplete} />
     </div>
   );
 };

@@ -3,43 +3,41 @@
  * Issue #238: Performance Optimization - Lazy loading images
  */
 
-import { useState, useEffect } from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useState, useEffect } from "react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import {
-  generateSrcSet,
-  generateSizes,
   createBlurPlaceholder,
   getOptimizedImageUrl,
-} from '../utils/imageOptimization';
+} from "../utils/imageOptimization";
 
 export const LazyImage = ({
   src,
   alt,
   width,
   height,
-  className = '',
+  className = "",
   style = {},
-  loading = 'lazy',
-  placeholder = 'blur',
+  loading = "lazy",
+  placeholder = "blur",
   quality = 80,
   onLoad,
   onError,
   ...props
 }) => {
   const [imageSrc, setImageSrc] = useState(
-    placeholder === 'blur' ? createBlurPlaceholder() : null
+    placeholder === "blur" ? createBlurPlaceholder() : null
   );
   const [imageLoaded, setImageLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const { targetRef, hasIntersected } = useIntersectionObserver({
-    rootMargin: '100px',
+    rootMargin: "100px",
   });
 
   useEffect(() => {
     if (!hasIntersected || !src) return;
 
     const img = new Image();
-    
+
     img.onload = () => {
       setImageSrc(src);
       setImageLoaded(true);
@@ -81,9 +79,11 @@ export const LazyImage = ({
       width={width}
       height={height}
       loading={loading}
-      className={`lazy-image ${imageLoaded ? 'loaded' : 'loading'} ${className}`}
+      className={`lazy-image ${
+        imageLoaded ? "loaded" : "loading"
+      } ${className}`}
       style={{
-        transition: 'opacity 0.3s ease-in-out',
+        transition: "opacity 0.3s ease-in-out",
         opacity: imageLoaded ? 1 : 0.5,
         ...style,
       }}

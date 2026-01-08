@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { FaRegLightbulb } from "react-icons/fa";
 import gsap from "gsap";
 import CountdownTimer from "./CountdownTimer";
 import AnimatedFeedback from "./AnimatedFeedback";
@@ -9,6 +10,7 @@ const QuizLayout = ({ questions = [], onComplete = () => {} }) => {
   const [answers, setAnswers] = useState([]);
   const [feedback, setFeedback] = useState(null);
   const [timePerQuestion] = useState(30);
+  const [showHint, setShowHint] = useState(false);
   const quizContainerRef = useRef(null);
 
   const totalQuestions = questions.length || 5;
@@ -103,11 +105,30 @@ const QuizLayout = ({ questions = [], onComplete = () => {} }) => {
       {/* Quiz Content */}
       <div className="quiz-content-wrapper" ref={quizContainerRef}>
         <div className="quiz-question-container">
-          <h2 className="question-title">
+          <h2 className="question-title flex items-center gap-2 justify-center relative">
             {questions[currentQuestion]?.question ||
               `Question ${currentQuestion + 1}`}
-          </h2>
 
+            {questions[currentQuestion]?.hint && (
+              <div
+                className="relative inline-block"
+                onMouseEnter={() => setShowHint(true)}
+                onMouseLeave={() => setShowHint(false)}
+              >
+                <FaRegLightbulb className="text-yellow-400 cursor-help text-lg hover:scale-110 transition-transform" />
+
+                {/* Tooltip */}
+                <div
+                  className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-2 bg-slate-800 text-white text-xs rounded shadow-lg w-48 text-center z-50 transition-opacity duration-200 pointer-events-none ${
+                    showHint ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {questions[currentQuestion].hint}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                </div>
+              </div>
+            )}
+          </h2>
           <div className="options-container">
             {questions[currentQuestion]?.options ? (
               questions[currentQuestion].options.map((option, index) => (
