@@ -52,17 +52,24 @@ export const authAPI = {
     localStorage.removeItem('user');
   },
 
-  // Forgot password
+  // Forgot password - Send OTP
   forgotPassword: async (email) => {
     const response = await apiClient.post('/auth/forgot-password', { email });
     return response.data;
   },
 
-  // Reset password
-  resetPassword: async (token, newPassword) => {
+  // Verify OTP
+  verifyOTP: async (email, otp) => {
+    const response = await apiClient.post('/auth/verify-otp', { email, otp });
+    return response.data;
+  },
+
+  // Reset password with token
+  resetPassword: async (resetToken, newPassword, email) => {
     const response = await apiClient.post('/auth/reset-password', { 
-      token, 
-      newPassword 
+      resetToken, 
+      newPassword,
+      email
     });
     return response.data;
   },
