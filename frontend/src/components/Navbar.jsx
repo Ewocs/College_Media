@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 import NotificationBell from "./NotificationBell";
 import SearchBar from "./SearchBar";
 
-function Navbar({ searchQuery, setSearchQuery }) {
+function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { user } = useAuth();
 

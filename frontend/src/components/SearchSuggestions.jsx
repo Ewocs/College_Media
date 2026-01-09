@@ -1,15 +1,24 @@
-import { Icon } from '@iconify/react';
-import { Link } from 'react-router-dom';
-import { removeFromSearchHistory, clearSearchHistory } from '../utils/searchHistory';
-import { useState } from 'react';
+import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
+import {
+  removeFromSearchHistory,
+  clearSearchHistory,
+} from "../utils/searchHistory";
+import { useState } from "react";
 
-const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onClose }) => {
+const SearchSuggestions = ({
+  suggestions,
+  loading,
+  query,
+  history,
+  onSelect,
+}) => {
   const [historyItems, setHistoryItems] = useState(history);
 
   const handleRemoveHistory = (item, e) => {
     e.stopPropagation();
     removeFromSearchHistory(item);
-    setHistoryItems(prev => prev.filter(h => h !== item));
+    setHistoryItems((prev) => prev.filter((h) => h !== item));
   };
 
   const handleClearHistory = () => {
@@ -19,9 +28,9 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
 
   const getIcon = (type) => {
     const icons = {
-      user: { icon: 'mdi:account', color: 'text-blue-500' },
-      post: { icon: 'mdi:file-document', color: 'text-green-500' },
-      tag: { icon: 'mdi:pound', color: 'text-purple-500' },
+      user: { icon: "mdi:account", color: "text-blue-500" },
+      post: { icon: "mdi:file-document", color: "text-green-500" },
+      tag: { icon: "mdi:pound", color: "text-purple-500" },
     };
     return icons[type] || icons.post;
   };
@@ -30,7 +39,11 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
     <div className="absolute top-full mt-2 w-full bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 max-h-[500px] overflow-y-auto">
       {loading ? (
         <div className="flex items-center justify-center py-8">
-          <Icon icon="mdi:loading" width={32} className="animate-spin text-blue-600" />
+          <Icon
+            icon="mdi:loading"
+            width={32}
+            className="animate-spin text-blue-600"
+          />
         </div>
       ) : (
         <>
@@ -54,8 +67,14 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
                   onClick={() => onSelect(item)}
                   className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left group"
                 >
-                  <Icon icon="mdi:history" width={20} className="text-gray-400" />
-                  <span className="flex-1 text-gray-900 dark:text-gray-100">{item}</span>
+                  <Icon
+                    icon="mdi:history"
+                    width={20}
+                    className="text-gray-400"
+                  />
+                  <span className="flex-1 text-gray-900 dark:text-gray-100">
+                    {item}
+                  </span>
                   <button
                     onClick={(e) => handleRemoveHistory(item, e)}
                     className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all"
@@ -80,7 +99,9 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
                 return (
                   <button
                     key={suggestion.id}
-                    onClick={() => onSelect(suggestion.query || suggestion.name)}
+                    onClick={() =>
+                      onSelect(suggestion.query || suggestion.name)
+                    }
                     className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left"
                   >
                     <div className={`${iconData.color}`}>
@@ -110,7 +131,11 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
           {/* No Results */}
           {query && !loading && suggestions.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 px-4">
-              <Icon icon="mdi:magnify" width={48} className="text-gray-400 mb-3" />
+              <Icon
+                icon="mdi:magnify"
+                width={48}
+                className="text-gray-400 mb-3"
+              />
               <p className="text-gray-600 dark:text-gray-400 text-center">
                 No suggestions found for "{query}"
               </p>
@@ -123,7 +148,11 @@ const SearchSuggestions = ({ suggestions, loading, query, history, onSelect, onC
           {/* Empty State */}
           {!query && historyItems.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 px-4">
-              <Icon icon="mdi:magnify" width={48} className="text-gray-400 mb-3" />
+              <Icon
+                icon="mdi:magnify"
+                width={48}
+                className="text-gray-400 mb-3"
+              />
               <p className="text-gray-600 dark:text-gray-400 text-center">
                 Start typing to search
               </p>
