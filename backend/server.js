@@ -18,37 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 // Static file serving for uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Initialize database connection
-let dbConnection;
-
-const connectDB = async () => {
-  try {
-    dbConnection = await initDB();
-    
-    // Set the database connection globally so routes can access it
-    app.set('dbConnection', dbConnection);
-    
-    // Import routes after database connection is established
-    app.use('/api/auth', require('./routes/auth'));
-    app.use('/api/users', require('./routes/users'));
-    
-    console.log('Database initialized successfully');
-  } catch (error) {
-    console.error('Database initialization error:', error);
-    // Don't exit, just use mock database
-    dbConnection = { useMongoDB: false, mongoose: null };
-    app.set('dbConnection', dbConnection);
-    
-    // Import routes with fallback to mock DB
-    app.use('/api/auth', require('./routes/auth'));
-    app.use('/api/users', require('./routes/users'));
-    
-    console.log('Using file-based database as fallback');
-  }
-};
-
-connectDB();
-
 // Basic route
 app.get('/', (req, res) => {
   res.json({
@@ -58,12 +27,40 @@ app.get('/', (req, res) => {
   });
 });
 
-// 404 Not Found Handler (must be after all routes)
-app.use(notFound);
+// Initialize database connection and start server
+const startServer = async () => {
+  let dbConnection;
+  
+  try {
+    dbConnection = await initDB();
+    
+    // Set the database connection globally so routes can access it
+    app.set('dbConnection', dbConnection);
+    
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Database initialization error:', error);
+    // Don't exit, just use mock database
+    dbConnection = { useMongoDB: false, mongoose: null };
+    app.set('dbConnection', dbConnection);
+    
+    console.log('Using file-based database as fallback');
+  }
+  
+  // Import and register routes
+  app.use('/api/auth', require('./routes/auth'));
+  app.use('/api/users', require('./routes/users'));
+  
+  // 404 Not Found Handler (must be after all routes)
+  app.use(notFound);
+  
+  // Global Error Handler (must be last)
+  app.use(errorHandler);
+  
+  // Start the server
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+};
 
-// Global Error Handler (must be last)
-app.use(errorHandler);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+startServer();

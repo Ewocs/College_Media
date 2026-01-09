@@ -109,11 +109,29 @@ const updateProfilePicture = (id, profilePicturePath) => {
   return userWithoutPassword;
 };
 
+// Update password
+const updatePassword = (id, hashedPassword) => {
+  const users = readUsers();
+  const userIndex = users.findIndex(user => user._id === id);
+  
+  if (userIndex === -1) {
+    return null;
+  }
+  
+  users[userIndex].password = hashedPassword;
+  users[userIndex].updatedAt = new Date().toISOString();
+  
+  writeUsers(users);
+  
+  return true;
+};
+
 module.exports = {
   findByEmail,
   findByUsername,
   findById,
   create,
   update,
-  updateProfilePicture
+  updateProfilePicture,
+  updatePassword
 };

@@ -37,6 +37,9 @@ const NotificationPreferences = lazy(() =>
   import("./components/NotificationPreferences.jsx")
 );
 const SearchResults = lazy(() => import("./pages/SearchResults.jsx"));
+const Login = lazy(() => import("./pages/Login.jsx"));
+const Signup = lazy(() => import("./pages/Signup.jsx"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 
 // Cursor Trail Component
 const CursorTrail = () => {
@@ -445,6 +448,30 @@ const App = () => {
             element={
               <Suspense fallback={<PostSkeleton />}>
                 <Landing />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<PostSkeleton />}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense fallback={<PostSkeleton />}>
+                <Signup />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <Suspense fallback={<PostSkeleton />}>
+                <ForgotPassword />
               </Suspense>
             }
           />

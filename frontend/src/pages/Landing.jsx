@@ -188,10 +188,10 @@ const Landing = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-3">
-              <Link to="/home" className="px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-[#e8684a] text-white text-xs md:text-sm font-medium hover:bg-[#d65a3d] transition">
+              <Link to="/login" className="px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-[#e8684a] text-white text-xs md:text-sm font-medium hover:bg-[#d65a3d] transition">
                 Log In
               </Link>
-              <Link to="/home" className="px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-gray-900 text-white text-xs md:text-sm font-medium hover:bg-black transition">
+              <Link to="/signup" className="px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-gray-900 text-white text-xs md:text-sm font-medium hover:bg-black transition">
                 Sign up
               </Link>
             </div>
@@ -221,7 +221,7 @@ const Landing = () => {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/home"
+              to="/signup"
               className="inline-block px-8 py-3.5 rounded-full bg-[#e8684a] text-white font-medium hover:bg-[#d65a3d] transition shadow-sm"
             >
               Join Your College Network
