@@ -91,6 +91,7 @@ export const notificationsApi = {
   markAsRead: (id) => apiClient.put(`/notifications/${id}/read`),
   markAllAsRead: () => apiClient.put('/notifications/read-all'),
   delete: (id) => apiClient.delete(`/notifications/${id}`),
+  clearAll: () => apiClient.delete('/notifications/clear-all'),
 };
 
 // Export all APIs

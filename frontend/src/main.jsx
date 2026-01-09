@@ -13,6 +13,7 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { BookmarkProvider } from "./context/BookmarkContext.jsx";
 import { SocketProvider } from "./context/SocketContext.jsx";
 import { AccessibilityProvider } from "./context/AccessibilityContext.jsx";
+import { NotificationProvider } from "./context/NotificationContext.jsx";
 import { register as registerServiceWorker } from "./utils/serviceWorkerRegistration";
 import "./index.css";
 import "./styles/accessibility.css";
@@ -29,9 +30,11 @@ createRoot(document.getElementById("root")).render(
           <ThemeProvider>
             <BookmarkProvider>
               <SocketProvider>
-                <BrowserRouter>
-                  <App />
-                </BrowserRouter>
+                <NotificationProvider>
+                  <BrowserRouter>
+                    <App />
+                  </BrowserRouter>
+                </NotificationProvider>
               </SocketProvider>
             </BookmarkProvider>
           </ThemeProvider>

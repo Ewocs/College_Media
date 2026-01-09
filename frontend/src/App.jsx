@@ -28,6 +28,8 @@ const CreatePost = lazy(() => import("./components/CreatePost.jsx"));
 const CoursesLanding = lazy(() => import("./pages/CoursesLanding.jsx"));
 const LearningMode = lazy(() => import("./pages/LearningMode.jsx"));
 const Landing = lazy(() => import("./pages/Landing.jsx"));
+const NotificationCenter = lazy(() => import("./components/NotificationCenter.jsx"));
+const NotificationPreferences = lazy(() => import("./components/NotificationPreferences.jsx"));
 
 const MainLayout = ({
   children,
@@ -326,6 +328,8 @@ const App = () => {
                     />
                     <Route path="/reels" element={<Reels />} />
                     <Route path="/create-post" element={<CreatePost />} />
+                    <Route path="/notifications" element={<NotificationCenter />} />
+                    <Route path="/notifications/preferences" element={<NotificationPreferences />} />
                     <Route path="/contact" element={<ContactUs />} />
                     <Route path="/certificate" element={<CertificatePage />} />
                     <Route
