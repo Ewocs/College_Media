@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";

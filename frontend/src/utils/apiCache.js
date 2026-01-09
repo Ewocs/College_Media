@@ -88,7 +88,9 @@ export const invalidateCache = (pattern) => {
   }
 
   if (import.meta.env.DEV && invalidatedCount > 0) {
-    console.log(`🗑️ [Cache Invalidated] ${invalidatedCount} entries matching "${pattern}"`);
+    console.log(
+      `🗑️ [Cache Invalidated] ${invalidatedCount} entries matching "${pattern}"`
+    );
   }
 
   return invalidatedCount;
@@ -116,7 +118,7 @@ export const getCacheStats = () => {
   let valid = 0;
   let totalSize = 0;
 
-  for (const [key, entry] of cache.entries()) {
+  for (const [_key, entry] of cache.entries()) {
     if (entry.isExpired()) {
       expired++;
     } else {
@@ -154,7 +156,7 @@ export const cleanExpiredCache = () => {
 };
 
 // Auto-clean expired cache every minute
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   setInterval(cleanExpiredCache, 60000);
 }
 
