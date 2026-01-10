@@ -30,6 +30,7 @@ const NotificationPreferences = lazy(() => import("../components/NotificationPre
 const SearchResults = lazy(() => import("../pages/SearchResults.jsx"));
 const Settings = lazy(() => import("../pages/Settings.jsx"));
 const Profile = lazy(() => import("../pages/Profile.jsx"));
+const Messages = lazy(() => import("../pages/Messages.jsx"));
 
 const AppRoutes = ({
     activeTab,
@@ -181,6 +182,15 @@ const AppRoutes = ({
           element={
             <LazyWrapper>
               <Profile />
+            </LazyWrapper>
+          }
+        />
+
+        <Route
+          path="messages"
+          element={
+            <LazyWrapper>
+              <Messages />
             </LazyWrapper>
           }
         />
