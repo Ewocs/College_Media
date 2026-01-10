@@ -28,8 +28,29 @@ const Settings = () => {
   const [passwordError, setPasswordError] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
 
-  const toggleSetting = (key) => {
-    setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
+  const [show2FAModal, setShow2FAModal] = useState(false);
+  const [twoFAStep, setTwoFAStep] = useState(1); // 1: QR Code, 2: Verify
+  const [twoFASecret, setTwoFASecret] = useState("");
+  const [twoFAQRCode, setTwoFAQRCode] = useState("");
+  const [twoFACode, setTwoFACode] = useState("");
+  const [twoFAError, setTwoFAError] = useState("");
+  const [twoFALoading, setTwoFALoading] = useState(false);
+
+  const toggleSetting = async (key) => {
+    if (key === "twoFactorAuth") {
+      if (settings.twoFactorAuth) {
+        // Disable 2FA - show password confirmation
+        const password = prompt("Enter your password to disable 2FA:");
+        if (password) {
+          await handle2FADisable(password);
+        }
+      } else {
+        // Enable 2FA - show modal
+        await handle2FAEnable();
+      }
+    } else {
+      setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
+    }
   };
 
   const handleLogoutClick = () => {
@@ -116,6 +137,118 @@ const Settings = () => {
     setShowChangePassword(false);
     setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
     setPasswordError("");
+  };
+
+  const handle2FAEnable = async () => {
+    setTwoFALoading(true);
+    setTwoFAError("");
+
+    try {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`${API_BASE_URL}/api/auth/2fa/enable`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setTwoFASecret(data.data.secret);
+        setTwoFAQRCode(data.data.qrCode);
+        setShow2FAModal(true);
+        setTwoFAStep(1);
+      } else {
+        setTwoFAError(data.message || "Failed to enable 2FA");
+      }
+    } catch (error) {
+      console.error("Enable 2FA error:", error);
+      setTwoFAError("Failed to enable 2FA. Please try again.");
+    } finally {
+      setTwoFALoading(false);
+    }
+  };
+
+  const handle2FAVerify = async (e) => {
+    e.preventDefault();
+    setTwoFALoading(true);
+    setTwoFAError("");
+
+    try {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`${API_BASE_URL}/api/auth/2fa/verify`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          secret: twoFASecret,
+          token: twoFACode,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSettings((prev) => ({ ...prev, twoFactorAuth: true }));
+        setShow2FAModal(false);
+        setTwoFACode("");
+        alert("Two-factor authentication enabled successfully!");
+      } else {
+        setTwoFAError(data.message || "Invalid verification code");
+      }
+    } catch (error) {
+      console.error("Verify 2FA error:", error);
+      setTwoFAError("Failed to verify code. Please try again.");
+    } finally {
+      setTwoFALoading(false);
+    }
+  };
+
+  const handle2FADisable = async (password) => {
+    setTwoFALoading(true);
+
+    try {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`${API_BASE_URL}/api/auth/2fa/disable`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSettings((prev) => ({ ...prev, twoFactorAuth: false }));
+        alert("Two-factor authentication disabled successfully!");
+      } else {
+        alert(data.message || "Failed to disable 2FA");
+      }
+    } catch (error) {
+      console.error("Disable 2FA error:", error);
+      alert("Failed to disable 2FA. Please try again.");
+    } finally {
+      setTwoFALoading(false);
+    }
+  };
+
+  const handle2FAModalClose = () => {
+    setShow2FAModal(false);
+    setTwoFAStep(1);
+    setTwoFACode("");
+    setTwoFAError("");
   };
 
   const settingsSections = [
@@ -453,6 +586,88 @@ const Settings = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Two-Factor Authentication Modal */}
+      {show2FAModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Enable Two-Factor Authentication
+            </h3>
+
+            {twoFAStep === 1 ? (
+              <div className="space-y-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)
+                </p>
+                <div className="flex justify-center bg-white p-4 rounded-lg">
+                  <img src={twoFAQRCode} alt="2FA QR Code" className="w-64 h-64" />
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Manual Entry Code:</p>
+                  <p className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all">
+                    {twoFASecret}
+                  </p>
+                </div>
+                <div className="flex space-x-3 pt-2">
+                  <button
+                    onClick={handle2FAModalClose}
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => setTwoFAStep(2)}
+                    className="flex-1 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors duration-200"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handle2FAVerify} className="space-y-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Enter the 6-digit code from your authenticator app to verify setup
+                </p>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Verification Code
+                  </label>
+                  <input
+                    type="text"
+                    value={twoFACode}
+                    onChange={(e) => setTwoFACode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    className="w-full px-4 py-2.5 text-center text-2xl tracking-widest rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="000000"
+                    maxLength="6"
+                  />
+                </div>
+                {twoFAError && (
+                  <p className="text-sm text-red-600 dark:text-red-400">
+                    {twoFAError}
+                  </p>
+                )}
+                <div className="flex space-x-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setTwoFAStep(1)}
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={twoFALoading || twoFACode.length !== 6}
+                    className="flex-1 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-medium transition-colors duration-200"
+                  >
+                    {twoFALoading ? "Verifying..." : "Verify & Enable"}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}

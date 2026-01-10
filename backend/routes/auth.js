@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const speakeasy = require('speakeasy');
+const QRCode = require('qrcode');
 const UserMongo = require('../models/User');
 const UserMock = require('../mockdb/userDB');
 const { validateRegister, validateLogin, checkValidation } = require('../middleware/validationMiddleware');
@@ -539,6 +541,202 @@ router.post('/change-password', verifyToken, async (req, res, next) => {
     });
   } catch (error) {
     console.error('Change password error:', error);
+    next(error);
+  }
+});
+
+// Enable Two-Factor Authentication
+router.post('/2fa/enable', verifyToken, async (req, res, next) => {
+  try {
+    const dbConnection = req.app.get('dbConnection');
+    
+    let user;
+    if (dbConnection && dbConnection.useMongoDB) {
+      user = await UserMongo.findById(req.userId);
+    } else {
+      user = await UserMock.findById(req.userId);
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: 'User not found'
+      });
+    }
+
+    // Generate secret for 2FA
+    const secret = speakeasy.generateSecret({
+      name: `College Media (${user.email})`,
+      length: 32
+    });
+
+    // Generate QR code
+    const qrCodeUrl = await QRCode.toDataURL(secret.otpauth_url);
+
+    res.json({
+      success: true,
+      data: {
+        secret: secret.base32,
+        qrCode: qrCodeUrl
+      },
+      message: '2FA setup initialized. Scan QR code with your authenticator app.'
+    });
+  } catch (error) {
+    console.error('Enable 2FA error:', error);
+    next(error);
+  }
+});
+
+// Verify and confirm Two-Factor Authentication
+router.post('/2fa/verify', verifyToken, async (req, res, next) => {
+  try {
+    const { secret, token } = req.body;
+
+    if (!secret || !token) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: 'Secret and token are required'
+      });
+    }
+
+    // Verify the token
+    const verified = speakeasy.totp.verify({
+      secret: secret,
+      encoding: 'base32',
+      token: token,
+      window: 2
+    });
+
+    if (!verified) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: 'Invalid verification code'
+      });
+    }
+
+    // Save the secret and enable 2FA
+    const dbConnection = req.app.get('dbConnection');
+    
+    if (dbConnection && dbConnection.useMongoDB) {
+      await UserMongo.findByIdAndUpdate(req.userId, {
+        twoFactorEnabled: true,
+        twoFactorSecret: secret
+      });
+    } else {
+      const user = await UserMock.findById(req.userId);
+      if (user) {
+        user.twoFactorEnabled = true;
+        user.twoFactorSecret = secret;
+        await UserMock.update(user);
+      }
+    }
+
+    res.json({
+      success: true,
+      data: null,
+      message: 'Two-factor authentication enabled successfully'
+    });
+  } catch (error) {
+    console.error('Verify 2FA error:', error);
+    next(error);
+  }
+});
+
+// Disable Two-Factor Authentication
+router.post('/2fa/disable', verifyToken, async (req, res, next) => {
+  try {
+    const { password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: 'Password is required to disable 2FA'
+      });
+    }
+
+    const dbConnection = req.app.get('dbConnection');
+    
+    let user;
+    if (dbConnection && dbConnection.useMongoDB) {
+      user = await UserMongo.findById(req.userId);
+    } else {
+      user = await UserMock.findById(req.userId);
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: 'User not found'
+      });
+    }
+
+    // Verify password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: 'Incorrect password'
+      });
+    }
+
+    // Disable 2FA
+    if (dbConnection && dbConnection.useMongoDB) {
+      await UserMongo.findByIdAndUpdate(req.userId, {
+        twoFactorEnabled: false,
+        twoFactorSecret: null
+      });
+    } else {
+      user.twoFactorEnabled = false;
+      user.twoFactorSecret = null;
+      await UserMock.update(user);
+    }
+
+    res.json({
+      success: true,
+      data: null,
+      message: 'Two-factor authentication disabled successfully'
+    });
+  } catch (error) {
+    console.error('Disable 2FA error:', error);
+    next(error);
+  }
+});
+
+// Get 2FA status
+router.get('/2fa/status', verifyToken, async (req, res, next) => {
+  try {
+    const dbConnection = req.app.get('dbConnection');
+    
+    let user;
+    if (dbConnection && dbConnection.useMongoDB) {
+      user = await UserMongo.findById(req.userId).select('twoFactorEnabled');
+    } else {
+      user = await UserMock.findById(req.userId);
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: {
+        enabled: user.twoFactorEnabled || false
+      },
+      message: '2FA status retrieved'
+    });
+  } catch (error) {
+    console.error('Get 2FA status error:', error);
     next(error);
   }
 });
