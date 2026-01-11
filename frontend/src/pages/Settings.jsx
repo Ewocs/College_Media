@@ -7,6 +7,7 @@ import ThemeModal from "../components/ThemeModal";
 import NotificationPreferencesModal from "../components/NotificationPreferencesModal";
 import BlockedUsersModal from "../components/BlockedUsersModal";
 import ProfileVisibilityModal from "../components/ProfileVisibilityModal";
+import EditProfileModal from "../components/EditProfileModal";
 
 // import { useTheme } from '../context/ThemeContext';
 
@@ -31,6 +32,7 @@ const Settings = () => {
   const [showNotificationPreferences, setShowNotificationPreferences] = useState(false);
   const [showBlockedUsers, setShowBlockedUsers] = useState(false);
   const [showProfileVisibility, setShowProfileVisibility] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -406,7 +408,8 @@ const Settings = () => {
           icon: "👤",
           label: "Edit Profile",
           description: "Update your profile information",
-          type: "link",
+          type: "button",
+          onClick: () => setShowEditProfile(true),
         },
         {
           icon: "🔒",
@@ -1016,6 +1019,11 @@ const Settings = () => {
       <ProfileVisibilityModal
         isOpen={showProfileVisibility}
         onClose={() => setShowProfileVisibility(false)}
+      />
+
+      <EditProfileModal
+        isOpen={showEditProfile}
+        onClose={() => setShowEditProfile(false)}
       />
     </div>
   );

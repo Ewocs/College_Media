@@ -648,6 +648,182 @@ router.put('/settings', verifyToken, async (req, res) => {
 });
 
 /**
+ * @route   GET /api/account/profile
+ * @desc    Get user's profile information
+ * @access  Private
+ */
+router.get('/profile', verifyToken, async (req, res) => {
+  try {
+    const dbConnection = req.app.get('dbConnection');
+    const useMongoDB = dbConnection?.useMongoDB;
+
+    let user;
+    if (useMongoDB) {
+      user = await UserMongo.findById(req.userId).select('-password -twoFactorSecret');
+    } else {
+      user = await UserMock.findById(req.userId);
+      if (user) {
+        delete user.password;
+        delete user.twoFactorSecret;
+      }
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: user,
+      message: 'Profile retrieved successfully'
+    });
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: 'Error retrieving profile'
+    });
+  }
+});
+
+/**
+ * @route   PUT /api/account/profile
+ * @desc    Update user's profile information
+ * @access  Private
+ */
+router.put('/profile', verifyToken, async (req, res) => {
+  try {
+    const { firstName, lastName, bio, username, email, profilePicture, profileBanner } = req.body;
+    
+    const dbConnection = req.app.get('dbConnection');
+    const useMongoDB = dbConnection?.useMongoDB;
+
+    // Get current user
+    let user;
+    if (useMongoDB) {
+      user = await UserMongo.findById(req.userId);
+    } else {
+      user = await UserMock.findById(req.userId);
+    }
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: 'User not found'
+      });
+    }
+
+    // Check if username is being changed and if it's already taken
+    if (username && username !== user.username) {
+      let existingUser;
+      if (useMongoDB) {
+        existingUser = await UserMongo.findOne({ username });
+      } else {
+        existingUser = await UserMock.findByUsername(username);
+      }
+
+      if (existingUser && existingUser._id.toString() !== req.userId) {
+        return res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Username is already taken'
+        });
+      }
+
+      // Validate username
+      if (username.length < 3 || username.length > 30) {
+        return res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Username must be between 3 and 30 characters'
+        });
+      }
+    }
+
+    // Check if email is being changed and if it's already taken
+    if (email && email !== user.email) {
+      let existingUser;
+      if (useMongoDB) {
+        existingUser = await UserMongo.findOne({ email: email.toLowerCase() });
+      } else {
+        existingUser = await UserMock.findByEmail(email.toLowerCase());
+      }
+
+      if (existingUser && existingUser._id.toString() !== req.userId) {
+        return res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Email is already registered'
+        });
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Invalid email format'
+        });
+      }
+    }
+
+    // Validate bio length
+    if (bio && bio.length > 500) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: 'Bio must be 500 characters or less'
+      });
+    }
+
+    // Update fields
+    if (firstName !== undefined) user.firstName = firstName.trim();
+    if (lastName !== undefined) user.lastName = lastName.trim();
+    if (bio !== undefined) user.bio = bio.trim();
+    if (username !== undefined) user.username = username.trim();
+    if (email !== undefined) user.email = email.toLowerCase().trim();
+    if (profilePicture !== undefined) user.profilePicture = profilePicture;
+    if (profileBanner !== undefined) user.profileBanner = profileBanner;
+
+    // Save user
+    if (useMongoDB) {
+      await user.save();
+    } else {
+      user.updatedAt = new Date().toISOString();
+      await UserMock.updateOne({ _id: req.userId }, user);
+    }
+
+    // Remove sensitive data before sending response
+    if (useMongoDB) {
+      user = await UserMongo.findById(req.userId).select('-password -twoFactorSecret');
+    } else {
+      delete user.password;
+      delete user.twoFactorSecret;
+    }
+
+    res.json({
+      success: true,
+      data: user,
+      message: 'Profile updated successfully'
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: 'Error updating profile'
+    });
+  }
+});
+
+/**
  * @route   GET /api/account/profile-visibility
  * @desc    Get user's profile visibility setting
  * @access  Private
