@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+
 const UserMongo = require('../models/User');
 const UserMock = require('../mockdb/userDB');
 const MessageMongo = require('../models/Message');
@@ -26,114 +28,126 @@ const verifyToken = (req, res, next) => {
 };
 
 /* =====================================================
-   DELETE ACCOUNT (SOFT DELETE) – RACE CONDITION SAFE
+   DELETE ACCOUNT (SOFT DELETE) – DATA CONSISTENCY SAFE
 ===================================================== */
 router.delete('/', verifyToken, validateAccountDeletion, checkValidation, async (req, res) => {
+  const session = await mongoose.startSession();
+
   try {
     const { password, reason } = req.body;
     const { useMongoDB } = req.app.get('dbConnection');
 
-    // Fetch user only for password validation
-    const user = useMongoDB
-      ? await UserMongo.findById(req.userId)
-      : await UserMock.findById(req.userId);
+    // 👉 MOCK DB (no transactions)
+    if (!useMongoDB) {
+      const user = await UserMock.findById(req.userId);
+      if (!user) return res.status(404).json({ success: false, message: 'User not found' });
 
-    if (!user) {
+      const isValid = await bcrypt.compare(password, user.password);
+      if (!isValid) return res.status(401).json({ success: false, message: 'Incorrect password' });
+
+      await UserMock.softDelete(req.userId, reason);
+      await MessageMock.softDeleteByUser(req.userId);
+
+      return res.json({
+        success: true,
+        message: 'Account deletion initiated successfully',
+      });
+    }
+
+    /* ---------- MONGODB TRANSACTION ---------- */
+    await session.withTransaction(async () => {
+      const user = await UserMongo.findById(req.userId).session(session);
+
+      if (!user) {
+        throw new Error('USER_NOT_FOUND');
+      }
+
+      if (user.isDeleted) {
+        throw new Error('ALREADY_DELETED');
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        throw new Error('INVALID_PASSWORD');
+      }
+
+      // ✅ Soft delete user
+      user.isDeleted = true;
+      user.deletedAt = new Date();
+      user.deletionReason = reason;
+      user.scheduledDeletionDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+      await user.save({ session });
+
+      // ✅ Mark all messages as deleted for this user
+      await MessageMongo.updateMany(
+        { $or: [{ sender: req.userId }, { receiver: req.userId }] },
+        { $addToSet: { deletedBy: req.userId } },
+        { session }
+      );
+    });
+
+    res.json({
+      success: true,
+      message: 'Account deletion initiated successfully',
+    });
+  } catch (error) {
+    if (error.message === 'USER_NOT_FOUND') {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
+    if (error.message === 'INVALID_PASSWORD') {
       return res.status(401).json({ success: false, message: 'Incorrect password' });
     }
-
-    // 🔐 ATOMIC SOFT DELETE
-    let updatedUser;
-
-    if (useMongoDB) {
-      updatedUser = await UserMongo.findOneAndUpdate(
-        { _id: req.userId, isDeleted: false },
-        {
-          $set: {
-            isDeleted: true,
-            deletedAt: new Date(),
-            deletionReason: reason,
-            scheduledDeletionDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-          },
-        },
-        { new: true }
-      );
-    } else {
-      updatedUser = await UserMock.softDelete(req.userId, reason);
-    }
-
-    // Already deleted by parallel request
-    if (!updatedUser) {
+    if (error.message === 'ALREADY_DELETED') {
       return res.status(200).json({
         success: true,
         message: 'Account deletion already scheduled',
       });
     }
 
-    // Idempotent message cleanup
-    if (useMongoDB) {
-      await MessageMongo.updateMany(
-        { $or: [{ sender: req.userId }, { receiver: req.userId }] },
-        { $addToSet: { deletedBy: req.userId } }
-      );
-    }
-
-    res.json({
-      success: true,
-      data: { scheduledDeletionDate: updatedUser.scheduledDeletionDate },
-      message: 'Account deletion initiated successfully',
-    });
-  } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Error deleting account' });
+  } finally {
+    session.endSession();
   }
 });
 
 /* =====================================================
-   RESTORE ACCOUNT – RACE CONDITION SAFE
+   RESTORE ACCOUNT – CONSISTENT & SAFE
 ===================================================== */
 router.post('/restore', verifyToken, async (req, res) => {
   try {
     const { useMongoDB } = req.app.get('dbConnection');
-    let restoredUser;
 
-    if (useMongoDB) {
-      restoredUser = await UserMongo.findOneAndUpdate(
-        {
-          _id: req.userId,
-          isDeleted: true,
-          scheduledDeletionDate: { $gt: new Date() },
-        },
-        {
-          $set: {
-            isDeleted: false,
-            deletedAt: null,
-            scheduledDeletionDate: null,
-            deletionReason: null,
-          },
-        },
-        { new: true }
-      );
-    } else {
-      restoredUser = await UserMock.restore(req.userId);
+    if (!useMongoDB) {
+      const restored = await UserMock.restore(req.userId);
+      if (!restored) {
+        return res.status(400).json({ success: false, message: 'Cannot restore account' });
+      }
+      return res.json({ success: true, message: 'Account restored successfully' });
     }
 
-    if (!restoredUser) {
-      return res.status(400).json({
-        success: false,
-        message: 'Account cannot be restored',
-      });
+    const user = await UserMongo.findOneAndUpdate(
+      {
+        _id: req.userId,
+        isDeleted: true,
+        scheduledDeletionDate: { $gt: new Date() },
+      },
+      {
+        $set: {
+          isDeleted: false,
+          deletedAt: null,
+          deletionReason: null,
+          scheduledDeletionDate: null,
+        },
+      },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'Account cannot be restored' });
     }
 
-    res.json({
-      success: true,
-      message: 'Account restored successfully',
-    });
+    res.json({ success: true, message: 'Account restored successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Error restoring account' });
@@ -141,26 +155,27 @@ router.post('/restore', verifyToken, async (req, res) => {
 });
 
 /* =====================================================
-   PERMANENT DELETE (unchanged logic)
+   PERMANENT DELETE (SAFE)
 ===================================================== */
 router.delete('/permanent', verifyToken, async (req, res) => {
   try {
     const { useMongoDB } = req.app.get('dbConnection');
 
-    const user = useMongoDB
-      ? await UserMongo.findById(req.userId)
-      : await UserMock.findById(req.userId);
+    if (!useMongoDB) {
+      await UserMock.permanentDelete(req.userId);
+      return res.json({ success: true, message: 'Account permanently deleted' });
+    }
 
+    const user = await UserMongo.findById(req.userId);
     if (!user || !user.isDeleted) {
       return res.status(400).json({ success: false, message: 'Account not eligible' });
     }
 
-    if (useMongoDB) {
-      await MessageMongo.deleteMany({ $or: [{ sender: req.userId }, { receiver: req.userId }] });
-      await UserMongo.findByIdAndDelete(req.userId);
-    } else {
-      await UserMock.permanentDelete(req.userId);
-    }
+    await MessageMongo.deleteMany({
+      $or: [{ sender: req.userId }, { receiver: req.userId }],
+    });
+
+    await UserMongo.findByIdAndDelete(req.userId);
 
     res.json({ success: true, message: 'Account permanently deleted' });
   } catch (error) {
