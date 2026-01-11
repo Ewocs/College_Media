@@ -3,12 +3,17 @@ import { commentsApi } from "../api/endpoints";
 import { useTheme } from "../context/ThemeContext";
 import useTypingIndicator from "../hooks/useTypingIndicator";
 import TypingIndicator from "./TypingIndicator";
+import useContentModeration from "../hooks/useContentModeration";
+import ModerationWarning from "./ModerationWarning";
 
 const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loading, setLoading] = useState(false);
   const { theme } = useTheme();
+
+  const { analyze, bypass, resetModeration, warnings } = useContentModeration();
+  const [showModerationModal, setShowModerationModal] = useState(false);
 
   // Mock user data (replace with actual user context)
   const currentUser = {
@@ -64,10 +69,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
     }
   };
 
-  const handlePostComment = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
-
+  const executePostComment = async () => {
     // Stop typing indicator
     stopTyping();
 
@@ -77,10 +79,38 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
         const addedComment = response.data.data || response.data;
         setComments((prev) => [...prev, addedComment]);
         setNewComment("");
+        resetModeration();
       }
     } catch (error) {
       console.error("Error posting comment:", error);
     }
+  };
+
+  const handlePostComment = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    const { isClean } = analyze(newComment);
+
+    if (!isClean) {
+      setShowModerationModal(true);
+      stopTyping(); // Stop typing while they decide
+      return;
+    }
+
+    await executePostComment();
+  };
+
+  const handleModerationBypass = () => {
+    bypass();
+    setShowModerationModal(false);
+    executePostComment();
+  };
+
+  const handleModerationEdit = () => {
+    setShowModerationModal(false);
+    resetModeration();
+    // Potentially restart typing if they focus back, but for now just close modal
   };
 
   if (!isOpen) return null;
@@ -149,6 +179,13 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
           </form>
         </div>
       </div>
+
+      <ModerationWarning
+        isOpen={showModerationModal}
+        onClose={handleModerationEdit}
+        onBypass={handleModerationBypass}
+        warnings={warnings}
+      />
     </div>
   );
 };
