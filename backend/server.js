@@ -1,15 +1,17 @@
-const express = require('express');
-const compression = require('compression');
-const helmet = require('helmet');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const path = require('path');
-const { initDB } = require('./config/db');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
-const logger = require('./utils/logger');
-const { globalLimiter } = require('./middleware/rateLimitMiddleware');
-const { sanitizeAll, validateContentType, preventParameterPollution } = require('./middleware/sanitizationMiddleware');
-require('./utils/redisClient'); // Initialize Redis client
+/**
+ * ================================
+ *  College Media – Backend Server
+ *  Timeout-Safe | Large-File Ready
+ *  Production Hardened
+ * ================================
+ */
+
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const path = require("path");
+const http = require("http");
+const os = require("os");
 
 /* ------------------
    🔧 INTERNAL IMPORTS
@@ -21,14 +23,16 @@ const securityHeaders = require("./config/securityHeaders");
 
 const { initDB } = require("./config/db");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+
 const resumeRoutes = require("./routes/resume");
 const uploadRoutes = require("./routes/upload");
+
 const { globalLimiter, authLimiter } = require("./middleware/rateLimiter");
 const { slidingWindowLimiter } = require("./middleware/slidingWindowLimiter");
 const { warmUpCache } = require("./utils/cache");
 const logger = require("./utils/logger");
 
-// 🔍 Observability & Metrics
+// 🔍 Observability
 const metricsMiddleware = require("./middleware/metrics.middleware");
 const { client: metricsClient } = require("./utils/metrics");
 
@@ -39,49 +43,18 @@ dotenv.config();
 
 const ENV = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || 5000;
+const METRICS_TOKEN = process.env.METRICS_TOKEN || "metrics-secret";
 
-// Middleware
-app.use(helmet()); // Set security headers
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'"], // Allow inline scripts for now (if needed for development)
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'", "data:", "https:"], // Allow images from https sources
-    connectSrc: ["'self'"],
-  },
-}));
-app.use(compression()); // Compress all responses
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+const server = http.createServer(app);
 
-// Apply global rate limiter
-// conditional check for test environment to avoid rate limits during testing
-if (process.env.NODE_ENV !== 'test') {
-  app.use(globalLimiter);
-}
+app.disable("x-powered-by");
 
-// Apply input sanitization (XSS & NoSQL injection protection)
-app.use(sanitizeAll);
-
-  logger.info("Feature flags loaded", { env: ENV, FEATURE_FLAGS });
-})();
 /* ------------------
-   📈 PROMETHEUS METRICS
+   🔐 SECURITY HEADERS (HELMET)
 ------------------ */
-app.get("/metrics", async (req, res) => {
-  try {
-    res.set("Content-Type", metricsClient.register.contentType);
-    res.end(await metricsClient.register.metrics());
-  } catch (err) {
-    logger.error("Metrics endpoint failed", { error: err.message });
-    res.status(500).json({
-      success: false,
-      message: "Failed to load metrics",
-    });
-  }
-});
+app.use(helmet(securityHeaders(ENV)));
+
 /* ------------------
    🌍 CORS
 ------------------ */
@@ -99,8 +72,19 @@ app.use(
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 
-// Static file serving for uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+/* ------------------
+   📊 OBSERVABILITY – REQUEST METRICS
+------------------ */
+app.use(metricsMiddleware);
+
+/* ------------------
+   ⏱️ REQUEST TIMEOUT GUARD
+------------------ */
+app.use((req, res, next) => {
+  req.setTimeout(10 * 60 * 1000);
+  res.setTimeout(10 * 60 * 1000);
+  next();
+});
 
 /* ------------------
    🐢 SLOW REQUEST LOGGER
@@ -135,7 +119,7 @@ app.use((req, res, next) => {
    ⏱️ RATE LIMITING
 ------------------ */
 app.use("/api", slidingWindowLimiter);
-if (FEATURE_FLAGS.ENABLE_STRICT_RATE_LIMITING) {
+if (ENV === "production") {
   app.use("/api", globalLimiter);
 }
 
@@ -164,17 +148,60 @@ app.get("/", (req, res) => {
   });
 });
 
-// Import and register routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/messages', require('./routes/messages'));
-app.use('/api/account', require('./routes/account'));
+/* ------------------
+   📈 PROMETHEUS METRICS (SECURED)
+------------------ */
+app.get("/metrics", async (req, res) => {
+  const token = req.headers["x-metrics-token"];
 
-// 404 Not Found Handler (must be after all routes)
-app.use(notFound);
+  if (ENV === "production" && token !== METRICS_TOKEN) {
+    return res.status(403).json({
+      success: false,
+      message: "Forbidden",
+    });
+  }
 
-// Global Error Handler (must be last)
-app.use(errorHandler);
+  try {
+    res.set("Content-Type", metricsClient.register.contentType);
+    res.end(await metricsClient.register.metrics());
+  } catch (err) {
+    logger.error("Metrics endpoint failed", { error: err.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to load metrics",
+    });
+  }
+});
+
+/* ------------------
+   🚀 START SERVER
+------------------ */
+let dbConnection = null;
+
+const startServer = async () => {
+  try {
+    dbConnection = await initDB();
+    logger.info("Database connected");
+  } catch (err) {
+    logger.critical("DB connection failed", { error: err.message });
+    process.exit(1);
+  }
+
+  /* 🔥 CACHE WARM-UP (NON-BLOCKING) */
+  setImmediate(() => {
+    warmUpCache({
+      User: require("./models/User"),
+      Resume: require("./models/Resume"),
+    });
+  });
+
+  /* ---------- ROUTES ---------- */
+  app.use("/api/auth", authLimiter, require("./routes/auth"));
+  app.use("/api/users", require("./routes/users"));
+  app.use("/api/resume", resumeRoutes);
+  app.use("/api/upload", uploadRoutes);
+  app.use("/api/messages", require("./routes/messages"));
+  app.use("/api/account", require("./routes/account"));
 
 // Initialize database connection
 const connectDB = async () => {
