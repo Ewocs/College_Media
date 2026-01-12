@@ -1,7 +1,8 @@
 /**
  * ================================
  *  College Media – Backend Server
- *  Feature-Flag Safe | Prod Ready
+ *  Timeout-Safe | Large-File Ready
+ *  Production Hardened
  * ================================
  */
 
@@ -11,7 +12,6 @@ const dotenv = require("dotenv");
 const path = require("path");
 const http = require("http");
 const os = require("os");
-const axios = require("axios");
 
 /* ------------------
    🔧 INTERNAL IMPORTS
@@ -30,21 +30,16 @@ const logger = require("./utils/logger");
 dotenv.config();
 
 const ENV = process.env.NODE_ENV || "development";
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 const server = http.createServer(app);
-const PORT = process.env.PORT || 5000;
 
 app.disable("x-powered-by");
 
 /* =================================================
-   🚩 FEATURE FLAGS (CENTRALIZED + SAFE)
+   🚩 FEATURE FLAGS
 ================================================= */
-/**
- * Rules:
- * - Production → risky features OFF by default
- * - Dev/Staging → controlled ON
- * - Flags are IMMUTABLE at runtime
- */
 const FEATURE_FLAGS = Object.freeze({
   ENABLE_EXPERIMENTAL_RESUME: ENV !== "production",
   ENABLE_NEW_MESSAGING_FLOW: ENV !== "production",
@@ -53,14 +48,11 @@ const FEATURE_FLAGS = Object.freeze({
   ENABLE_VERBOSE_ERRORS: ENV !== "production",
 });
 
-/* ---------- Feature Flag Validation (FAIL FAST) ---------- */
-const validateFeatureFlags = () => {
-  Object.entries(FEATURE_FLAGS).forEach(([key, value]) => {
-    if (typeof value !== "boolean") {
-      logger.critical("Invalid feature flag configuration", {
-        flag: key,
-        value,
-      });
+/* ---------- Feature Flag Validation ---------- */
+(() => {
+  Object.entries(FEATURE_FLAGS).forEach(([k, v]) => {
+    if (typeof v !== "boolean") {
+      logger.critical("Invalid feature flag", { k, v });
       process.exit(1);
     }
   });
@@ -70,26 +62,12 @@ const validateFeatureFlags = () => {
     (FEATURE_FLAGS.ENABLE_EXPERIMENTAL_RESUME ||
       FEATURE_FLAGS.ENABLE_NEW_MESSAGING_FLOW)
   ) {
-    logger.critical(
-      "Unsafe feature flag enabled in production",
-      FEATURE_FLAGS
-    );
+    logger.critical("Unsafe feature flags enabled in production");
     process.exit(1);
   }
 
-  logger.info("Feature flags initialized", {
-    env: ENV,
-    flags: FEATURE_FLAGS,
-  });
-};
-
-validateFeatureFlags();
-
-/* ---------- Expose flags safely ---------- */
-app.use((req, res, next) => {
-  req.features = FEATURE_FLAGS; // read-only
-  next();
-});
+  logger.info("Feature flags loaded", { env: ENV, FEATURE_FLAGS });
+})();
 
 /* ------------------
    🌍 CORS
@@ -104,9 +82,39 @@ app.use(
 
 /* ------------------
    📦 BODY PARSERS
+   (Upload-safe limits)
 ------------------ */
-app.use(express.json({ limit: "1mb" }));
-app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+app.use(express.json({ limit: "2mb" }));
+app.use(express.urlencoded({ extended: true, limit: "2mb" }));
+
+/* ------------------
+   ⏱️ REQUEST TIMEOUT GUARD
+------------------ */
+app.use((req, res, next) => {
+  req.setTimeout(10 * 60 * 1000); // 10 minutes per request
+  res.setTimeout(10 * 60 * 1000);
+  next();
+});
+
+/* ------------------
+   🐢 SLOW REQUEST LOGGER
+------------------ */
+app.use((req, res, next) => {
+  const start = Date.now();
+
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (duration > 5000) {
+      logger.warn("Slow request detected", {
+        method: req.method,
+        url: req.originalUrl,
+        durationMs: duration,
+      });
+    }
+  });
+
+  next();
+});
 
 /* ------------------
    🔁 API VERSIONING
@@ -132,6 +140,7 @@ app.use(
   "/uploads",
   express.static(path.join(__dirname, "uploads"), {
     maxAge: "1h",
+    etag: true,
   })
 );
 
@@ -141,9 +150,8 @@ app.use(
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "College Media API is running!",
+    message: "College Media API running",
     env: ENV,
-    features: FEATURE_FLAGS,
     uptime: process.uptime(),
     memory: process.memoryUsage(),
     cpu: os.loadavg(),
@@ -158,37 +166,35 @@ let dbConnection = null;
 const startServer = async () => {
   try {
     dbConnection = await initDB();
-    logger.info("Database initialized successfully");
+    logger.info("Database connected");
   } catch (err) {
-    logger.critical("Database initialization failed", {
-      error: err.message,
-    });
+    logger.critical("DB connection failed", { error: err.message });
     process.exit(1);
   }
 
-  /* ---------- ROUTES (FLAG GUARDED) ---------- */
-
+  /* ---------- ROUTES ---------- */
   app.use("/api/auth", authLimiter, require("./routes/auth"));
   app.use("/api/users", require("./routes/users"));
 
   if (FEATURE_FLAGS.ENABLE_EXPERIMENTAL_RESUME) {
     app.use("/api/resume", resumeRoutes);
-  } else {
-    logger.warn("Resume routes disabled by feature flag");
   }
 
   app.use("/api/upload", uploadRoutes);
 
   if (FEATURE_FLAGS.ENABLE_NEW_MESSAGING_FLOW) {
     app.use("/api/messages", require("./routes/messages"));
-  } else {
-    logger.warn("Messaging routes disabled by feature flag");
   }
 
   app.use("/api/account", require("./routes/account"));
 
   app.use(notFound);
   app.use(errorHandler);
+
+  /* ---------- SERVER TIMEOUT TUNING ---------- */
+  server.keepAliveTimeout = 120000; // 2 min
+  server.headersTimeout = 130000;   // > keepAlive
+  server.requestTimeout = 0;        // disable default timeout
 
   server.listen(PORT, () => {
     logger.info(`Server running on port ${PORT}`);
@@ -199,7 +205,7 @@ const startServer = async () => {
    🧹 GRACEFUL SHUTDOWN
 ------------------ */
 const shutdown = async (signal) => {
-  logger.warn("Shutdown signal received", { signal });
+  logger.warn("Shutdown signal", { signal });
 
   server.close(async () => {
     if (dbConnection?.mongoose) {
@@ -218,7 +224,7 @@ process.on("SIGTERM", shutdown);
    🧨 PROCESS SAFETY
 ------------------ */
 process.on("unhandledRejection", (reason) => {
-  logger.critical("Unhandled Promise Rejection", { reason });
+  logger.critical("Unhandled Rejection", { reason });
 });
 
 process.on("uncaughtException", (err) => {
