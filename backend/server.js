@@ -1,8 +1,7 @@
 /**
  * ================================
  *  College Media – Backend Server
- *  Memory-Safe | Production Ready
- *  Dependency-Failure Resilient
+ *  Feature-Flag Safe | Prod Ready
  * ================================
  */
 
@@ -12,7 +11,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const http = require("http");
 const os = require("os");
-const axios = require("axios"); // 🔥 ADDED
+const axios = require("axios");
 
 /* ------------------
    🔧 INTERNAL IMPORTS
@@ -30,31 +29,78 @@ const logger = require("./utils/logger");
 ------------------ */
 dotenv.config();
 
+const ENV = process.env.NODE_ENV || "development";
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 
 app.disable("x-powered-by");
 
+/* =================================================
+   🚩 FEATURE FLAGS (CENTRALIZED + SAFE)
+================================================= */
+/**
+ * Rules:
+ * - Production → risky features OFF by default
+ * - Dev/Staging → controlled ON
+ * - Flags are IMMUTABLE at runtime
+ */
+const FEATURE_FLAGS = Object.freeze({
+  ENABLE_EXPERIMENTAL_RESUME: ENV !== "production",
+  ENABLE_NEW_MESSAGING_FLOW: ENV !== "production",
+  ENABLE_DEBUG_LOGS: ENV !== "production",
+  ENABLE_STRICT_RATE_LIMITING: ENV === "production",
+  ENABLE_VERBOSE_ERRORS: ENV !== "production",
+});
+
+/* ---------- Feature Flag Validation (FAIL FAST) ---------- */
+const validateFeatureFlags = () => {
+  Object.entries(FEATURE_FLAGS).forEach(([key, value]) => {
+    if (typeof value !== "boolean") {
+      logger.critical("Invalid feature flag configuration", {
+        flag: key,
+        value,
+      });
+      process.exit(1);
+    }
+  });
+
+  if (
+    ENV === "production" &&
+    (FEATURE_FLAGS.ENABLE_EXPERIMENTAL_RESUME ||
+      FEATURE_FLAGS.ENABLE_NEW_MESSAGING_FLOW)
+  ) {
+    logger.critical(
+      "Unsafe feature flag enabled in production",
+      FEATURE_FLAGS
+    );
+    process.exit(1);
+  }
+
+  logger.info("Feature flags initialized", {
+    env: ENV,
+    flags: FEATURE_FLAGS,
+  });
+};
+
+validateFeatureFlags();
+
+/* ---------- Expose flags safely ---------- */
+app.use((req, res, next) => {
+  req.features = FEATURE_FLAGS; // read-only
+  next();
+});
+
 /* ------------------
    🌍 CORS
 ------------------ */
-const corsOptions = {
-  origin: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "X-API-Version",
-  ],
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  })
+);
 
 /* ------------------
    📦 BODY PARSERS
@@ -71,120 +117,13 @@ app.use((req, res, next) => {
   next();
 });
 
-/* =================================================
-   🔌 API DEPENDENCY HANDLING (CORE FIX)
-================================================= */
-
-/* ---------- Axios Instance with Timeout ---------- */
-const apiClient = axios.create({
-  timeout: 5000, // 🔥 dependency timeout
-});
-
-/* ---------- Retry Logic (Simple Backoff) ---------- */
-const retryRequest = async (fn, retries = 2) => {
-  try {
-    return await fn();
-  } catch (err) {
-    if (retries <= 0) throw err;
-    await new Promise((r) => setTimeout(r, 500));
-    return retryRequest(fn, retries - 1);
-  }
-};
-
-/* ---------- Circuit Breaker (Lightweight) ---------- */
-let dependencyFailures = 0;
-let circuitOpenUntil = null;
-
-const isCircuitOpen = () =>
-  circuitOpenUntil && Date.now() < circuitOpenUntil;
-
-const recordFailure = () => {
-  dependencyFailures++;
-  if (dependencyFailures >= 5) {
-    circuitOpenUntil = Date.now() + 60 * 1000; // 1 min cooldown
-    logger.critical("Circuit breaker opened for dependency");
-  }
-};
-
-const recordSuccess = () => {
-  dependencyFailures = 0;
-  circuitOpenUntil = null;
-};
-
-/* ---------- Dependency Safe Middleware ---------- */
-app.use((req, res, next) => {
-  req.callDependency = async (config, fallback = null) => {
-    if (isCircuitOpen()) {
-      logger.warn("Dependency circuit open – serving fallback");
-      return fallback;
-    }
-
-    try {
-      const response = await retryRequest(() =>
-        apiClient.request(config)
-      );
-      recordSuccess();
-      return response.data;
-    } catch (err) {
-      recordFailure();
-
-      logger.error("API Dependency Failure", {
-        url: config.url,
-        method: config.method,
-        error: err.message,
-      });
-
-      return fallback;
-    }
-  };
-
-  next();
-});
-
-/* ------------------
-   ⏱️ REQUEST TIMEOUT
------------------- */
-app.use((req, res, next) => {
-  res.setTimeout(30 * 1000, () => {
-    logger.warn("Request timeout", {
-      method: req.method,
-      url: req.originalUrl,
-    });
-
-    res.status(408).json({
-      success: false,
-      message: "Request timeout",
-    });
-  });
-  next();
-});
-
 /* ------------------
    ⏱️ RATE LIMITING
 ------------------ */
 app.use("/api", slidingWindowLimiter);
-app.use("/api", globalLimiter);
-
-/* ------------------
-   📊 REQUEST LOGGING
------------------- */
-app.use((req, res, next) => {
-  const start = Date.now();
-
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (duration > 1000) {
-      logger.warn("Slow request detected", {
-        method: req.method,
-        url: req.originalUrl,
-        duration,
-        statusCode: res.statusCode,
-      });
-    }
-  });
-
-  next();
-});
+if (FEATURE_FLAGS.ENABLE_STRICT_RATE_LIMITING) {
+  app.use("/api", globalLimiter);
+}
 
 /* ------------------
    📁 STATIC FILES
@@ -193,23 +132,21 @@ app.use(
   "/uploads",
   express.static(path.join(__dirname, "uploads"), {
     maxAge: "1h",
-    etag: true,
-    setHeaders: (res) =>
-      res.setHeader("Cache-Control", "public, max-age=3600"),
   })
 );
 
 /* ------------------
-   ❤️ HEALTH CHECK (DEPENDENCY STATUS)
+   ❤️ HEALTH CHECK
 ------------------ */
 app.get("/", (req, res) => {
   res.json({
     success: true,
     message: "College Media API is running!",
+    env: ENV,
+    features: FEATURE_FLAGS,
     uptime: process.uptime(),
     memory: process.memoryUsage(),
     cpu: os.loadavg(),
-    dependencyCircuitOpen: isCircuitOpen(),
   });
 });
 
@@ -226,14 +163,28 @@ const startServer = async () => {
     logger.critical("Database initialization failed", {
       error: err.message,
     });
-    dbConnection = null;
+    process.exit(1);
   }
+
+  /* ---------- ROUTES (FLAG GUARDED) ---------- */
 
   app.use("/api/auth", authLimiter, require("./routes/auth"));
   app.use("/api/users", require("./routes/users"));
-  app.use("/api/resume", resumeRoutes);
+
+  if (FEATURE_FLAGS.ENABLE_EXPERIMENTAL_RESUME) {
+    app.use("/api/resume", resumeRoutes);
+  } else {
+    logger.warn("Resume routes disabled by feature flag");
+  }
+
   app.use("/api/upload", uploadRoutes);
-  app.use("/api/messages", require("./routes/messages"));
+
+  if (FEATURE_FLAGS.ENABLE_NEW_MESSAGING_FLOW) {
+    app.use("/api/messages", require("./routes/messages"));
+  } else {
+    logger.warn("Messaging routes disabled by feature flag");
+  }
+
   app.use("/api/account", require("./routes/account"));
   app.use("/api/notifications", require("./routes/notifications"));
 
@@ -264,6 +215,9 @@ const shutdown = async (signal) => {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
+/* ------------------
+   🧨 PROCESS SAFETY
+------------------ */
 process.on("unhandledRejection", (reason) => {
   logger.critical("Unhandled Promise Rejection", { reason });
 });
@@ -276,7 +230,7 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-server.keepAliveTimeout = 60 * 1000;
-server.headersTimeout = 65 * 1000;
-
+/* ------------------
+   ▶️ BOOTSTRAP
+------------------ */
 startServer();
