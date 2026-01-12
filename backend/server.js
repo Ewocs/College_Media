@@ -1,16 +1,17 @@
-/**
- * ============================================================
- *  College Media – Backend Server
- * ------------------------------------------------------------
- *  ✔ Timeout Safe
- *  ✔ Large File Ready
- *  ✔ Advanced Rate Limiting
- *  ✔ Background Job Hardened
- *  ✔ Observability Enabled
- *  ✔ Graceful Shutdown
- *  ✔ Production Hardened
- * ============================================================
- */
+const express = require('express');
+const compression = require('compression');
+const helmet = require('helmet');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const path = require('path');
+const http = require('http');
+const { initDB } = require('./config/db');
+const { initSocket } = require('./socket');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+const logger = require('./utils/logger');
+const { globalLimiter } = require('./middleware/rateLimitMiddleware');
+const { sanitizeAll, validateContentType, preventParameterPollution } = require('./middleware/sanitizationMiddleware');
+require('./utils/redisClient'); // Initialize Redis client
 
 /* ============================================================
    📦 CORE DEPENDENCIES
@@ -60,7 +61,9 @@ const sampleJob = require("./jobs/sampleJob");
    🌱 ENVIRONMENT SETUP
 dotenv.config();
 
-const ENV = process.env.NODE_ENV || "development";
+
+const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 const METRICS_TOKEN = process.env.METRICS_TOKEN || "metrics-secret";
 const TRUST_PROXY = process.env.TRUST_PROXY === "true";
@@ -257,53 +260,12 @@ const startServer = async () => {
     process.exit(1);
   }
 
-  /* ---------- CACHE WARM-UP ---------- */
-  setImmediate(() => {
-    try {
-      warmUpCache({
-        User: require("./models/User"),
-        Resume: require("./models/Resume"),
-      });
-      logger.info("Cache warm-up triggered");
-    } catch (err) {
-      logger.warn("Cache warm-up failed", {
-        error: err.message,
-      });
-    }
-  });
-
-  /* ---------- BACKGROUND JOBS ---------- */
-  startBackgroundJobs();
-
-  /* ============================================================
-     🚦 ROUTES WITH RATE LIMITING
-  ============================================================ */
-
-  app.use("/api/auth", authLimiter, require("./routes/auth"));
-  app.use("/api/auth/otp", otpLimiter);
-
-  app.use("/api/users", require("./routes/users"));
-  app.use("/api/search", searchLimiter, require("./routes/search"));
-  app.use("/api/admin", adminLimiter, require("./routes/admin"));
-
-  app.use("/api/resume", resumeRoutes);
-  app.use("/api/upload", uploadRoutes);
-  app.use("/api/messages", require("./routes/messages"));
-  app.use("/api/account", require("./routes/account"));
-
-  /* ---------- ERROR HANDLING ---------- */
-  app.use(notFound);
-  app.use(errorHandler);
-
-  /* ---------- SERVER TIMEOUTS ---------- */
-  server.keepAliveTimeout = 120000;
-  server.headersTimeout = 130000;
-  server.requestTimeout = 0;
-
-  /* ---------- START LISTEN ---------- */
-  server.listen(PORT, () => {
-    logger.info(`Server running on port ${PORT}`, {
-      env: ENV,
+// Start server only if run directly
+if (require.main === module) {
+  connectDB().then(() => {
+    initSocket(server);
+    server.listen(PORT, () => {
+      logger.info(`Server is running on port ${PORT}`);
     });
   });
 };
