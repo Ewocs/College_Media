@@ -11,6 +11,7 @@ const logger = require('../utils/logger');
 const { authLimiter, registerLimiter, forgotPasswordLimiter, apiLimiter } = require('../middleware/rateLimitMiddleware');
 const { isValidEmail, isValidUsername, isValidPassword, isValidName, isValidOTP } = require('../utils/validators');
 const NotificationService = require('../services/notificationService');
+const { logActivity, logLoginAttempt } = require('../middleware/activityLogger');
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'college_media_secret_key';
@@ -284,6 +285,9 @@ router.post('/login', authLimiter, validateLogin, checkValidation, async (req, r
         JWT_SECRET,
         { expiresIn: '7d' }
       );
+
+      // Log successful login
+      logLoginAttempt(req, user._id, true, { method: 'password' }).catch(err => logger.error('Login log failed:', err));
 
       res.json({
         success: true,
