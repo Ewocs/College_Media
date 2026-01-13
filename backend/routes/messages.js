@@ -15,7 +15,9 @@ const cache = require('../utils/cache');
 const { checkPermission, PERMISSIONS } = require('../middleware/rbacMiddleware');
 
 const { hasPermission } = require('../config/roles');
+
 const { getIO, isUserOnline } = require('../socket');
+const NotificationService = require('../services/notificationService');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
@@ -178,6 +180,19 @@ router.post('/', verifyToken, validateMessage, checkValidation, invalidateCache(
       io.to(req.userId).emit('new_message', message);
     } catch (socketErr) {
       logger.warn('Socket emit error:', socketErr.message);
+    }
+
+    // Send email notification (async, non-blocking)
+    // Only send if receiver is not online (to avoid spam)
+    if (!isUserOnline(receiver) && receiverUser) {
+      const senderUser = useMongoDB
+        ? await UserMongo.findById(req.userId).select('firstName lastName username')
+        : await UserMock.findById(req.userId);
+
+      if (senderUser) {
+        NotificationService.sendNewMessageNotification(senderUser, receiverUser, content)
+          .catch(err => logger.error('Message notification failed:', err));
+      }
     }
 
     res.status(201).json({

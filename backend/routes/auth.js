@@ -10,6 +10,7 @@ const { sendPasswordResetOTP } = require('../services/emailService');
 const logger = require('../utils/logger');
 const { authLimiter, registerLimiter, forgotPasswordLimiter, apiLimiter } = require('../middleware/rateLimitMiddleware');
 const { isValidEmail, isValidUsername, isValidPassword, isValidName, isValidOTP } = require('../utils/validators');
+const NotificationService = require('../services/notificationService');
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'college_media_secret_key';
@@ -182,6 +183,8 @@ router.post('/register', registerLimiter, validateRegister, checkValidation, asy
           JWT_SECRET,
           { expiresIn: '7d' }
         );
+        // Send welcome email notification
+        NotificationService.sendWelcomeEmail(newUser).catch(err => logger.error('Welcome email failed:', err));
 
         res.status(201).json({
           success: true,
