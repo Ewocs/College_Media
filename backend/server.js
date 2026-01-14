@@ -28,6 +28,7 @@ const compression = require("compression");
 const passport = require("passport");
 const crypto = require("crypto");
 const { randomUUID } = require("crypto");
+const { ApolloServer } = require("apollo-server-express");
 
 /* ============================================================
    🔧 INTERNAL IMPORTS
@@ -38,6 +39,10 @@ const logger = require("./utils/logger");
 
 const resumeRoutes = require("./routes/resume");
 const uploadRoutes = require("./routes/upload");
+
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+const context = require('./graphql/context');
 
 const {
   globalLimiter,
@@ -149,6 +154,7 @@ app.use((req, res, next) => {
    🛡️ CSRF VALIDATION
 ============================================================ */
 app.use((req, res, next) => {
+  if (req.path === '/graphql') return next(); // Exclude GraphQL from CSRF
   if (!CSRF_METHODS.includes(req.method)) return next();
 
   const cookieToken = req.cookies[CSRF_COOKIE_NAME];
@@ -247,6 +253,16 @@ const startServer = async () => {
     User: require("./models/User"),
     Resume: require("./models/Resume"),
   });
+
+  const apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context,
+  });
+
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app });
+  logger.info(`GraphQL endpoint ready at ${apolloServer.graphqlPath}`);
 
   server.listen(PORT, () =>
     logger.info("Server running", { port: PORT, env: ENV })
