@@ -308,4 +308,58 @@ router.get('/:id/download', protect, async (req, res) => {
   }
 });
 
+// @route   POST /api/resume/ats-check
+// @desc    Check resume ATS compatibility
+// @access  Private
+router.post('/ats-check', protect, async (req, res) => {
+  console.log('🔍 /resume/ats-check HIT');
+  
+  try {
+    const { content, summary, personalInfo } = req.body;
+
+    // Validate that resume content exists
+    if (!content || (!content.experience && !content.education && !content.skills)) {
+      console.log('⚠️ Validation failed: insufficient resume data');
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Please provide resume content for ATS analysis.' 
+      });
+    }
+
+    console.log('➡️ Starting ATS compatibility check...');
+    console.log('📊 Analyzing resume with:', {
+      hasPersonalInfo: !!personalInfo,
+      hasSummary: !!summary,
+      experienceCount: content.experience?.length || 0,
+      educationCount: content.education?.length || 0,
+      hasSkills: !!content.skills,
+      projectsCount: content.projects?.length || 0
+    });
+
+    // Check ATS compatibility using AI
+    const atsAnalysis = await Promise.race([
+      aiService.checkATSCompatibility({ content, summary, personalInfo }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('ATS check timed out after 50 seconds')), 50000)
+      )
+    ]);
+
+    console.log('✅ ATS analysis completed successfully');
+
+    res.json({
+      success: true,
+      message: 'ATS compatibility check completed',
+      data: atsAnalysis
+    });
+
+  } catch (err) {
+    console.error('❌ ATS check failed:', err.message);
+    console.error('Stack trace:', err.stack);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message || 'Failed to complete ATS check. Please check your API key configuration.' 
+    });
+  }
+});
+
 module.exports = router;

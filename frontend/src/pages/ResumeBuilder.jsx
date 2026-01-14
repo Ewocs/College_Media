@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api'; 
-import { Plus, Trash2, Upload, Save, Sparkles, Download, Eye } from 'lucide-react';
+import { Plus, Trash2, Upload, Save, Sparkles, Download, Eye, Shield, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
 
 const ResumeBuilder = () => {
   const [activeTab, setActiveTab] = useState('build');
   const [loading, setLoading] = useState(false);
   const [aiGenerating, setAiGenerating] = useState(false);
+  const [atsChecking, setAtsChecking] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [atsResults, setAtsResults] = useState(null);
+  const [showAtsModal, setShowAtsModal] = useState(false);
   
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -238,8 +241,231 @@ const ResumeBuilder = () => {
     }
   };
 
+  // New function: Check ATS Compatibility
+  const handleATSCheck = async () => {
+    setAtsChecking(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      // Prepare data for ATS check
+      const atsPayload = {
+        personalInfo: {
+          name: personalInfo.name,
+          email: personalInfo.email,
+          phone: personalInfo.phone,
+          linkedin: personalInfo.linkedin
+        },
+        summary: personalInfo.summary,
+        content: {
+          experience: formData.experience.filter(exp => exp.title || exp.company),
+          education: formData.education.filter(edu => edu.degree || edu.institution),
+          skills: formData.skills.split(',').map(skill => skill.trim()).filter(Boolean),
+          projects: formData.projects.filter(proj => proj.title || proj.description)
+        }
+      };
+
+      // Validate minimum data
+      if (atsPayload.content.experience.length === 0 && atsPayload.content.education.length === 0) {
+        setMessage({ 
+          type: 'error', 
+          text: 'Please provide at least some experience or education details for ATS analysis.' 
+        });
+        return;
+      }
+
+      const response = await api.post('/resume/ats-check', atsPayload);
+      
+      if (response.data.success) {
+        setAtsResults(response.data.data);
+        setShowAtsModal(true);
+        setMessage({ 
+          type: 'success', 
+          text: '✅ ATS compatibility check completed!' 
+        });
+      }
+
+    } catch (error) {
+      console.error('ATS check error:', error);
+      setMessage({ 
+        type: 'error', 
+        text: error.response?.data?.message || 'Failed to complete ATS check. Please ensure MISTRAL_API_KEY is configured.' 
+      });
+    } finally {
+      setAtsChecking(false);
+    }
+  };
+
+  // ATS Results Modal Component
+  const ATSResultsModal = () => {
+    if (!showAtsModal || !atsResults) return null;
+
+    const getScoreColor = (score) => {
+      if (score >= 80) return 'text-green-600';
+      if (score >= 60) return 'text-yellow-600';
+      return 'text-red-600';
+    };
+
+    const getScoreBgColor = (score) => {
+      if (score >= 80) return 'bg-green-100';
+      if (score >= 60) return 'bg-yellow-100';
+      return 'bg-red-100';
+    };
+
+    const getRatingIcon = (rating) => {
+      switch (rating) {
+        case 'excellent': return <CheckCircle className="text-green-500" size={24} />;
+        case 'good': return <CheckCircle className="text-blue-500" size={24} />;
+        case 'fair': return <AlertTriangle className="text-yellow-500" size={24} />;
+        case 'poor': return <AlertCircle className="text-red-500" size={24} />;
+        default: return <Shield className="text-gray-500" size={24} />;
+      }
+    };
+
+    const getPriorityColor = (priority) => {
+      switch (priority) {
+        case 'high': return 'bg-red-100 text-red-800';
+        case 'medium': return 'bg-yellow-100 text-yellow-800';
+        case 'low': return 'bg-blue-100 text-blue-800';
+        default: return 'bg-gray-100 text-gray-800';
+      }
+    };
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          {/* Header */}
+          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 z-10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Shield className="text-indigo-600" size={32} />
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white">ATS Compatibility Report</h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Applicant Tracking System Analysis</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAtsModal(false)}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Overall Score */}
+            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-lg p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Overall ATS Score</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{atsResults.summary}</p>
+                </div>
+                <div className="text-center">
+                  <div className={`text-5xl font-bold ${getScoreColor(atsResults.overallScore)}`}>
+                    {atsResults.overallScore}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">out of 100</div>
+                  <div className="flex items-center justify-center gap-2 mt-2">
+                    {getRatingIcon(atsResults.atsRating)}
+                    <span className="text-sm font-medium capitalize">{atsResults.atsRating}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Category Scores */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Category Breakdown</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(atsResults.categories).map(([category, data]) => (
+                  <div key={category} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-medium text-gray-800 dark:text-white capitalize">{category}</h4>
+                      <span className={`px-3 py-1 rounded-full text-sm font-bold ${getScoreBgColor(data.score)} ${getScoreColor(data.score)}`}>
+                        {data.score}%
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{data.feedback}</p>
+                    {data.missingKeywords && data.missingKeywords.length > 0 && (
+                      <div className="mt-2">
+                        <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Missing Keywords:</p>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {data.missingKeywords.map((keyword, idx) => (
+                            <span key={idx} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded">
+                              {keyword}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Strengths */}
+            {atsResults.strengths && atsResults.strengths.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+                  <CheckCircle className="text-green-500" size={20} />
+                  Strengths
+                </h3>
+                <ul className="space-y-2">
+                  {atsResults.strengths.map((strength, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                      <span className="text-green-500 mt-1">✓</span>
+                      <span>{strength}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Improvements */}
+            {atsResults.improvements && atsResults.improvements.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+                  <AlertCircle className="text-orange-500" size={20} />
+                  Suggested Improvements
+                </h3>
+                <div className="space-y-3">
+                  {atsResults.improvements.map((improvement, idx) => (
+                    <div key={idx} className="border-l-4 border-orange-400 bg-orange-50 dark:bg-orange-900/20 p-4 rounded-r">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-800 dark:text-white mb-1">{improvement.issue}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{improvement.suggestion}</p>
+                        </div>
+                        <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${getPriorityColor(improvement.priority)}`}>
+                          {improvement.priority}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4">
+            <button
+              onClick={() => setShowAtsModal(false)}
+              className="w-full px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              Close Report
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-6">
+      {/* ATS Results Modal */}
+      <ATSResultsModal />
+      
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Resume Builder</h1>
         {savedResume && (
@@ -508,6 +734,17 @@ const ResumeBuilder = () => {
               >
                 <Save className="mr-2" size={18} />
                 Save as Draft
+              </button>
+              
+              <button 
+                type="button"
+                onClick={handleATSCheck}
+                disabled={atsChecking}
+                className="flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 disabled:opacity-50 transition-colors shadow-sm"
+                title="Check ATS Compatibility"
+              >
+                <Shield className="mr-2" size={18} />
+                {atsChecking ? 'Checking ATS...' : 'Check ATS'}
               </button>
               
               <button 

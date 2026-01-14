@@ -246,6 +246,193 @@ class AIService {
       throw new Error('AI Enhancement Failed');
     }
   }
+
+  /**
+   * Check ATS compatibility of resume
+   * @param {Object} resumeData - Complete resume data
+   * @returns {Promise<Object>} ATS analysis with score and suggestions
+   */
+  async checkATSCompatibility(resumeData) {
+    const apiKey = this.getApiKey();
+    if (!apiKey) {
+      throw new Error('Mistral API key not configured. Please set MISTRAL_API_KEY in your environment variables.');
+    }
+
+    const { content, summary, personalInfo } = resumeData;
+
+    // Build comprehensive resume text for analysis
+    let resumeText = '';
+    
+    if (personalInfo) {
+      resumeText += `PERSONAL INFORMATION:\n`;
+      resumeText += `${personalInfo.name || ''}\n`;
+      resumeText += `${personalInfo.email || ''} | ${personalInfo.phone || ''}\n`;
+      resumeText += `${personalInfo.linkedin || ''}\n\n`;
+    }
+
+    if (summary) {
+      resumeText += `PROFESSIONAL SUMMARY:\n${summary}\n\n`;
+    }
+
+    if (content.experience && content.experience.length > 0) {
+      resumeText += `EXPERIENCE:\n`;
+      content.experience.forEach(exp => {
+        resumeText += `${exp.title} at ${exp.company} (${exp.duration})\n`;
+        resumeText += `${exp.description}\n\n`;
+      });
+    }
+
+    if (content.education && content.education.length > 0) {
+      resumeText += `EDUCATION:\n`;
+      content.education.forEach(edu => {
+        resumeText += `${edu.degree} - ${edu.institution} (${edu.year})`;
+        if (edu.gpa) resumeText += ` - GPA: ${edu.gpa}`;
+        resumeText += `\n`;
+      });
+      resumeText += `\n`;
+    }
+
+    if (content.skills && content.skills.length > 0) {
+      resumeText += `SKILLS:\n${Array.isArray(content.skills) ? content.skills.join(', ') : content.skills}\n\n`;
+    }
+
+    if (content.projects && content.projects.length > 0) {
+      resumeText += `PROJECTS:\n`;
+      content.projects.forEach(proj => {
+        resumeText += `${proj.title}\n${proj.description}\n`;
+        if (proj.link) resumeText += `Link: ${proj.link}\n`;
+        resumeText += `\n`;
+      });
+    }
+
+    const prompt = `As an expert ATS (Applicant Tracking System) analyzer, evaluate this resume for ATS compatibility and provide detailed feedback.
+
+RESUME TO ANALYZE:
+${resumeText}
+
+Please analyze and provide a JSON response with the following structure:
+{
+  "overallScore": <number 0-100>,
+  "categories": {
+    "formatting": {
+      "score": <number 0-100>,
+      "feedback": "<string>"
+    },
+    "keywords": {
+      "score": <number 0-100>,
+      "feedback": "<string>",
+      "missingKeywords": ["<keyword1>", "<keyword2>"]
+    },
+    "content": {
+      "score": <number 0-100>,
+      "feedback": "<string>"
+    },
+    "structure": {
+      "score": <number 0-100>,
+      "feedback": "<string>"
+    }
+  },
+  "strengths": ["<strength1>", "<strength2>", "<strength3>"],
+  "improvements": [
+    {
+      "issue": "<issue description>",
+      "suggestion": "<specific suggestion>",
+      "priority": "<high|medium|low>"
+    }
+  ],
+  "atsRating": "<excellent|good|fair|poor>",
+  "summary": "<brief overall assessment>"
+}
+
+Evaluate based on:
+1. Formatting: Simple, clean, ATS-friendly formatting without tables/graphics
+2. Keywords: Industry-relevant keywords and action verbs
+3. Content: Quantifiable achievements, clear descriptions
+4. Structure: Proper sections, chronological order, consistency
+5. Contact info, dates, and completeness
+
+Be specific and actionable in your suggestions.`;
+
+    try {
+      const response = await axios.post(
+        this.apiUrl,
+        {
+          model: this.model,
+          messages: [
+            {
+              role: 'system',
+              content: 'You are an expert ATS (Applicant Tracking System) analyzer with deep knowledge of how recruiting software parses and ranks resumes. Provide detailed, actionable feedback to improve ATS compatibility.'
+            },
+            {
+              role: 'user',
+              content: prompt
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 2000
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          }
+        }
+      );
+
+      const atsAnalysis = response.data.choices[0].message.content;
+      return this.parseATSResponse(atsAnalysis);
+
+    } catch (error) {
+      console.error('Mistral AI Error (ATS Check):', error.response?.data || error.message);
+      throw new Error(`ATS Check Failed: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
+   * Parse ATS analysis response
+   */
+  parseATSResponse(content) {
+    try {
+      // Try to extract JSON from the response
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        return parsed;
+      }
+
+      // Fallback response if JSON parsing fails
+      console.warn('Could not parse ATS response as JSON');
+      return {
+        overallScore: 0,
+        categories: {
+          formatting: { score: 0, feedback: 'Unable to analyze' },
+          keywords: { score: 0, feedback: 'Unable to analyze', missingKeywords: [] },
+          content: { score: 0, feedback: 'Unable to analyze' },
+          structure: { score: 0, feedback: 'Unable to analyze' }
+        },
+        strengths: [],
+        improvements: [{ issue: 'Analysis failed', suggestion: 'Please try again', priority: 'high' }],
+        atsRating: 'unknown',
+        summary: 'Unable to complete ATS analysis. Please try again.'
+      };
+
+    } catch (error) {
+      console.error('Error parsing ATS response:', error);
+      return {
+        overallScore: 0,
+        categories: {
+          formatting: { score: 0, feedback: 'Error parsing response' },
+          keywords: { score: 0, feedback: 'Error parsing response', missingKeywords: [] },
+          content: { score: 0, feedback: 'Error parsing response' },
+          structure: { score: 0, feedback: 'Error parsing response' }
+        },
+        strengths: [],
+        improvements: [{ issue: 'Parsing error', suggestion: 'Please try again', priority: 'high' }],
+        atsRating: 'unknown',
+        summary: 'Error processing ATS analysis.'
+      };
+    }
+  }
 }
 
 module.exports = new AIService();
