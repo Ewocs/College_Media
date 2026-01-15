@@ -1344,15 +1344,142 @@ Refresh analytics.
 
 ### External
 
-<!-- Add external endpoints here -->
+#### GET /api/external/status
+
+Check external service status.
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "status": "operational"
+  }
+}
+```
 
 ### Credentials
 
-<!-- Add credentials endpoints here -->
+#### POST /api/credentials/mint
+
+Mint a credential (Admin only).
+
+**Headers:** Authorization required
+
+**Permissions:** MANAGE_USERS
+
+**Request Body:**
+```json
+{
+  "userId": "user_id",
+  "credentialType": "achievement",
+  "metadata": { ... }
+}
+```
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "credential": { ... }
+  }
+}
+```
+
+#### GET /api/credentials/verify/:address
+
+Verify credential by address.
+
+**Headers:** Authorization required
+
+**Parameters:**
+- `address`: Blockchain address
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "isValid": true,
+    "credential": { ... }
+  }
+}
+```
+
+#### GET /api/credentials/user/:address
+
+Get user's credentials.
+
+**Headers:** Authorization required
+
+**Parameters:**
+- `address`: User address
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "credentials": [ ... ]
+  }
+}
+```
 
 ### Streams
 
-<!-- Add streams endpoints here -->
+#### POST /api/streams/upload
+
+Upload video stream.
+
+**Headers:** Authorization required
+
+**Content-Type:** multipart/form-data
+
+**Form Data:**
+- `video`: Video file
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "videoId": "id",
+    "status": "processing"
+  }
+}
+```
+
+#### GET /api/streams/:videoId/status
+
+Get video processing status.
+
+**Headers:** Authorization required
+
+**Parameters:**
+- `videoId`: Video ID
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "status": "processing|completed|failed",
+    "progress": 50
+  }
+}
+```
+
+#### GET /api/streams/:videoId/:file
+
+Stream video file.
+
+**Parameters:**
+- `videoId`: Video ID
+- `file`: File name (e.g., "playlist.m3u8")
+
+**Response (200):**
+Video stream or playlist file
 
 ## GraphQL API
 
