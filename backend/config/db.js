@@ -9,17 +9,17 @@ let isConnected = false;
 
 // Function to initialize database connection with pooling
 const initDB = async () => {
-  const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/college_media';
+  // Configured Shards
+  const MONGODB_URI = process.env.MONGODB_URI; // Keeping for default reference
 
-  // Try to connect to MongoDB with connection pooling
   try {
-    // Initialize connection pool
-    await initializePool(MONGODB_URI);
+    // Initialize Shard Connections
+    await require('./sharding').initShards();
 
-    // Initialize query monitoring
-    initializeQueryMonitoring(mongoose);
+    // Initialize query monitoring (on default/global mongoose if needed, or per connection)
+    // initializeQueryMonitoring(mongoose);
 
-    logger.info('MongoDB connected successfully with connection pooling');
+    logger.info('MongoDB Sharding Layer initialized successfully');
     useMongoDB = true;
 
     return {
@@ -28,8 +28,7 @@ const initDB = async () => {
       healthCheck
     };
   } catch (error) {
-    logger.warn(`MongoDB connection failed: ${error.message}`);
-    logger.info('Falling back to file-based database for development');
+    logger.warn(`MongoDB Sharding initialization failed: ${error.message}`);
     useMongoDB = false;
     return {
       useMongoDB: false,
