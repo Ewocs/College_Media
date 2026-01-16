@@ -262,6 +262,7 @@ app.use("/api/proctoring", require("./routes/proctoring"));
 app.use("/api/interview", require("./routes/interview"));
 app.use("/api/storage", require("./routes/storage"));
 app.use("/api/account", require("./routes/account"));
+app.use("/api/federated", require("./routes/federated"));
 
 /* ============================================================
    ❌ ERROR HANDLING
