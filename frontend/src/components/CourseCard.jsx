@@ -14,7 +14,7 @@ const CourseCard = ({ course }) => {
   const isFree = price === 0;
 
   return (
-    <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full">
+    <div className="group bg-bg-secondary dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full">
       {/* Thumbnail Section - Reduced height */}
       <div className="relative h-36 overflow-hidden bg-gray-100 dark:bg-slate-700 shrink-0">
         <img
@@ -24,10 +24,10 @@ const CourseCard = ({ course }) => {
           loading="lazy"
         />
         {/* Floating Badges - Minimalist */}
-        <div className="absolute top-2 right-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold shadow-sm">
+        <div className="absolute top-2 right-2 bg-bg-secondary/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[10px] font-bold shadow-sm">
           <span
             className={
-              isFree ? "text-green-600" : "text-slate-900 dark:text-white"
+              isFree ? "text-green-600" : "text-text-primary dark:text-white"
             }
           >
             {isFree ? "Free" : `$${price}`}
@@ -44,7 +44,7 @@ const CourseCard = ({ course }) => {
 
       {/* Content Section - Compact */}
       <div className="p-4 flex flex-col flex-1">
-        <div className="flex items-center justify-between mb-2 text-[10px] text-slate-500 dark:text-slate-400">
+        <div className="flex items-center justify-between mb-2 text-[10px] text-text-muted dark:text-slate-400">
           <span className="bg-slate-100 dark:bg-slate-700/50 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-300 font-medium">
             {category}
           </span>
@@ -55,18 +55,18 @@ const CourseCard = ({ course }) => {
             </span>
             <span className="flex items-center text-yellow-500">
               <FaStar className="w-2.5 h-2.5 mr-0.5" />
-              <span className="font-bold text-slate-700 dark:text-slate-200">
+              <span className="font-bold text-text-secondary dark:text-slate-200">
                 {rating}
               </span>
             </span>
           </div>
         </div>
 
-        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-base font-bold text-text-primary dark:text-white mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
           {title}
         </h3>
 
-        <p className="text-xs text-slate-500 dark:text-slate-400 mb-3 flex items-center">
+        <p className="text-xs text-text-muted dark:text-slate-400 mb-3 flex items-center">
           <span className="truncate">By {instructor}</span>
         </p>
 
@@ -83,3 +83,4 @@ const CourseCard = ({ course }) => {
 };
 
 export default CourseCard;
+

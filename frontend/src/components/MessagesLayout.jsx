@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 const MessagesLayout = ({ searchQuery, setSearchQuery }) => {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-bg-secondary dark:bg-slate-900">
       <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Outlet />
     </div>
@@ -12,3 +12,4 @@ const MessagesLayout = ({ searchQuery, setSearchQuery }) => {
 };
 
 export default MessagesLayout;
+

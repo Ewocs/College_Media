@@ -23,7 +23,7 @@ const CourseSearchFilter = ({
 
   return (
     <div className="w-full max-w-2xl mb-10 relative z-20">
-      <div className="relative flex items-center bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 p-1.5 border border-slate-100 dark:border-slate-700">
+      <div className="relative flex items-center bg-bg-secondary dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 p-1.5 border border-slate-100 dark:border-slate-700">
         {/* Search Icon */}
         <div className="pl-4 text-slate-400">
           <svg
@@ -47,7 +47,7 @@ const CourseSearchFilter = ({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for courses..."
-          className="flex-1 w-full bg-transparent border-none focus:ring-0 text-slate-700 dark:text-slate-200 placeholder-slate-400 px-4 py-2 outline-none"
+          className="flex-1 w-full bg-transparent border-none focus:ring-0 text-text-secondary dark:text-slate-200 placeholder-slate-400 px-4 py-2 outline-none"
         />
 
         {/* Divider */}
@@ -85,7 +85,7 @@ const CourseSearchFilter = ({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden py-1 z-50 origin-top-right"
+                className="absolute right-0 top-full mt-2 w-48 bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden py-1 z-50 origin-top-right"
               >
                 {filterOptions.map((option) => (
                   <button
@@ -99,7 +99,7 @@ const CourseSearchFilter = ({
                       ${
                         filter === option.value
                           ? "bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-medium"
-                          : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+                          : "text-slate-600 dark:text-slate-300 hover:bg-bg-primary dark:hover:bg-slate-700"
                       }
                     `}
                   >
@@ -133,3 +133,4 @@ const CourseSearchFilter = ({
 };
 
 export default CourseSearchFilter;
+

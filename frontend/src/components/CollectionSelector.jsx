@@ -40,11 +40,11 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-hidden flex flex-col">
+    <div className="absolute right-0 mt-2 w-72 bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-lg border border-border dark:border-gray-700 z-50 max-h-96 overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-b border-border dark:border-gray-700">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900 dark:text-white">
+          <h3 className="font-semibold text-text-primary dark:text-white">
             Save to Collection
           </h3>
           <button
@@ -66,7 +66,7 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search collections..."
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
       {/* Collections List */}
       <div className="flex-1 overflow-y-auto p-2">
         {filteredCollections.length === 0 ? (
-          <div className="p-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+          <div className="p-4 text-center text-text-muted dark:text-gray-400 text-sm">
             {searchQuery ? 'No collections found' : 'No collections yet'}
           </div>
         ) : (
@@ -98,10 +98,10 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
                     className="w-5 h-5 text-gray-600 dark:text-gray-400 flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-gray-900 dark:text-white truncate">
+                    <p className="font-medium text-text-primary dark:text-white truncate">
                       {collection.name}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-text-muted dark:text-gray-400">
                       {collection.postIds?.length || 0} post{collection.postIds?.length !== 1 ? 's' : ''}
                     </p>
                   </div>
@@ -119,7 +119,7 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
       </div>
 
       {/* Create New Collection */}
-      <div className="border-t border-gray-200 dark:border-gray-700 p-3">
+      <div className="border-t border-border dark:border-gray-700 p-3">
         {showCreateForm ? (
           <form onSubmit={handleCreateAndSave} className="space-y-2">
             <input
@@ -129,7 +129,7 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
               placeholder="Collection name"
               autoFocus
               maxLength={50}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <div className="flex gap-2">
               <button
@@ -138,7 +138,7 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
                   setShowCreateForm(false);
                   setNewCollectionName('');
                 }}
-                className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors"
               >
                 Cancel
               </button>
@@ -173,3 +173,4 @@ const CollectionSelector = ({ postId, onClose, onSelect }) => {
 };
 
 export default CollectionSelector;
+

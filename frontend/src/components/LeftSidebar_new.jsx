@@ -73,9 +73,9 @@ function LeftSidebar() {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 z-40 flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-bg-secondary border-r border-border z-40 flex flex-col">
       {/* Logo */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-border">
         <div className="flex items-center space-x-2">
           <span className="text-xl font-bold">
             <span className="text-gray-800">College</span>
@@ -94,11 +94,11 @@ function LeftSidebar() {
               className={`w-full flex items-center space-x-4 px-4 py-3.5 rounded-xl transition-all duration-200 group relative ${
                 location.pathname === item.path
                   ? "bg-gray-100 font-semibold"
-                  : "hover:bg-gray-50 font-normal"
+                  : "hover:bg-bg-primary font-normal"
               }`}
             >
               <div className="relative">
-                <span className={location.pathname === item.path ? "text-gray-900" : "text-gray-700 group-hover:text-gray-900"}>
+                <span className={location.pathname === item.path ? "text-text-primary" : "text-text-secondary group-hover:text-text-primary"}>
                   {item.icon}
                 </span>
                 {item.badge && (
@@ -109,8 +109,8 @@ function LeftSidebar() {
               </div>
               <span className={`text-base ${
                 location.pathname === item.path
-                  ? "text-gray-900 font-semibold"
-                  : "text-gray-700 group-hover:text-gray-900"
+                  ? "text-text-primary font-semibold"
+                  : "text-text-secondary group-hover:text-text-primary"
               }`}>
                 {item.label}
               </span>
@@ -118,26 +118,26 @@ function LeftSidebar() {
           ))}
         </div>
         
-        <hr className="my-4 border-gray-200" />
+        <hr className="my-4 border-border" />
         
         <div className="space-y-1">
-          <Link to="/more" className="w-full flex items-center space-x-4 px-4 py-3.5 rounded-xl transition-all duration-200 hover:bg-gray-50 group">
-            <svg className="w-7 h-7 text-gray-700 group-hover:text-gray-900" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <Link to="/more" className="w-full flex items-center space-x-4 px-4 py-3.5 rounded-xl transition-all duration-200 hover:bg-bg-primary group">
+            <svg className="w-7 h-7 text-text-secondary group-hover:text-text-primary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <span className="text-base text-gray-700 group-hover:text-gray-900">More</span>
+            <span className="text-base text-text-secondary group-hover:text-text-primary">More</span>
           </Link>
         </div>
       </nav>
 
       {/* Bottom Section */}
-      <div className="p-4 border-t border-gray-200">
-        <Link to="/settings" className="w-full flex items-center space-x-4 px-4 py-3.5 rounded-xl transition-all duration-200 hover:bg-gray-50 group">
-          <svg className="w-7 h-7 text-gray-700 group-hover:text-gray-900" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <div className="p-4 border-t border-border">
+        <Link to="/settings" className="w-full flex items-center space-x-4 px-4 py-3.5 rounded-xl transition-all duration-200 hover:bg-bg-primary group">
+          <svg className="w-7 h-7 text-text-secondary group-hover:text-text-primary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          <span className="text-base text-gray-700 group-hover:text-gray-900">Settings</span>
+          <span className="text-base text-text-secondary group-hover:text-text-primary">Settings</span>
         </Link>
       </div>
     </aside>
@@ -145,3 +145,4 @@ function LeftSidebar() {
 }
 
 export default LeftSidebar;
+

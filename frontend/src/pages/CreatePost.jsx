@@ -37,21 +37,21 @@ const CreatePost = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 p-4">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Create Post</h1>
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+        <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 mb-2">Create Post</h1>
         <p className="text-gray-600 dark:text-gray-400">Share your thoughts with your college community</p>
       </div>
 
       {/* Post Type Selection */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">Post Type</h2>
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+        <h2 className="text-lg font-bold text-text-primary dark:text-gray-100 mb-4">Post Type</h2>
         <div className="grid grid-cols-4 gap-3">
           <button
             onClick={() => setPostType('text')}
             className={`p-4 rounded-xl border-2 transition-all duration-200 ${
               postType === 'text'
                 ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:border-indigo-500'
-                : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
             }`}
           >
             <svg className={`w-6 h-6 mx-auto mb-2 ${postType === 'text' ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ const CreatePost = () => {
             className={`p-4 rounded-xl border-2 transition-all duration-200 ${
               postType === 'photo'
                 ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:border-indigo-500'
-                : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
             }`}
           >
             <svg className={`w-6 h-6 mx-auto mb-2 ${postType === 'photo' ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ const CreatePost = () => {
             className={`p-4 rounded-xl border-2 transition-all duration-200 ${
               postType === 'video'
                 ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:border-indigo-500'
-                : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
             }`}
           >
             <svg className={`w-6 h-6 mx-auto mb-2 ${postType === 'video' ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +93,7 @@ const CreatePost = () => {
             className={`p-4 rounded-xl border-2 transition-all duration-200 ${
               postType === 'poll'
                 ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 dark:border-indigo-500'
-                : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
             }`}
           >
             <svg className={`w-6 h-6 mx-auto mb-2 ${postType === 'poll' ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-600 dark:text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@ const CreatePost = () => {
       </div>
 
       {/* Post Content */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
         <div className="flex items-start space-x-3 mb-4">
           <img
             src="https://placehold.co/48x48/4F46E5/FFFFFF?text=U"
@@ -113,8 +113,8 @@ const CreatePost = () => {
             className="w-12 h-12 rounded-full"
           />
           <div className="flex-1">
-            <p className="font-bold text-gray-900 dark:text-gray-100">Your Name</p>
-            <select className="mt-1 text-sm text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 bg-white dark:bg-gray-700">
+            <p className="font-bold text-text-primary dark:text-gray-100">Your Name</p>
+            <select className="mt-1 text-sm text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 bg-bg-secondary dark:bg-gray-700">
               <option>Public</option>
               <option>Friends</option>
               <option>Only Me</option>
@@ -126,7 +126,7 @@ const CreatePost = () => {
           value={caption}
           onChange={handleCaptionChange}
           placeholder="What's on your mind?"
-          className="w-full p-4 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 resize-none text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700"
+          className="w-full p-4 border border-border dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 resize-none text-text-primary dark:text-gray-100 bg-bg-secondary dark:bg-gray-700"
           rows={6}
           maxLength={maxLength}
         />
@@ -141,7 +141,7 @@ const CreatePost = () => {
                 ? 'text-orange-500 dark:text-orange-400'
                 : charCount > maxLength * 0.75
                 ? 'text-yellow-500 dark:text-yellow-400'
-                : 'text-gray-500 dark:text-gray-400'
+                : 'text-text-muted dark:text-gray-400'
             }`}
           >
             {charCount} / {maxLength}
@@ -151,7 +151,7 @@ const CreatePost = () => {
         {/* File Upload */}
         {(postType === 'photo' || postType === 'video') && (
           <div className="mt-6">
-            <label className="block w-full p-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors duration-200 cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+            <label className="block w-full p-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors duration-200 cursor-pointer bg-bg-primary dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
               <input
                 type="file"
                 multiple={postType === 'photo'}
@@ -160,12 +160,12 @@ const CreatePost = () => {
                 className="hidden"
               />
               <div className="text-center">
-                <svg className="w-12 h-12 mx-auto text-gray-400 dark:text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12 mx-auto text-gray-400 dark:text-text-muted mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
                 <p className="text-gray-600 dark:text-gray-300 font-medium">Click to upload {postType}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">or drag and drop</p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">Max file size: 10MB</p>
+                <p className="text-sm text-text-muted dark:text-gray-400 mt-1">or drag and drop</p>
+                <p className="text-xs text-gray-400 dark:text-text-muted mt-2">Max file size: 10MB</p>
               </div>
             </label>
             {selectedFiles.length > 0 && (
@@ -187,16 +187,16 @@ const CreatePost = () => {
         {/* Poll Options */}
         {postType === 'poll' && (
           <div className="mt-6 space-y-3">
-            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Poll Options</h3>
+            <h3 className="font-medium text-text-primary dark:text-gray-100 mb-3">Poll Options</h3>
             <input
               type="text"
               placeholder="Option 1"
-              className="w-full p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="w-full p-3 border border-border dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100"
             />
             <input
               type="text"
               placeholder="Option 2"
-              className="w-full p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+              className="w-full p-3 border border-border dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100"
             />
             <button className="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center">
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,8 +208,8 @@ const CreatePost = () => {
         )}
 
         {/* Add to Post */}
-        <div className="mt-6 flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800">
-          <p className="font-medium text-gray-900 dark:text-gray-100">Add to your post</p>
+        <div className="mt-6 flex items-center justify-between p-4 border border-border dark:border-gray-700 rounded-xl bg-bg-secondary dark:bg-gray-800">
+          <p className="font-medium text-text-primary dark:text-gray-100">Add to your post</p>
           <div className="flex space-x-2">
             <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
               <svg className="w-5 h-5 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

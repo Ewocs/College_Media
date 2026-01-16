@@ -18,7 +18,7 @@ const SearchResultItem = ({ result, query }) => {
     return (
       <Link
         to={`/profile/${result.username}`}
-        className="block bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+        className="block bg-bg-secondary dark:bg-gray-900 rounded-lg shadow-sm border border-border dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
       >
         <div className="flex items-center gap-4">
           <img
@@ -27,19 +27,19 @@ const SearchResultItem = ({ result, query }) => {
             className="w-16 h-16 rounded-full object-cover"
           />
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white">
               {result.name}
             </h3>
             <p className="text-gray-600 dark:text-gray-400">@{result.username}</p>
             {result.bio && (
               <p
-                className="text-sm text-gray-700 dark:text-gray-300 mt-1"
+                className="text-sm text-text-secondary dark:text-gray-300 mt-1"
                 dangerouslySetInnerHTML={{
                   __html: getHighlightedExcerpt(result.bio, query, 100),
                 }}
               />
             )}
-            <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-4 mt-2 text-sm text-text-muted dark:text-gray-400">
               <span>{result.followers || 0} followers</span>
               <span>{result.posts || 0} posts</span>
             </div>
@@ -54,7 +54,7 @@ const SearchResultItem = ({ result, query }) => {
     return (
       <Link
         to={`/post/${result.id}`}
-        className="block bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+        className="block bg-bg-secondary dark:bg-gray-900 rounded-lg shadow-sm border border-border dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
       >
         <div className="flex gap-4">
           <div className={`flex-shrink-0 ${iconData.color}`}>
@@ -69,10 +69,10 @@ const SearchResultItem = ({ result, query }) => {
                     alt={result.author.name}
                     className="w-8 h-8 rounded-full"
                   />
-                  <span className="font-medium text-gray-900 dark:text-white">
+                  <span className="font-medium text-text-primary dark:text-white">
                     {result.author.name}
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">
+                  <span className="text-text-muted dark:text-gray-400">
                     @{result.author.username}
                   </span>
                 </>
@@ -80,7 +80,7 @@ const SearchResultItem = ({ result, query }) => {
             </div>
             {result.title && (
               <h3
-                className="text-lg font-semibold text-gray-900 dark:text-white mb-2"
+                className="text-lg font-semibold text-text-primary dark:text-white mb-2"
                 dangerouslySetInnerHTML={{
                   __html: getHighlightedExcerpt(result.title, query, 80),
                 }}
@@ -88,7 +88,7 @@ const SearchResultItem = ({ result, query }) => {
             )}
             {result.content && (
               <p
-                className="text-gray-700 dark:text-gray-300 mb-3"
+                className="text-text-secondary dark:text-gray-300 mb-3"
                 dangerouslySetInnerHTML={{
                   __html: getHighlightedExcerpt(result.content, query, 200),
                 }}
@@ -101,7 +101,7 @@ const SearchResultItem = ({ result, query }) => {
                 className="w-full max-h-64 object-cover rounded-lg mb-3"
               />
             )}
-            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-4 text-sm text-text-muted dark:text-gray-400">
               <span className="flex items-center gap-1">
                 <Icon icon="mdi:heart" width={16} />
                 {result.likes || 0}
@@ -124,7 +124,7 @@ const SearchResultItem = ({ result, query }) => {
     return (
       <Link
         to={`/post/${result.postId}#comment-${result.id}`}
-        className="block bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+        className="block bg-bg-secondary dark:bg-gray-900 rounded-lg shadow-sm border border-border dark:border-gray-800 p-4 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
       >
         <div className="flex gap-4">
           <div className={`flex-shrink-0 ${iconData.color}`}>
@@ -139,25 +139,25 @@ const SearchResultItem = ({ result, query }) => {
                     alt={result.author.name}
                     className="w-8 h-8 rounded-full"
                   />
-                  <span className="font-medium text-gray-900 dark:text-white">
+                  <span className="font-medium text-text-primary dark:text-white">
                     {result.author.name}
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">commented</span>
+                  <span className="text-text-muted dark:text-gray-400">commented</span>
                 </>
               )}
             </div>
             <p
-              className="text-gray-700 dark:text-gray-300 mb-2"
+              className="text-text-secondary dark:text-gray-300 mb-2"
               dangerouslySetInnerHTML={{
                 __html: getHighlightedExcerpt(result.content, query, 200),
               }}
             />
             {result.postTitle && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-text-muted dark:text-gray-400">
                 on: {result.postTitle}
               </p>
             )}
-            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <div className="flex items-center gap-4 text-sm text-text-muted dark:text-gray-400 mt-2">
               <span className="flex items-center gap-1">
                 <Icon icon="mdi:heart" width={16} />
                 {result.likes || 0}
@@ -176,3 +176,4 @@ const SearchResultItem = ({ result, query }) => {
 };
 
 export default SearchResultItem;
+

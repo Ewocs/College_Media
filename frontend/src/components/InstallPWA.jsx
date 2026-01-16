@@ -68,7 +68,7 @@ const InstallPWA = () => {
     <div className="fixed bottom-4 right-4 z-50 animate-bounce">
       <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg shadow-2xl p-4 max-w-sm">
         <div className="flex items-start gap-3">
-          <div className="bg-white/20 p-2 rounded-lg">
+          <div className="bg-bg-secondary/20 p-2 rounded-lg">
             <Icon icon="mdi:cellphone-arrow-down" width={24} />
           </div>
           <div className="flex-1">
@@ -79,13 +79,13 @@ const InstallPWA = () => {
             <div className="flex gap-2">
               <button
                 onClick={handleInstall}
-                className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-bg-secondary text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Install
               </button>
               <button
                 onClick={() => setIsInstallable(false)}
-                className="bg-white/20 px-4 py-2 rounded-lg font-semibold hover:bg-white/30 transition-colors"
+                className="bg-bg-secondary/20 px-4 py-2 rounded-lg font-semibold hover:bg-bg-secondary/30 transition-colors"
               >
                 Later
               </button>
@@ -105,3 +105,4 @@ const InstallPWA = () => {
 };
 
 export default InstallPWA;
+

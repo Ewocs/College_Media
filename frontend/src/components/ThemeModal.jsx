@@ -19,17 +19,17 @@ const ThemeModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+      <div className="relative w-full max-w-md rounded-lg bg-bg-secondary p-6 shadow-xl dark:bg-gray-800">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
+          className="absolute top-3 right-3 text-text-muted hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
           aria-label="Close"
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Select Theme</h2>
+        <h2 className="text-2xl font-bold text-text-primary dark:text-white">Select Theme</h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
           Choose how College Media looks to you. Select a theme from the options below.
         </p>
@@ -42,14 +42,14 @@ const ThemeModal = ({ isOpen, onClose }) => {
               className={`flex w-full items-center justify-between rounded-lg border p-4 text-left transition-all duration-200 ${
                 theme === value
                   ? "border-blue-500 bg-blue-50 dark:bg-blue-900/50"
-                  : "border-gray-300 bg-transparent hover:border-blue-400 hover:bg-gray-50 dark:border-gray-600 dark:hover:border-blue-500 dark:hover:bg-gray-700/50"
+                  : "border-gray-300 bg-transparent hover:border-blue-400 hover:bg-bg-primary dark:border-gray-600 dark:hover:border-blue-500 dark:hover:bg-gray-700/50"
               }`}
             >
               <div className="flex items-center">
                 <span className="mr-4 text-2xl">{icon}</span>
                 <div>
                   <p className="font-semibold text-gray-800 dark:text-white">{label}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-text-muted dark:text-gray-400">
                     {value === 'auto' ? 'Sync with your system preference' : `Always use ${label} mode`}
                   </p>
                 </div>
@@ -70,3 +70,4 @@ const ThemeModal = ({ isOpen, onClose }) => {
 };
 
 export default ThemeModal;
+

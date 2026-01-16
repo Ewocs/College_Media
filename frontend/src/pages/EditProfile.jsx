@@ -261,7 +261,7 @@ const EditProfile = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 pb-8">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
@@ -270,11 +270,11 @@ const EditProfile = () => {
             >
               <Icon icon="mdi:arrow-left" className="w-6 h-6 text-gray-600 dark:text-gray-300" />
             </Link>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Edit Profile</h1>
+            <h1 className="text-2xl font-bold text-text-primary dark:text-white">Edit Profile</h1>
           </div>
           <Link
             to="/profile"
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            className="text-gray-600 dark:text-gray-400 hover:text-text-primary dark:hover:text-white transition-colors"
           >
             <Icon icon="mdi:close" className="w-6 h-6" />
           </Link>
@@ -298,7 +298,7 @@ const EditProfile = () => {
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Profile Picture */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
           <div className="flex items-center space-x-6">
             <div className="relative">
               <img
@@ -313,8 +313,8 @@ const EditProfile = () => {
               )}
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Profile Photo</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">JPG, PNG or GIF. Max size 5MB</p>
+              <h3 className="font-bold text-text-primary dark:text-white mb-2">Profile Photo</h3>
+              <p className="text-sm text-text-muted dark:text-gray-400 mb-3">JPG, PNG or GIF. Max size 5MB</p>
               <div className="flex flex-wrap gap-3">
                 <label className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-200 cursor-pointer inline-flex items-center gap-2">
                   <Icon icon="mdi:upload" className="w-5 h-5" />
@@ -353,15 +353,15 @@ const EditProfile = () => {
         </div>
 
         {/* Basic Information */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+          <h2 className="text-lg font-bold text-text-primary dark:text-white mb-6 flex items-center gap-2">
             <Icon icon="mdi:account" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             Basic Information
           </h2>
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   First Name
                 </label>
                 <input
@@ -369,13 +369,13 @@ const EditProfile = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
                   placeholder="Enter your first name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Last Name
                 </label>
                 <input
@@ -383,14 +383,14 @@ const EditProfile = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
                   placeholder="Enter your last name"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Username
               </label>
               <input
@@ -399,17 +399,17 @@ const EditProfile = () => {
                 value={formData.username}
                 onChange={handleChange}
                 disabled
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-primary dark:bg-gray-900 text-text-muted dark:text-gray-400 cursor-not-allowed"
                 placeholder="Enter your username"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1">
+              <p className="text-xs text-text-muted dark:text-gray-400 mt-1 flex items-center gap-1">
                 <Icon icon="mdi:information" className="w-3 h-3" />
                 Username cannot be changed
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Bio
               </label>
               <textarea
@@ -418,16 +418,16 @@ const EditProfile = () => {
                 onChange={handleChange}
                 rows={4}
                 maxLength={500}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 resize-none transition-all"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 resize-none transition-all"
                 placeholder="Tell us about yourself"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right">
+              <p className="text-xs text-text-muted dark:text-gray-400 mt-1 text-right">
                 {formData.bio.length}/500 characters
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Website
               </label>
               <div className="relative">
@@ -437,7 +437,7 @@ const EditProfile = () => {
                   name="website"
                   value={formData.website}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
                   placeholder="https://example.com"
                 />
               </div>
@@ -446,14 +446,14 @@ const EditProfile = () => {
         </div>
 
         {/* Contact Information */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+          <h2 className="text-lg font-bold text-text-primary dark:text-white mb-6 flex items-center gap-2">
             <Icon icon="mdi:email" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             Contact Information
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Email
               </label>
               <div className="relative">
@@ -463,14 +463,14 @@ const EditProfile = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
                   placeholder="Enter your email"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Phone Number
               </label>
               <div className="relative">
@@ -480,21 +480,21 @@ const EditProfile = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                 Gender
               </label>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
               >
                 <option value="">Prefer not to say</option>
                 <option value="male">Male</option>
@@ -506,16 +506,16 @@ const EditProfile = () => {
         </div>
 
         {/* Privacy Settings */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+          <h2 className="text-lg font-bold text-text-primary dark:text-white mb-6 flex items-center gap-2">
             <Icon icon="mdi:shield-lock" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             Privacy Settings
           </h2>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <div className="flex items-center justify-between p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">Private Account</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Only approved followers can see your posts</p>
+                <p className="font-medium text-text-primary dark:text-white">Private Account</p>
+                <p className="text-sm text-text-muted dark:text-gray-400">Only approved followers can see your posts</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input 
@@ -525,14 +525,14 @@ const EditProfile = () => {
                   onChange={handleChange}
                   className="sr-only peer" 
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
               </label>
             </div>
 
-            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <div className="flex items-center justify-between p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">Activity Status</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Show when you're active</p>
+                <p className="font-medium text-text-primary dark:text-white">Activity Status</p>
+                <p className="text-sm text-text-muted dark:text-gray-400">Show when you're active</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input 
@@ -542,7 +542,7 @@ const EditProfile = () => {
                   onChange={handleChange}
                   className="sr-only peer" 
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
               </label>
             </div>
           </div>
@@ -569,7 +569,7 @@ const EditProfile = () => {
           </button>
           <Link
             to="/profile"
-            className="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 inline-flex items-center justify-center gap-2"
+            className="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-text-secondary dark:text-gray-300 rounded-xl font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 inline-flex items-center justify-center gap-2"
           >
             <Icon icon="mdi:close" className="w-5 h-5" />
             Cancel

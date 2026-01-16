@@ -65,12 +65,12 @@ const ContactUs = () => {
         <main className="pt-20 pb-16">
           {/* Hero Section */}
           <section className="max-w-7xl mx-auto px-6 py-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-purple-100 rounded-full px-4 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 bg-bg-secondary/80 backdrop-blur-sm border border-purple-100 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
               <span className="text-sm font-medium text-gray-600">We're here to help</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">
               Get in{' '}
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Touch
@@ -88,15 +88,15 @@ const ContactUs = () => {
               {contactOptions.map((option, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-300"
+                  className="bg-bg-secondary rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-300"
                 >
                   <div
                     className={`w-12 h-12 rounded-xl bg-gradient-to-br ${option.color} flex items-center justify-center text-white text-xl mb-4`}
                   >
                     <span aria-hidden="true">{option.icon}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{option.title}</h3>
-                  <p className="text-sm text-gray-500 mb-2">{option.description}</p>
+                  <h3 className="text-lg font-bold text-text-primary mb-1">{option.title}</h3>
+                  <p className="text-sm text-text-muted mb-2">{option.description}</p>
                   <p className="text-sm font-medium text-purple-600">{option.detail}</p>
                 </div>
               ))}
@@ -161,3 +161,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+

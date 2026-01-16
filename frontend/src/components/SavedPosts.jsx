@@ -27,7 +27,7 @@ const SavedPosts = ({ posts = [] }) => {
   if (bookmarkedPosts.length === 0) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-12 text-center">
+        <div className="bg-bg-secondary rounded-lg shadow-md p-12 text-center">
           <div className="mb-6">
             <svg
               className="w-24 h-24 mx-auto text-gray-300"
@@ -43,10 +43,10 @@ const SavedPosts = ({ posts = [] }) => {
               />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+          <h3 className="text-2xl font-bold text-text-primary mb-2">
             No saved posts yet
           </h3>
-          <p className="text-gray-500 mb-6">
+          <p className="text-text-muted mb-6">
             Posts you bookmark will appear here for easy access later
           </p>
           <a
@@ -63,10 +63,10 @@ const SavedPosts = ({ posts = [] }) => {
   return (
     <div className="max-w-2xl mx-auto">
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
+      <div className="bg-bg-secondary rounded-lg shadow-md p-4 mb-6">
+        <h2 className="text-2xl font-bold text-text-primary">
           Saved Posts
-          <span className="ml-2 text-lg text-gray-500">
+          <span className="ml-2 text-lg text-text-muted">
             ({bookmarkedPosts.length})
           </span>
         </h2>
@@ -78,7 +78,7 @@ const SavedPosts = ({ posts = [] }) => {
         {bookmarkedPosts.map((post) => (
           <div
             key={post.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-bg-secondary rounded-lg shadow-md overflow-hidden"
           >
             {/* Post Header */}
             <div className="flex items-center p-4">
@@ -88,10 +88,10 @@ const SavedPosts = ({ posts = [] }) => {
                 className="w-10 h-10 rounded-full object-cover mr-3"
               />
               <div className="flex-1">
-                <h3 className="font-semibold text-gray-900">
+                <h3 className="font-semibold text-text-primary">
                   {post.user.username}
                 </h3>
-                <p className="text-xs text-gray-500">{post.timestamp}</p>
+                <p className="text-xs text-text-muted">{post.timestamp}</p>
               </div>
             </div>
 
@@ -112,7 +112,7 @@ const SavedPosts = ({ posts = [] }) => {
                   <button
                     onClick={() => handleLike(post.id)}
                     className={`flex items-center ${
-                      post.liked ? "text-red-500" : "text-gray-700"
+                      post.liked ? "text-red-500" : "text-text-secondary"
                     }`}
                   >
                     <svg
@@ -124,7 +124,7 @@ const SavedPosts = ({ posts = [] }) => {
                   </button>
 
                   {/* Comment Button */}
-                  <button className="text-gray-700">
+                  <button className="text-text-secondary">
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -141,7 +141,7 @@ const SavedPosts = ({ posts = [] }) => {
                   </button>
 
                   {/* Share Button */}
-                  <button className="text-gray-700">
+                  <button className="text-text-secondary">
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -171,21 +171,21 @@ const SavedPosts = ({ posts = [] }) => {
               </div>
 
               {/* Likes */}
-              <p className="font-semibold text-gray-900 mb-1">
+              <p className="font-semibold text-text-primary mb-1">
                 {post.likes} likes
               </p>
 
               {/* Caption */}
               <div className="mb-2">
-                <span className="font-semibold text-gray-900 mr-2">
+                <span className="font-semibold text-text-primary mr-2">
                   {post.user.username}
                 </span>
-                <span className="text-gray-700">{post.caption}</span>
+                <span className="text-text-secondary">{post.caption}</span>
               </div>
 
               {/* Comments */}
               {post.comments > 0 && (
-                <button className="text-gray-500 text-sm mb-2">
+                <button className="text-text-muted text-sm mb-2">
                   View all {post.comments} comments
                 </button>
               )}
@@ -210,3 +210,4 @@ const SavedPosts = ({ posts = [] }) => {
 };
 
 export default SavedPosts;
+

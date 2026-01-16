@@ -18,7 +18,7 @@ const AccessibilitySettings = ({ isOpen, onClose }) => {
       aria-labelledby="a11y-title"
       aria-modal="true"
     >
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <h2 id="a11y-title" className="text-2xl font-bold">
             Accessibility Settings
@@ -117,3 +117,4 @@ const AccessibilitySettings = ({ isOpen, onClose }) => {
 };
 
 export default AccessibilitySettings;
+

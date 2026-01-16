@@ -141,10 +141,10 @@ const Notifications = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Notifications Header */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Notifications</h1>
+            <h1 className="text-2xl font-bold text-text-primary mb-2">Notifications</h1>
             <p className="text-gray-600">Stay updated with your campus activity</p>
           </div>
           <div className="flex items-center space-x-2">
@@ -156,7 +156,7 @@ const Notifications = () => {
             </button>
             <button
               onClick={clearAll}
-              className="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-gray-100 text-text-secondary font-medium rounded-lg hover:bg-gray-200 transition-colors"
             >
               Clear all
             </button>
@@ -169,9 +169,9 @@ const Notifications = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-indigo-600 font-medium">Total</p>
-                <p className="text-2xl font-bold text-gray-900">{notifications.length}</p>
+                <p className="text-2xl font-bold text-text-primary">{notifications.length}</p>
               </div>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-bg-secondary rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
@@ -183,9 +183,9 @@ const Notifications = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-red-600 font-medium">Unread</p>
-                <p className="text-2xl font-bold text-gray-900">{unreadCount}</p>
+                <p className="text-2xl font-bold text-text-primary">{unreadCount}</p>
               </div>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-bg-secondary rounded-full flex items-center justify-center">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               </div>
             </div>
@@ -195,11 +195,11 @@ const Notifications = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-blue-600 font-medium">Mentions</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-text-primary">
                   {notifications.filter(n => n.type === 'mention').length}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-bg-secondary rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
@@ -211,11 +211,11 @@ const Notifications = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-green-600 font-medium">Events</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-text-primary">
                   {notifications.filter(n => n.type === 'event').length}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-bg-secondary rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -226,7 +226,7 @@ const Notifications = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-4">
         <div className="flex flex-wrap gap-2">
           {filters.map((filter) => (
             <button
@@ -235,13 +235,13 @@ const Notifications = () => {
               className={`px-4 py-2 rounded-full font-medium transition-all duration-200 flex items-center space-x-2 ${
                 activeFilter === filter.id
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-text-secondary hover:bg-gray-200'
               }`}
             >
               <span>{filter.label}</span>
               <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                 activeFilter === filter.id
-                  ? 'bg-white/20'
+                  ? 'bg-bg-secondary/20'
                   : 'bg-gray-300'
               }`}>
                 {filter.count}
@@ -252,7 +252,7 @@ const Notifications = () => {
       </div>
 
       {/* Notifications List */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border overflow-hidden">
         {filteredNotifications.length === 0 ? (
           <div className="p-12 text-center">
             <div className="w-20 h-20 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -260,7 +260,7 @@ const Notifications = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No notifications</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-2">No notifications</h3>
             <p className="text-gray-600 mb-6">You're all caught up! Check back later for updates.</p>
             <button
               onClick={() => setActiveFilter('all')}
@@ -275,7 +275,7 @@ const Notifications = () => {
               <div
                 key={notification.id}
                 onClick={() => markAsRead(notification.id)}
-                className={`p-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer group ${
+                className={`p-5 hover:bg-bg-primary transition-colors duration-200 cursor-pointer group ${
                   !notification.read ? 'bg-indigo-50/50' : ''
                 }`}
               >
@@ -289,8 +289,8 @@ const Notifications = () => {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-bold text-gray-900">{notification.user.name}</span>
-                          <span className="text-sm text-gray-500">{notification.user.username}</span>
+                          <span className="font-bold text-text-primary">{notification.user.name}</span>
+                          <span className="text-sm text-text-muted">{notification.user.username}</span>
                           {!notification.read && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
                               New
@@ -298,24 +298,24 @@ const Notifications = () => {
                           )}
                         </div>
                         
-                        <p className="text-gray-700">
+                        <p className="text-text-secondary">
                           {getActionText(notification)}
                         </p>
                         
                         {notification.content && (
-                          <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                          <div className="mt-2 p-3 bg-bg-primary rounded-lg border border-border">
                             <p className="text-gray-600 text-sm">{notification.content}</p>
                           </div>
                         )}
                         
                         {notification.postPreview && (
-                          <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                          <div className="mt-2 p-3 bg-bg-primary rounded-lg border border-border">
                             <p className="text-gray-600 text-sm italic">"{notification.postPreview}"</p>
                           </div>
                         )}
                         
                         {notification.location && (
-                          <div className="mt-2 flex items-center text-sm text-gray-500">
+                          <div className="mt-2 flex items-center text-sm text-text-muted">
                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -325,7 +325,7 @@ const Notifications = () => {
                         )}
                         
                         <div className="flex items-center justify-between mt-3">
-                          <span className="text-sm text-gray-500">{notification.time}</span>
+                          <span className="text-sm text-text-muted">{notification.time}</span>
                           <div className="flex items-center space-x-2">
                             {notification.type === 'follow' && (
                               <button className="px-3 py-1.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
@@ -357,13 +357,13 @@ const Notifications = () => {
 
       {/* Empty state message when no notifications match filter */}
       {filteredNotifications.length === 0 && activeFilter !== 'all' && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
+        <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-8 text-center">
           <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
             <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No {activeFilter} notifications</h3>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">No {activeFilter} notifications</h3>
           <p className="text-gray-600">You don't have any {activeFilter} notifications at the moment.</p>
           <button
             onClick={() => setActiveFilter('all')}

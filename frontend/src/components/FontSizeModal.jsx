@@ -18,15 +18,15 @@ const FontSizeModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+        <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 px-6 py-4 flex items-center justify-between">
+          <h2 className="text-xl font-bold text-text-primary dark:text-gray-100">
             Font Size
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+            className="text-text-muted hover:text-text-secondary dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -48,7 +48,7 @@ const FontSizeModal = ({ isOpen, onClose }) => {
               className={`w-full p-4 rounded-xl border-2 transition-all duration-200 text-left ${
                 fontSize === size.value
                   ? "border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20"
-                  : "border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-700"
+                  : "border-border dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-700"
               } ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             >
               <div className="flex items-center justify-between mb-2">
@@ -61,10 +61,10 @@ const FontSizeModal = ({ isOpen, onClose }) => {
                     }`}
                   >
                     {fontSize === size.value && (
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <div className="w-2 h-2 bg-bg-secondary rounded-full"></div>
                     )}
                   </div>
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                  <span className="font-semibold text-text-primary dark:text-gray-100">
                     {size.label}
                   </span>
                 </div>
@@ -89,7 +89,7 @@ const FontSizeModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="sticky bottom-0 bg-bg-primary dark:bg-gray-900 px-6 py-4 border-t border-border dark:border-gray-700">
           <button
             onClick={onClose}
             className="w-full px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition-colors duration-200"
@@ -103,3 +103,4 @@ const FontSizeModal = ({ isOpen, onClose }) => {
 };
 
 export default FontSizeModal;
+

@@ -66,7 +66,7 @@ function Navbar() {
                   aria-haspopup="true"
                 >
                   <svg
-                    className="w-6 h-6 text-gray-600"
+                    className="w-6 h-6 text-text-primary"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -95,3 +95,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

@@ -92,7 +92,7 @@ const CourseDiscovery = () => {
               #BeUnstoppable
             </span>
           </div>
-          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+          <h1 className="text-4xl font-extrabold text-text-primary dark:text-white mb-2 tracking-tight">
             Unlock{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-slate-500 dark:from-white dark:to-slate-400">
               Courses
@@ -121,7 +121,7 @@ const CourseDiscovery = () => {
               ${
                 activeCategory === cat
                   ? "bg-slate-900 text-white shadow-lg shadow-slate-200 dark:shadow-none scale-105"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-white hover:shadow-md"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-bg-secondary hover:shadow-md"
               }
             `}
           >
@@ -167,12 +167,12 @@ const CourseDiscovery = () => {
       </motion.div>
 
       {!isLoading && filteredCourses.length === 0 && (
-        <div className="text-center py-20 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+        <div className="text-center py-20 bg-bg-primary dark:bg-slate-800/50 rounded-3xl border-2 border-dashed border-border dark:border-slate-700">
           <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+          <h3 className="text-xl font-bold text-text-primary dark:text-white mb-2">
             No results found
           </h3>
-          <p className="text-slate-500">
+          <p className="text-text-muted">
             We couldn't find any courses matching your filters.
           </p>
           <button
@@ -192,3 +192,4 @@ const CourseDiscovery = () => {
 };
 
 export default CourseDiscovery;
+

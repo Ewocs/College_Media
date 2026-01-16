@@ -72,7 +72,7 @@ const CollabEditor = ({ documentId, username = 'Anonymous' }) => {
 
     return (
         <div className="collab-session">
-            <div className="status-bar mb-2 text-sm text-gray-500">
+            <div className="status-bar mb-2 text-sm text-text-muted">
                 Connected as <strong>{username}</strong> to <em>{documentId}</em>
             </div>
             <div
@@ -85,3 +85,4 @@ const CollabEditor = ({ documentId, username = 'Anonymous' }) => {
 };
 
 export default CollabEditor;
+

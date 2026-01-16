@@ -24,7 +24,7 @@ const SkeletonNotification = ({ count = 5 }) => {
             {Array.from({ length: count }).map((_, index) => (
                 <div
                     key={index}
-                    className="flex items-start gap-3 p-4 border-b border-gray-100 hover:bg-gray-50"
+                    className="flex items-start gap-3 p-4 border-b border-gray-100 hover:bg-bg-primary"
                     role="status"
                     aria-busy="true"
                     aria-label="Loading notification"
@@ -53,3 +53,4 @@ const SkeletonNotification = ({ count = 5 }) => {
 };
 
 export default SkeletonNotification;
+

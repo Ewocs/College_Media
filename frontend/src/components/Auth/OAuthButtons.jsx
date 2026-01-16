@@ -16,14 +16,14 @@ const OAuthButtons = ({ isRegister = false }) => {
         <div className="flex flex-col gap-3 w-full mt-4">
             <div className="relative flex items-center">
                 <div className="flex-grow border-t border-gray-300"></div>
-                <span className="flex-shrink-0 mx-4 text-gray-500 text-sm">Or continue with</span>
+                <span className="flex-shrink-0 mx-4 text-text-muted text-sm">Or continue with</span>
                 <div className="flex-grow border-t border-gray-300"></div>
             </div>
 
             <button
                 type="button"
                 onClick={handleGoogleLogin}
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-700 font-medium border border-gray-300 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200"
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-bg-secondary hover:bg-bg-primary text-text-secondary font-medium border border-gray-300 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200"
             >
                 <FaGoogle className="text-red-500" />
                 <span>{isRegister ? 'Sign up' : 'Sign in'} with Google</span>
@@ -42,3 +42,4 @@ const OAuthButtons = ({ isRegister = false }) => {
 };
 
 export default OAuthButtons;
+

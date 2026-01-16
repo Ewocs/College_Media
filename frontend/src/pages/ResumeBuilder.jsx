@@ -461,7 +461,7 @@ const ResumeBuilder = () => {
         case 'good': return <CheckCircle className="text-blue-500" size={24} />;
         case 'fair': return <AlertTriangle className="text-yellow-500" size={24} />;
         case 'poor': return <AlertCircle className="text-red-500" size={24} />;
-        default: return <Shield className="text-gray-500" size={24} />;
+        default: return <Shield className="text-text-muted" size={24} />;
       }
     };
 
@@ -476,9 +476,9 @@ const ResumeBuilder = () => {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 z-10">
+          <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 p-6 z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Shield className="text-indigo-600" size={32} />
@@ -489,7 +489,7 @@ const ResumeBuilder = () => {
               </div>
               <button
                 onClick={() => setShowAtsModal(false)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="text-text-muted hover:text-text-secondary dark:text-gray-400 dark:hover:text-gray-200"
               >
                 ✕
               </button>
@@ -522,7 +522,7 @@ const ResumeBuilder = () => {
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Category Breakdown</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(atsResults.categories).map(([category, data]) => (
-                  <div key={category} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <div key={category} className="border border-border dark:border-gray-700 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="font-medium text-gray-800 dark:text-white capitalize">{category}</h4>
                       <span className={`px-3 py-1 rounded-full text-sm font-bold ${getScoreBgColor(data.score)} ${getScoreColor(data.score)}`}>
@@ -532,7 +532,7 @@ const ResumeBuilder = () => {
                     <p className="text-sm text-gray-600 dark:text-gray-400">{data.feedback}</p>
                     {data.missingKeywords && data.missingKeywords.length > 0 && (
                       <div className="mt-2">
-                        <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Missing Keywords:</p>
+                        <p className="text-xs font-medium text-text-secondary dark:text-gray-300">Missing Keywords:</p>
                         <div className="flex flex-wrap gap-1 mt-1">
                           {data.missingKeywords.map((keyword, idx) => (
                             <span key={idx} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded">
@@ -556,7 +556,7 @@ const ResumeBuilder = () => {
                 </h3>
                 <ul className="space-y-2">
                   {atsResults.strengths.map((strength, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                    <li key={idx} className="flex items-start gap-2 text-text-secondary dark:text-gray-300">
                       <span className="text-green-500 mt-1">✓</span>
                       <span>{strength}</span>
                     </li>
@@ -592,7 +592,7 @@ const ResumeBuilder = () => {
           </div>
 
           {/* Footer */}
-          <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4">
+          <div className="sticky bottom-0 bg-bg-primary dark:bg-gray-900 border-t border-border dark:border-gray-700 p-4">
             <button
               onClick={() => setShowAtsModal(false)}
               className="w-full px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
@@ -632,9 +632,9 @@ const ResumeBuilder = () => {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
           {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 z-10">
+          <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 p-6 z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Target className="text-indigo-600" size={32} />
@@ -645,7 +645,7 @@ const ResumeBuilder = () => {
               </div>
               <button
                 onClick={() => setShowJobOptModal(false)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="text-text-muted hover:text-text-secondary dark:text-gray-400 dark:hover:text-gray-200"
               >
                 ✕
               </button>
@@ -736,10 +736,10 @@ const ResumeBuilder = () => {
             {jobOptResults.summaryOptimization && jobOptResults.summaryOptimization.optimizedSummary && (
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">Optimized Professional Summary</h3>
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-700">
-                  <p className="text-gray-700 dark:text-gray-300 italic">"{jobOptResults.summaryOptimization.optimizedSummary}"</p>
+                <div className="border border-border dark:border-gray-700 rounded-lg p-4 bg-bg-primary dark:bg-gray-700">
+                  <p className="text-text-secondary dark:text-gray-300 italic">"{jobOptResults.summaryOptimization.optimizedSummary}"</p>
                   {jobOptResults.summaryOptimization.keyPhrasesAdded && jobOptResults.summaryOptimization.keyPhrasesAdded.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+                    <div className="mt-3 pt-3 border-t border-border dark:border-gray-600">
                       <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Key phrases added:</p>
                       <div className="flex flex-wrap gap-1">
                         {jobOptResults.summaryOptimization.keyPhrasesAdded.map((phrase, idx) => (
@@ -760,7 +760,7 @@ const ResumeBuilder = () => {
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">Experience Optimization</h3>
                 <div className="space-y-3">
                   {jobOptResults.experienceOptimization.map((exp, idx) => (
-                    <div key={idx} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div key={idx} className="border border-border dark:border-gray-700 rounded-lg p-4">
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="font-medium text-gray-800 dark:text-white">{exp.currentSection}</h4>
                         <span className="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded">needs update</span>
@@ -770,7 +770,7 @@ const ResumeBuilder = () => {
                       </p>
                       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded p-3 mb-2">
                         <p className="text-sm font-medium text-green-800 dark:text-green-300 mb-1">Optimized version:</p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">{exp.optimizedVersion}</p>
+                        <p className="text-sm text-text-secondary dark:text-gray-300">{exp.optimizedVersion}</p>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         <strong>Why:</strong> {exp.reasoning}
@@ -811,7 +811,7 @@ const ResumeBuilder = () => {
                     </div>
                   )}
                   {jobOptResults.skillsOptimization.skillsToRemove && jobOptResults.skillsOptimization.skillsToRemove.length > 0 && (
-                    <div className="border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <div className="border border-border dark:border-gray-700 bg-bg-primary dark:bg-gray-700 rounded-lg p-4">
                       <h4 className="font-medium text-gray-800 dark:text-gray-300 mb-2 text-sm">➖ Consider Removing</h4>
                       <div className="flex flex-wrap gap-1">
                         {jobOptResults.skillsOptimization.skillsToRemove.map((skill, idx) => (
@@ -848,9 +848,9 @@ const ResumeBuilder = () => {
                             <strong>Impact:</strong> {action.impact}
                           </p>
                           {action.example && (
-                            <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded p-2 mt-2">
+                            <div className="bg-bg-secondary dark:bg-gray-700 border border-border dark:border-gray-600 rounded p-2 mt-2">
                               <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Example:</p>
-                              <p className="text-xs text-gray-700 dark:text-gray-300 italic">{action.example}</p>
+                              <p className="text-xs text-text-secondary dark:text-gray-300 italic">{action.example}</p>
                             </div>
                           )}
                         </div>
@@ -865,16 +865,16 @@ const ResumeBuilder = () => {
             {jobOptResults.atsCompatibility && (
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">ATS Compatibility for This Job</h3>
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <div className="border border-border dark:border-gray-700 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-gray-700 dark:text-gray-300">Score for this specific role:</span>
+                    <span className="text-text-secondary dark:text-gray-300">Score for this specific role:</span>
                     <span className={`text-2xl font-bold ${getMatchColor(jobOptResults.atsCompatibility.score)}`}>
                       {jobOptResults.atsCompatibility.score}/100
                     </span>
                   </div>
                   {jobOptResults.atsCompatibility.recommendations && jobOptResults.atsCompatibility.recommendations.length > 0 && (
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Recommendations:</p>
+                      <p className="text-sm font-medium text-text-secondary dark:text-gray-300">Recommendations:</p>
                       <ul className="space-y-1">
                         {jobOptResults.atsCompatibility.recommendations.map((rec, idx) => (
                           <li key={idx} className="text-sm text-gray-600 dark:text-gray-400 flex items-start gap-2">
@@ -891,7 +891,7 @@ const ResumeBuilder = () => {
           </div>
 
           {/* Footer */}
-          <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4">
+          <div className="sticky bottom-0 bg-bg-primary dark:bg-gray-900 border-t border-border dark:border-gray-700 p-4">
             <button
               onClick={() => setShowJobOptModal(false)}
               className="w-full px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
@@ -905,7 +905,7 @@ const ResumeBuilder = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-6">
+    <div className="max-w-4xl mx-auto p-6 bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-md mt-6">
       {/* ATS Results Modal */}
       <ATSResultsModal />
       
@@ -925,13 +925,13 @@ const ResumeBuilder = () => {
         )}
       </div>
       
-      <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+      <div className="flex border-b border-border dark:border-gray-700 mb-6">
         <button 
           onClick={() => setActiveTab('build')} 
           className={`pb-3 px-4 text-sm font-medium transition-colors ${
             activeTab === 'build' 
               ? 'border-b-2 border-indigo-600 text-indigo-600' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400'
+              : 'text-text-muted hover:text-text-secondary dark:text-gray-400'
           }`}
         >
           Build from Scratch
@@ -941,7 +941,7 @@ const ResumeBuilder = () => {
           className={`pb-3 px-4 text-sm font-medium transition-colors ${
             activeTab === 'upload' 
               ? 'border-b-2 border-indigo-600 text-indigo-600' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400'
+              : 'text-text-muted hover:text-text-secondary dark:text-gray-400'
           }`}
         >
           Upload PDF
@@ -1017,7 +1017,7 @@ const ResumeBuilder = () => {
             {/* Personal Information */}
             <section>
               <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Personal Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-border rounded-lg bg-bg-primary dark:bg-gray-700 dark:border-gray-600">
                 <input
                   type="text"
                   placeholder="Full Name *"
@@ -1067,7 +1067,7 @@ const ResumeBuilder = () => {
                 </button>
               </div>
               {formData.experience.map((exp, index) => (
-                <div key={index} className="p-4 border border-gray-200 rounded-lg mb-4 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div key={index} className="p-4 border border-border rounded-lg mb-4 bg-bg-primary dark:bg-gray-700 dark:border-gray-600">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
                     <input
                       type="text"
@@ -1124,7 +1124,7 @@ const ResumeBuilder = () => {
                 </button>
               </div>
               {formData.education.map((edu, index) => (
-                <div key={index} className="p-4 border border-gray-200 rounded-lg mb-4 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div key={index} className="p-4 border border-border rounded-lg mb-4 bg-bg-primary dark:bg-gray-700 dark:border-gray-600">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input
                       type="text"
@@ -1191,7 +1191,7 @@ const ResumeBuilder = () => {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Upload your resume and a job description to get AI-powered analysis and optimization suggestions
                 </p>
-                <div className="mt-2 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                <div className="mt-2 flex items-center gap-2 text-xs text-text-muted dark:text-gray-400">
                   <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 rounded">Step 1: Job Description</span>
                   <span>→</span>
                   <span className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 rounded">Step 2: Upload Resume</span>
@@ -1203,7 +1203,7 @@ const ResumeBuilder = () => {
               <div className="space-y-4">
                 {/* Text Input Option */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                     Step 1: Paste Job Description Text
                   </label>
                   <div className="relative">
@@ -1224,7 +1224,7 @@ const ResumeBuilder = () => {
                     )}
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-text-muted dark:text-gray-400">
                       {jobDescription.length} / 100 minimum characters
                     </p>
                     {jobDescription.length > 0 && jobDescription.length < 100 && (
@@ -1237,7 +1237,7 @@ const ResumeBuilder = () => {
 
                 {/* Resume Upload for Analysis */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                     Step 2: Upload Your Resume PDF
                   </label>
                   <div className="border-2 border-dashed border-indigo-300 dark:border-indigo-600 rounded-lg p-6 text-center hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors bg-indigo-50/50 dark:bg-indigo-900/10">
@@ -1265,7 +1265,7 @@ const ResumeBuilder = () => {
                       <Upload size={40} className="text-indigo-500 mb-3" />
                       {resumeUploadFile ? (
                         <>
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
+                          <span className="text-sm font-medium text-text-secondary dark:text-gray-200 mb-1">
                             ✓ {resumeUploadFile.name}
                           </span>
                           <span className="text-xs text-green-600 dark:text-green-400 mb-2">
@@ -1286,10 +1286,10 @@ const ResumeBuilder = () => {
                         </>
                       ) : (
                         <>
-                          <span className="text-base font-medium text-gray-700 dark:text-gray-200 mb-1">
+                          <span className="text-base font-medium text-text-secondary dark:text-gray-200 mb-1">
                             Click to upload your resume
                           </span>
-                          <span className="text-xs text-gray-500 mb-1">PDF format, max 5MB</span>
+                          <span className="text-xs text-text-muted mb-1">PDF format, max 5MB</span>
                           <span className="text-xs text-gray-400 italic">
                             This will be analyzed against the job description above
                           </span>
@@ -1340,7 +1340,7 @@ const ResumeBuilder = () => {
 
           </div>
         ) : (
-          <div className="upload-section py-10 px-4 border-2 border-dashed border-gray-300 rounded-lg text-center dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <div className="upload-section py-10 px-4 border-2 border-dashed border-gray-300 rounded-lg text-center dark:border-gray-600 hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors">
             <input
               type="file"
               id="resume-upload"
@@ -1350,10 +1350,10 @@ const ResumeBuilder = () => {
             />
             <label htmlFor="resume-upload" className="cursor-pointer flex flex-col items-center">
               <Upload size={48} className="text-gray-400 mb-4" />
-              <span className="text-lg font-medium text-gray-700 dark:text-gray-200">
+              <span className="text-lg font-medium text-text-secondary dark:text-gray-200">
                 {resumeFile ? resumeFile.name : 'Click to Upload Resume (PDF/DOC)'}
               </span>
-              <span className="text-sm text-gray-500 mt-2">Maximum file size: 5MB</span>
+              <span className="text-sm text-text-muted mt-2">Maximum file size: 5MB</span>
             </label>
           </div>
         )}

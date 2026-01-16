@@ -39,12 +39,12 @@ const PollDisplay = ({ poll }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 mt-3">
+    <div className="bg-bg-secondary rounded-lg border border-border p-4 mt-3">
       {/* Poll Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
           <Icon icon="mdi:poll" className="text-indigo-500 text-2xl" />
-          <h3 className="font-semibold text-gray-900">Poll</h3>
+          <h3 className="font-semibold text-text-primary">Poll</h3>
         </div>
         
         {/* Status Badge */}
@@ -87,7 +87,7 @@ const PollDisplay = ({ poll }) => {
       )}
 
       {/* Poll Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-200 mt-3">
+      <div className="flex items-center justify-between pt-3 border-t border-border mt-3">
         <div className="flex items-center gap-4 text-sm text-gray-600">
           {/* Total Votes */}
           <span className="flex items-center gap-1">
@@ -106,7 +106,7 @@ const PollDisplay = ({ poll }) => {
 
         {/* Vote Change Info */}
         {hasVoted && poll.allowVoteChange && !isExpired && (
-          <span className="text-xs text-gray-500 italic">
+          <span className="text-xs text-text-muted italic">
             You can change your vote
           </span>
         )}
@@ -116,3 +116,4 @@ const PollDisplay = ({ poll }) => {
 };
 
 export default PollDisplay;
+

@@ -19,7 +19,7 @@ import '../../styles/skeleton.css';
 const SkeletonCard = () => {
     return (
         <div
-            className="bg-white rounded-lg shadow-md p-4"
+            className="bg-bg-secondary rounded-lg shadow-md p-4"
             role="status"
             aria-busy="true"
             aria-label="Loading content"
@@ -51,3 +51,4 @@ const SkeletonCard = () => {
 };
 
 export default SkeletonCard;
+

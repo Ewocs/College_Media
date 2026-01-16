@@ -188,7 +188,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-t border-gray-200/70 dark:border-slate-800/70 py-2 transition-colors duration-300">
+    <footer className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-t border-border/70 dark:border-slate-800/70 py-2 transition-colors duration-300">
       {/* Background Container - Handles Overflow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Creative Background Elements with Animation */}
@@ -250,7 +250,7 @@ const Footer = () => {
                 >
                   <a
                     href="#"
-                    className={`w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 flex items-center justify-center transition-all duration-300 ${social.hover} shadow-sm hover:shadow-xl hover:-translate-y-1 relative overflow-hidden`}
+                    className={`w-8 h-8 rounded-lg bg-bg-secondary dark:bg-slate-800 border border-border dark:border-slate-700 flex items-center justify-center transition-all duration-300 ${social.hover} shadow-sm hover:shadow-xl hover:-translate-y-1 relative overflow-hidden`}
                   >
                     {/* Icon with proper color transition */}
                     <div
@@ -318,7 +318,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-2">
           {/* Description Column - Enhanced Hover */}
           <div
-            className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-lg p-2 border border-gray-200/50 dark:border-slate-700/50 hover:border-purple-300/50 hover:bg-white/70 dark:hover:bg-slate-800/70 hover:shadow-lg transition-all duration-500 group cursor-pointer"
+            className="bg-bg-secondary/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-lg p-2 border border-border/50 dark:border-slate-700/50 hover:border-purple-300/50 hover:bg-bg-secondary/70 dark:hover:bg-slate-800/70 hover:shadow-lg transition-all duration-500 group cursor-pointer"
             onMouseEnter={() => setHoveredLink("description")}
             onMouseLeave={() => setHoveredLink(null)}
           >
@@ -333,7 +333,7 @@ const Footer = () => {
                   size={12}
                 />
               </div>
-              <h3 className="text-xs font-semibold text-gray-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors duration-300">
+              <h3 className="text-xs font-semibold text-text-primary dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors duration-300">
                 Why Choose UniHub?
               </h3>
             </div>
@@ -351,11 +351,11 @@ const Footer = () => {
               {footerLinks.map((section, sectionIndex) => (
                 <div
                   key={section.title}
-                  className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-lg p-2 border border-gray-200/50 dark:border-slate-700/50 hover:border-purple-200 dark:hover:border-purple-900 hover:bg-white/70 dark:hover:bg-slate-800/70 hover:shadow-lg transition-all duration-500 group"
+                  className="bg-bg-secondary/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-lg p-2 border border-border/50 dark:border-slate-700/50 hover:border-purple-200 dark:hover:border-purple-900 hover:bg-bg-secondary/70 dark:hover:bg-slate-800/70 hover:shadow-lg transition-all duration-500 group"
                 >
                   <div className="flex items-center gap-2 mb-1.5 group-hover:gap-3 transition-all duration-500">
                     {section.icon}
-                    <h4 className="text-xs font-semibold text-gray-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors duration-300">
+                    <h4 className="text-xs font-semibold text-text-primary dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors duration-300">
                       {section.title}
                     </h4>
                   </div>
@@ -431,7 +431,7 @@ const Footer = () => {
                   <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-500/30 to-pink-500/30 opacity-0 group-hover/icon:opacity-100 group-hover/icon:animate-ping transition-opacity duration-500"></div>
                 </div>
                 <div>
-                  <h4 className="text-xs font-semibold text-gray-900 dark:text-white group-hover/newsletter:text-purple-700 dark:group-hover/newsletter:text-purple-400 transition-colors duration-300">
+                  <h4 className="text-xs font-semibold text-text-primary dark:text-white group-hover/newsletter:text-purple-700 dark:group-hover/newsletter:text-purple-400 transition-colors duration-300">
                     Stay Updated
                   </h4>
                   <p className="text-[10px] text-gray-600 dark:text-slate-400 group-hover/newsletter:text-gray-800 dark:group-hover/newsletter:text-slate-200 transition-colors duration-300">
@@ -462,7 +462,7 @@ const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email"
-                      className="w-full px-3 py-1.5 text-xs bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none transition-all duration-300 group-hover/form:border-purple-400 text-slate-900 dark:text-white"
+                      className="w-full px-3 py-1.5 text-xs bg-bg-secondary dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none transition-all duration-300 group-hover/form:border-purple-400 text-text-primary dark:text-white"
                     />
                     {/* Focus/Hover Effect */}
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/0 to-pink-500/0 group-hover/form:from-purple-500/5 group-hover/form:to-pink-500/5 transition-all duration-500 pointer-events-none"></div>
@@ -486,17 +486,17 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar - Enhanced Hover Effects */}
-        <div className="border-t border-gray-200/50 dark:border-slate-700/50 pt-1 group/bottom">
+        <div className="border-t border-border/50 dark:border-slate-700/50 pt-1 group/bottom">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
             {/* Copyright with Hover Effect */}
             <div className="text-center sm:text-left group/copyright cursor-pointer">
               <div className="flex items-center gap-1.5 mb-0.5 justify-center sm:justify-start">
                 <FaHeart className="text-red-500 text-xs group-hover/copyright:scale-125 group-hover/copyright:animate-pulse transition-all duration-300" />
-                <p className="text-xs text-gray-700 dark:text-slate-400 group-hover/copyright:text-purple-700 dark:group-hover/copyright:text-purple-400 transition-colors duration-300">
+                <p className="text-xs text-text-secondary dark:text-slate-400 group-hover/copyright:text-purple-700 dark:group-hover/copyright:text-purple-400 transition-colors duration-300">
                   Crafted with passion
                 </p>
               </div>
-              <p className="text-[10px] text-gray-500 dark:text-slate-500 group-hover/copyright:text-gray-700 dark:group-hover/copyright:text-slate-300 transition-colors duration-300">
+              <p className="text-[10px] text-text-muted dark:text-text-muted group-hover/copyright:text-text-secondary dark:group-hover/copyright:text-slate-300 transition-colors duration-300">
                 © {currentYear} UniHub. All rights reserved.
               </p>
             </div>
@@ -508,7 +508,7 @@ const Footer = () => {
                   <a
                     key={link}
                     href="#"
-                    className="text-[10px] text-gray-600 dark:text-slate-500 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 relative group/link-item"
+                    className="text-[10px] text-gray-600 dark:text-text-muted hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 relative group/link-item"
                   >
                     <span className="relative z-10 group-hover/link-item:font-medium">
                       {link}
@@ -661,3 +661,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

@@ -101,10 +101,10 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-bg-secondary p-6 shadow-xl dark:bg-gray-800">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
+          className="absolute top-3 right-3 text-text-muted hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
           aria-label="Close"
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +112,7 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
           </svg>
         </button>
 
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-2xl font-bold text-text-primary dark:text-white mb-2">
           Notification Preferences
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -129,12 +129,12 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
               {notificationOptions.map(({ key, icon, title, description }) => (
                 <div
                   key={key}
-                  className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-lg border border-border dark:border-gray-700 hover:bg-bg-primary dark:hover:bg-gray-700/50 transition-colors"
                 >
                   <div className="flex items-center flex-1">
                     <span className="text-2xl mr-4">{icon}</span>
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-white">
+                      <p className="font-semibold text-text-primary dark:text-white">
                         {title}
                       </p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -153,7 +153,7 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
                     aria-checked={preferences[key]}
                   >
                     <span
-                      className={`inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                      className={`inline-block h-5 w-5 transform rounded-full bg-bg-secondary shadow ring-0 transition duration-200 ease-in-out ${
                         preferences[key] ? "translate-x-5" : "translate-x-0"
                       }`}
                     />
@@ -179,7 +179,7 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
             <div className="flex space-x-3">
               <button
                 onClick={onClose}
-                className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 Cancel
               </button>
@@ -199,3 +199,4 @@ const NotificationPreferencesModal = ({ isOpen, onClose }) => {
 };
 
 export default NotificationPreferencesModal;
+

@@ -84,7 +84,7 @@ const CollectionDetail = () => {
 
   if (loading && !collection) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-bg-primary dark:bg-gray-900 flex items-center justify-center">
         <Icon icon="mdi:loading" className="w-8 h-8 animate-spin text-gray-400" />
       </div>
     );
@@ -92,10 +92,10 @@ const CollectionDetail = () => {
 
   if (!collection) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-bg-primary dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <Icon icon="mdi:folder-off-outline" className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h2 className="text-xl font-semibold text-text-primary dark:text-white mb-2">
             Collection not found
           </h2>
           <Link
@@ -111,9 +111,9 @@ const CollectionDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-bg-primary dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <Link
             to="/collections"
@@ -129,14 +129,14 @@ const CollectionDetail = () => {
                 type="text"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
-                className="text-2xl font-bold w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="text-2xl font-bold w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
               />
               <textarea
                 value={editedDescription}
                 onChange={(e) => setEditedDescription(e.target.value)}
                 placeholder="Description"
                 rows={2}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white resize-none"
               />
               <div className="flex items-center gap-4">
                 <label className="flex items-center gap-2">
@@ -146,12 +146,12 @@ const CollectionDetail = () => {
                     onChange={(e) => setEditedPublic(e.target.checked)}
                     className="rounded"
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">Public</span>
+                  <span className="text-sm text-text-secondary dark:text-gray-300">Public</span>
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setIsEditing(false)}
-                    className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+                    className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700"
                   >
                     Cancel
                   </button>
@@ -170,7 +170,7 @@ const CollectionDetail = () => {
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    <h1 className="text-2xl font-bold text-text-primary dark:text-white">
                       {collection.name}
                     </h1>
                     {collection.isPublic && (
@@ -185,7 +185,7 @@ const CollectionDetail = () => {
                       {collection.description}
                     </p>
                   )}
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <p className="text-sm text-text-muted dark:text-gray-400 mt-2">
                     {postCount} post{postCount !== 1 ? 's' : ''} • Last updated {format(new Date(collection.updatedAt), 'MMM d, yyyy')}
                   </p>
                 </div>
@@ -224,7 +224,7 @@ const CollectionDetail = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search in this collection..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -246,7 +246,7 @@ const CollectionDetail = () => {
                 </button>
                 <button
                   onClick={clearSelection}
-                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-sm"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700 text-sm"
                 >
                   Clear
                 </button>
@@ -256,7 +256,7 @@ const CollectionDetail = () => {
             {selectedPosts.length === 0 && filteredPostIds.length > 0 && (
               <button
                 onClick={() => selectAll(filteredPostIds)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-sm"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700 text-sm"
               >
                 Select All
               </button>
@@ -270,7 +270,7 @@ const CollectionDetail = () => {
         {filteredPostIds.length === 0 ? (
           <div className="text-center py-12">
             <Icon icon="mdi:image-off-outline" className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
               {searchQuery ? 'No posts found' : 'No posts in this collection'}
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
@@ -310,8 +310,8 @@ const CollectionDetail = () => {
       {/* Move Modal */}
       {showMoveModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full p-6">
+            <h3 className="text-lg font-bold text-text-primary dark:text-white mb-4">
               Move {selectedPosts.length} post(s) to:
             </h3>
 
@@ -329,7 +329,7 @@ const CollectionDetail = () => {
                     }`}
                   >
                     <Icon icon="mdi:folder" className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                    <span className="font-medium text-gray-900 dark:text-white">{c.name}</span>
+                    <span className="font-medium text-text-primary dark:text-white">{c.name}</span>
                   </button>
                 ))}
             </div>
@@ -340,7 +340,7 @@ const CollectionDetail = () => {
                   setShowMoveModal(false);
                   setTargetCollectionId('');
                 }}
-                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700"
               >
                 Cancel
               </button>
@@ -366,7 +366,7 @@ const PostCard = ({ postId, isSelected, onToggleSelect }) => {
       className={`aspect-square relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
         isSelected
           ? 'border-blue-500 ring-2 ring-blue-500'
-          : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+          : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
       }`}
       onClick={onToggleSelect}
     >
@@ -381,7 +381,7 @@ const PostCard = ({ postId, isSelected, onToggleSelect }) => {
           className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
             isSelected
               ? 'bg-blue-600 text-white'
-              : 'bg-white/80 backdrop-blur-sm text-gray-600 group-hover:bg-white'
+              : 'bg-bg-secondary/80 backdrop-blur-sm text-gray-600 group-hover:bg-bg-secondary'
           }`}
         >
           {isSelected ? (

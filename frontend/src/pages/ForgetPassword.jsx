@@ -28,8 +28,8 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white p-4">
-      <div className="bg-white rounded-2xl p-8 w-full max-w-md border border-gray-200 shadow-xl">
+    <div className="min-h-screen flex items-center justify-center bg-bg-secondary p-4">
+      <div className="bg-bg-secondary rounded-2xl p-8 w-full max-w-md border border-border shadow-xl">
         <h1 className="text-2xl font-bold text-center mb-4">Forgot Password</h1>
 
         <p className="text-center text-gray-600 mb-6">
@@ -55,7 +55,7 @@ const ForgotPassword = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg bg-gray-50"
+            className="w-full px-4 py-3 border rounded-lg bg-bg-primary"
           />
 
           <button
@@ -81,3 +81,4 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+

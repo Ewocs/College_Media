@@ -64,7 +64,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header with Cover and Profile Picture */}
         <div className="relative">
           {/* Cover Photo */}
@@ -73,9 +73,9 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full transition-colors"
+            className="absolute top-4 right-4 p-2 bg-bg-secondary/90 hover:bg-bg-secondary dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full transition-colors"
           >
-            <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+            <X className="w-6 h-6 text-text-secondary dark:text-gray-300" />
           </button>
 
           {/* Profile Picture and Name */}
@@ -90,7 +90,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
               <div className="flex-1 md:mb-2">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div>
-                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <h2 className="text-3xl font-bold text-text-primary dark:text-white">
                       {alumni.user?.name || 'Anonymous'}
                     </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -149,33 +149,33 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
         <div className="px-6 pb-6 space-y-6">
           {/* Quick Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <div className="flex items-center gap-3 p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
               <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
                 <GraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Graduation Year</p>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{alumni.graduationYear}</p>
+                <p className="text-xs text-text-muted dark:text-gray-400">Graduation Year</p>
+                <p className="text-sm font-semibold text-text-primary dark:text-white">{alumni.graduationYear}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <div className="flex items-center gap-3 p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
               <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
                 <Award className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Degree</p>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{alumni.degree}</p>
+                <p className="text-xs text-text-muted dark:text-gray-400">Degree</p>
+                <p className="text-sm font-semibold text-text-primary dark:text-white">{alumni.degree}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <div className="flex items-center gap-3 p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
               <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
                 <MapPin className="w-5 h-5 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Location</p>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{formatLocation(alumni.location)}</p>
+                <p className="text-xs text-text-muted dark:text-gray-400">Location</p>
+                <p className="text-sm font-semibold text-text-primary dark:text-white">{formatLocation(alumni.location)}</p>
               </div>
             </div>
           </div>
@@ -183,19 +183,19 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* About Section */}
           {alumni.bio && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">About</h3>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{alumni.bio}</p>
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3">About</h3>
+              <p className="text-text-secondary dark:text-gray-300 leading-relaxed">{alumni.bio}</p>
             </div>
           )}
 
           {/* Education */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3 flex items-center gap-2">
               <GraduationCap className="w-5 h-5" />
               Education
             </h3>
-            <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-              <p className="font-semibold text-gray-900 dark:text-white">{alumni.degree} in {alumni.major}</p>
+            <div className="p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
+              <p className="font-semibold text-text-primary dark:text-white">{alumni.degree} in {alumni.major}</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">Class of {alumni.graduationYear}</p>
             </div>
           </div>
@@ -203,15 +203,15 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Current Work */}
           {(alumni.currentCompany || alumni.currentPosition) && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3 flex items-center gap-2">
                 <Briefcase className="w-5 h-5" />
                 Current Position
               </h3>
-              <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-                <p className="font-semibold text-gray-900 dark:text-white">{alumni.currentPosition}</p>
+              <div className="p-4 bg-bg-primary dark:bg-gray-700/50 rounded-xl">
+                <p className="font-semibold text-text-primary dark:text-white">{alumni.currentPosition}</p>
                 <p className="text-sm text-gray-600 dark:text-gray-300">{alumni.currentCompany}</p>
                 {alumni.industry && (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Industry: {alumni.industry}</p>
+                  <p className="text-sm text-text-muted dark:text-gray-400 mt-1">Industry: {alumni.industry}</p>
                 )}
               </div>
             </div>
@@ -220,7 +220,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Skills */}
           {alumni.skills && alumni.skills.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Skills & Expertise</h3>
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3">Skills & Expertise</h3>
               <div className="flex flex-wrap gap-2">
                 {alumni.skills.map((skill, index) => (
                   <span
@@ -237,7 +237,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Mentorship Areas */}
           {alumni.mentorshipAvailable && alumni.mentorshipAreas && alumni.mentorshipAreas.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Mentorship Areas</h3>
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3">Mentorship Areas</h3>
               <div className="flex flex-wrap gap-2">
                 {alumni.mentorshipAreas.map((area, index) => (
                   <span
@@ -254,7 +254,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Achievements */}
           {alumni.achievements && alumni.achievements.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3 flex items-center gap-2">
                 <Award className="w-5 h-5" />
                 Achievements
               </h3>
@@ -262,10 +262,10 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
                 {alumni.achievements.map((achievement, index) => (
                   <li
                     key={index}
-                    className="flex items-start gap-2 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+                    className="flex items-start gap-2 p-3 bg-bg-primary dark:bg-gray-700/50 rounded-lg"
                   >
                     <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
-                    <span className="text-gray-700 dark:text-gray-300">{achievement}</span>
+                    <span className="text-text-secondary dark:text-gray-300">{achievement}</span>
                   </li>
                 ))}
               </ul>
@@ -275,7 +275,7 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
           {/* Social Links */}
           {(alumni.socialMedia?.linkedin || alumni.socialMedia?.twitter || alumni.socialMedia?.github || alumni.socialMedia?.website) && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Connect Online</h3>
+              <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-3">Connect Online</h3>
               <div className="flex flex-wrap gap-3">
                 {alumni.socialMedia?.linkedin && (
                   <a
@@ -331,3 +331,4 @@ const AlumniProfileViewModal = ({ isOpen, onClose, alumni }) => {
 };
 
 export default AlumniProfileViewModal;
+

@@ -58,13 +58,13 @@ const Explore = () => {
   return (
     <div className="space-y-6">
       {/* Explore Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Explore</h1>
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+        <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 mb-2">Explore</h1>
         <p className="text-gray-600 dark:text-gray-400">Discover events, groups, and pages in your college</p>
       </div>
 
       {/* Category Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-4">
         <div className="flex space-x-2 overflow-x-auto scrollbar-hide">
           {categories.map((category) => (
             <button
@@ -73,7 +73,7 @@ const Explore = () => {
               className={`flex items-center space-x-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-200 ${
                 activeTab === category.id
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-text-secondary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <span className="font-medium">{category.label}</span>
@@ -87,7 +87,7 @@ const Explore = () => {
         {filteredItems.map((item) => (
           <div
             key={item.id}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-200 cursor-pointer"
+            className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
             <div className="p-5">
@@ -96,7 +96,7 @@ const Explore = () => {
                   {item.type}
                 </span>
                 {item.date && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                  <span className="text-sm text-text-muted dark:text-gray-400 flex items-center">
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -104,17 +104,17 @@ const Explore = () => {
                   </span>
                 )}
               </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">{item.title}</h3>
+              <h3 className="text-lg font-bold text-text-primary dark:text-gray-100 mb-2">{item.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{item.description}</p>
               <div className="flex items-center justify-between">
                 {item.interested && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{item.interested} interested</span>
+                  <span className="text-sm text-text-muted dark:text-gray-400">{item.interested} interested</span>
                 )}
                 {item.members && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{item.members} members</span>
+                  <span className="text-sm text-text-muted dark:text-gray-400">{item.members} members</span>
                 )}
                 {item.followers && (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{item.followers} followers</span>
+                  <span className="text-sm text-text-muted dark:text-gray-400">{item.followers} followers</span>
                 )}
                 <button className="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm font-medium hover:bg-indigo-700 transition-colors duration-200">
                   {item.type === 'event' ? 'Interested' : item.type === 'group' ? 'Join' : 'Follow'}
@@ -133,3 +133,4 @@ const Explore = () => {
 };
 
 export default Explore;
+

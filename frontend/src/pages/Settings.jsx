@@ -518,8 +518,8 @@ const Settings = () => {
   return (
     <div className="space-y-6">
       {/* Settings Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
+        <h1 className="text-2xl font-bold text-text-primary dark:text-gray-100 mb-2">
           Settings
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
@@ -531,9 +531,9 @@ const Settings = () => {
       {settingsSections.map((section, index) => (
         <div
           key={index}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+          className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6"
         >
-          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-lg font-bold text-text-primary dark:text-gray-100 mb-4">
             {section.title}
           </h2>
           <div className="space-y-2">
@@ -541,15 +541,15 @@ const Settings = () => {
               <div
                 key={itemIndex}
                 onClick={item.type === "button" ? item.onClick : (item.type === "link" && item.onClick) ? item.onClick : undefined}
-                className={`flex items-center justify-between p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 ${(item.type === "button" || (item.type === "link" && item.onClick)) ? "cursor-pointer" : ""}`}
+                className={`flex items-center justify-between p-4 rounded-xl hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200 ${(item.type === "button" || (item.type === "link" && item.onClick)) ? "cursor-pointer" : ""}`}
               >
                 <div className="flex items-center space-x-4 flex-1">
                   <div className="text-2xl">{item.icon}</div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold text-gray-900 dark:text-gray-100">
+                    <p className="font-bold text-text-primary dark:text-gray-100">
                       {item.label}
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
+                    <p className="text-sm text-text-muted dark:text-gray-400 capitalize">
                       {item.description}
                     </p>
                   </div>
@@ -562,7 +562,7 @@ const Settings = () => {
                     }`}
                   >
                     <span
-                      className={`inline-block h-5 w-5 transform rounded-full bg-white transition duration-200 ease-in-out ${
+                      className={`inline-block h-5 w-5 transform rounded-full bg-bg-secondary transition duration-200 ease-in-out ${
                         settings[item.key] ? "translate-x-5" : "translate-x-0"
                       }`}
                     />
@@ -570,7 +570,7 @@ const Settings = () => {
                 )}
                 {(item.type === "link" || item.type === "button") && (
                   <svg
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
+                    className="w-5 h-5 text-gray-400 dark:text-text-muted"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -589,7 +589,7 @@ const Settings = () => {
                     onChange={(e) =>
                       setSettings({ ...settings, [item.key]: e.target.value })
                     }
-                    className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100"
                   >
                     {item.options.map((option) => (
                       <option key={option} value={option}>
@@ -605,7 +605,7 @@ const Settings = () => {
       ))}
 
       {/* Danger Zone */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-red-200 dark:border-red-900/50 p-6">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-red-200 dark:border-red-900/50 p-6">
         <h2 className="text-lg font-bold text-red-600 dark:text-red-400 mb-4">
           Danger Zone
         </h2>
@@ -638,16 +638,16 @@ const Settings = () => {
       {/* Logout Button */}
       <button 
         onClick={handleLogoutClick}
-        className="w-full p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+        className="w-full p-4 bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
       >
-        <p className="font-bold text-gray-900 dark:text-gray-100">Log Out</p>
+        <p className="font-bold text-text-primary dark:text-gray-100">Log Out</p>
       </button>
 
       {/* Logout Confirmation Modal */}
       {showLogoutConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <h3 className="text-xl font-bold text-text-primary dark:text-gray-100">
               Confirm Logout
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
@@ -656,7 +656,7 @@ const Settings = () => {
             <div className="flex space-x-3 pt-2">
               <button
                 onClick={handleLogoutCancel}
-                className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 Cancel
               </button>
@@ -674,13 +674,13 @@ const Settings = () => {
       {/* Change Password Modal */}
       {showChangePassword && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold text-text-primary dark:text-gray-100 mb-4">
               Change Password
             </h3>
             <form onSubmit={handleChangePasswordSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Current Password
                 </label>
                 <input
@@ -688,12 +688,12 @@ const Settings = () => {
                   name="currentPassword"
                   value={passwordData.currentPassword}
                   onChange={handlePasswordChange}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter current password"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   New Password
                 </label>
                 <input
@@ -701,12 +701,12 @@ const Settings = () => {
                   name="newPassword"
                   value={passwordData.newPassword}
                   onChange={handlePasswordChange}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter new password (min 6 characters)"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Confirm New Password
                 </label>
                 <input
@@ -714,7 +714,7 @@ const Settings = () => {
                   name="confirmPassword"
                   value={passwordData.confirmPassword}
                   onChange={handlePasswordChange}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Confirm new password"
                 />
               </div>
@@ -727,7 +727,7 @@ const Settings = () => {
                 <button
                   type="button"
                   onClick={handleChangePasswordCancel}
-                  className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                  className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
                 >
                   Cancel
                 </button>
@@ -747,8 +747,8 @@ const Settings = () => {
       {/* Two-Factor Authentication Modal */}
       {show2FAModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold text-text-primary dark:text-gray-100 mb-4">
               Enable Two-Factor Authentication
             </h3>
 
@@ -757,19 +757,19 @@ const Settings = () => {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)
                 </p>
-                <div className="flex justify-center bg-white p-4 rounded-lg">
+                <div className="flex justify-center bg-bg-secondary p-4 rounded-lg">
                   <img src={twoFAQRCode} alt="2FA QR Code" className="w-64 h-64" />
                 </div>
-                <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Manual Entry Code:</p>
-                  <p className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all">
+                <div className="bg-bg-primary dark:bg-gray-700 p-3 rounded-lg">
+                  <p className="text-xs text-text-muted dark:text-gray-400 mb-1">Manual Entry Code:</p>
+                  <p className="font-mono text-sm text-text-primary dark:text-gray-100 break-all">
                     {twoFASecret}
                   </p>
                 </div>
                 <div className="flex space-x-3 pt-2">
                   <button
                     onClick={handle2FAModalClose}
-                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
                   >
                     Cancel
                   </button>
@@ -787,14 +787,14 @@ const Settings = () => {
                   Enter the 6-digit code from your authenticator app to verify setup
                 </p>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                     Verification Code
                   </label>
                   <input
                     type="text"
                     value={twoFACode}
                     onChange={(e) => setTwoFACode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    className="w-full px-4 py-2.5 text-center text-2xl tracking-widest rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-4 py-2.5 text-center text-2xl tracking-widest rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="000000"
                     maxLength="6"
                   />
@@ -808,7 +808,7 @@ const Settings = () => {
                   <button
                     type="button"
                     onClick={() => setTwoFAStep(1)}
-                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
                   >
                     Back
                   </button>
@@ -829,7 +829,7 @@ const Settings = () => {
       {/* Delete Account Modal */}
       {showDeleteAccount && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6">
             <h3 className="text-xl font-bold text-red-600 dark:text-red-400 mb-4">
               Delete Account
             </h3>
@@ -846,26 +846,26 @@ const Settings = () => {
             </div>
             <form onSubmit={handleDeleteAccountSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Confirm Password *
                 </label>
                 <input
                   type="password"
                   value={deletePassword}
                   onChange={(e) => setDeletePassword(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Enter your password"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Reason for Deletion (Optional)
                 </label>
                 <textarea
                   value={deleteReason}
                   onChange={(e) => setDeleteReason(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Help us improve by telling us why you're leaving..."
                   rows="3"
                 />
@@ -879,7 +879,7 @@ const Settings = () => {
                 <button
                   type="button"
                   onClick={handleDeleteAccountCancel}
-                  className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                  className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
                 >
                   Cancel
                 </button>
@@ -931,3 +931,4 @@ const Settings = () => {
 };
 
 export default Settings;
+

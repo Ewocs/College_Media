@@ -30,7 +30,7 @@ const PollOption = ({
     <div
       className={`
         relative overflow-hidden rounded-lg border-2 transition-all cursor-pointer
-        ${isUserChoice ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
+        ${isUserChoice ? 'border-blue-500 bg-blue-50' : 'border-border hover:border-gray-300'}
         ${!canVote && !showResults ? 'cursor-not-allowed opacity-70' : ''}
         ${isSelected ? 'ring-2 ring-blue-500' : ''}
       `}
@@ -57,7 +57,7 @@ const PollOption = ({
               ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
             `}>
               {isSelected && (
-                <div className="w-2 h-2 rounded-full bg-white" />
+                <div className="w-2 h-2 rounded-full bg-bg-secondary" />
               )}
             </div>
           )}
@@ -65,7 +65,7 @@ const PollOption = ({
           {/* Option Text */}
           <span className={`
             font-medium flex-1
-            ${isUserChoice ? 'text-blue-700' : 'text-gray-700'}
+            ${isUserChoice ? 'text-blue-700' : 'text-text-secondary'}
           `}>
             {option.text}
           </span>
@@ -90,10 +90,10 @@ const PollOption = ({
         {/* Results */}
         {showResults && (
           <div className="ml-3 flex items-center gap-3">
-            <span className="text-sm font-semibold text-gray-700">
+            <span className="text-sm font-semibold text-text-secondary">
               {option.votes}
             </span>
-            <span className="text-sm font-bold text-gray-900 min-w-[3rem] text-right">
+            <span className="text-sm font-bold text-text-primary min-w-[3rem] text-right">
               {percentage}%
             </span>
           </div>
@@ -104,3 +104,4 @@ const PollOption = ({
 };
 
 export default PollOption;
+

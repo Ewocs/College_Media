@@ -80,7 +80,7 @@ const CertificatePage = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-coral-600 to-purple-600 bg-clip-text text-transparent">
               🎉 Congratulations! 🎉
             </h1>
-            <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 mb-4">
+            <p className="text-xl md:text-2xl text-text-secondary dark:text-slate-300 mb-4">
               You've successfully completed your course!
             </p>
             <p className="text-lg text-slate-600 dark:text-slate-400">
@@ -108,16 +108,16 @@ const CertificatePage = () => {
         </section>
 
         {/* Achievement Timeline Section */}
-        <section className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <section className="bg-bg-secondary dark:bg-slate-900 border-t border-border dark:border-slate-800">
           <AchievementTimeline milestones={milestones} />
         </section>
 
         {/* Additional Info Section */}
-        <section className="py-16 px-6 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <section className="py-16 px-6 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 border-t border-border dark:border-slate-800">
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
             {/* Certificate Details */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="bg-bg-secondary dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-border dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
+              <h3 className="text-xl font-bold text-text-primary dark:text-white mb-4 flex items-center gap-2">
                 <span>📜</span> Certificate Details
               </h3>
               <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
@@ -137,8 +137,8 @@ const CertificatePage = () => {
             </div>
 
             {/* Next Steps */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="bg-bg-secondary dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-border dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
+              <h3 className="text-xl font-bold text-text-primary dark:text-white mb-4 flex items-center gap-2">
                 <span>🚀</span> Next Steps
               </h3>
               <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
@@ -150,8 +150,8 @@ const CertificatePage = () => {
             </div>
 
             {/* Benefits */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="bg-bg-secondary dark:bg-slate-800 rounded-xl p-6 shadow-lg border border-border dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
+              <h3 className="text-xl font-bold text-text-primary dark:text-white mb-4 flex items-center gap-2">
                 <span>🏆</span> Benefits
               </h3>
               <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
@@ -169,3 +169,4 @@ const CertificatePage = () => {
 }
 
 export default CertificatePage
+

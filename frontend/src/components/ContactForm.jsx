@@ -181,7 +181,7 @@ const ContactForm = () => {
   // Success confirmation UI
   if (isSubmitted) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-8 text-center">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg
             className="w-8 h-8 text-green-600"
@@ -198,7 +198,7 @@ const ContactForm = () => {
             />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+        <h3 className="text-xl font-bold text-text-primary mb-2">Message Sent!</h3>
         <p className="text-gray-600 mb-6">
           Thank you for reaching out. Our support team will get back to you within 24-48 hours.
         </p>
@@ -215,11 +215,11 @@ const ContactForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
+      className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6 md:p-8"
       aria-label="Contact form"
       noValidate
     >
-      <h2 className="text-xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+      <h2 className="text-xl font-bold text-text-primary mb-6">Send us a Message</h2>
 
       {/* Honeypot field - hidden from users, visible to bots */}
       <div className="hidden" aria-hidden="true">
@@ -240,7 +240,7 @@ const ContactForm = () => {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Full Name <span className="text-red-500">*</span>
           </label>
@@ -252,7 +252,7 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder="Enter your full name"
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-purple-500'
+              errors.name ? 'border-red-300 focus:ring-red-500' : 'border-border focus:ring-purple-500'
             } focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
             aria-invalid={errors.name ? 'true' : 'false'}
             aria-describedby={errors.name ? 'name-error' : undefined}
@@ -268,7 +268,7 @@ const ContactForm = () => {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Email Address <span className="text-red-500">*</span>
           </label>
@@ -280,7 +280,7 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder="your.email@college.edu"
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-purple-500'
+              errors.email ? 'border-red-300 focus:ring-red-500' : 'border-border focus:ring-purple-500'
             } focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
             aria-invalid={errors.email ? 'true' : 'false'}
             aria-describedby={errors.email ? 'email-error' : undefined}
@@ -296,7 +296,7 @@ const ContactForm = () => {
         <div>
           <label
             htmlFor="category"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Category <span className="text-red-500">*</span>
           </label>
@@ -306,8 +306,8 @@ const ContactForm = () => {
             value={formData.category}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.category ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-purple-500'
-            } focus:outline-none focus:ring-2 focus:border-transparent transition-all bg-white`}
+              errors.category ? 'border-red-300 focus:ring-red-500' : 'border-border focus:ring-purple-500'
+            } focus:outline-none focus:ring-2 focus:border-transparent transition-all bg-bg-secondary`}
             aria-invalid={errors.category ? 'true' : 'false'}
             aria-describedby={errors.category ? 'category-error' : undefined}
           >
@@ -328,7 +328,7 @@ const ContactForm = () => {
         <div>
           <label
             htmlFor="subject"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Subject <span className="text-red-500">*</span>
           </label>
@@ -340,7 +340,7 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder="Brief description of your inquiry"
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.subject ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-purple-500'
+              errors.subject ? 'border-red-300 focus:ring-red-500' : 'border-border focus:ring-purple-500'
             } focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
             aria-invalid={errors.subject ? 'true' : 'false'}
             aria-describedby={errors.subject ? 'subject-error' : undefined}
@@ -356,7 +356,7 @@ const ContactForm = () => {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-text-secondary mb-1"
           >
             Message <span className="text-red-500">*</span>
           </label>
@@ -368,7 +368,7 @@ const ContactForm = () => {
             rows={5}
             placeholder="Please describe your issue or feedback in detail..."
             className={`w-full px-4 py-3 rounded-xl border ${
-              errors.message ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-purple-500'
+              errors.message ? 'border-red-300 focus:ring-red-500' : 'border-border focus:ring-purple-500'
             } focus:outline-none focus:ring-2 focus:border-transparent transition-all resize-none`}
             aria-invalid={errors.message ? 'true' : 'false'}
             aria-describedby={errors.message ? 'message-error' : undefined}
@@ -378,7 +378,7 @@ const ContactForm = () => {
               {errors.message}
             </p>
           )}
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-text-muted">
             {formData.message.length}/1000 characters
           </p>
         </div>
@@ -440,3 +440,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+

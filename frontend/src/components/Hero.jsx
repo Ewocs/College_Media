@@ -45,7 +45,7 @@ const Hero = ({ variant = "home" }) => {
   }, []);
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-bg-secondary dark:bg-slate-950 transition-colors duration-300">
       {/* Background Blobs */}
       <div
         ref={blob1}
@@ -66,7 +66,7 @@ const Hero = ({ variant = "home" }) => {
         className="max-w-7xl mx-auto px-6 relative z-20 text-center"
       >
         {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-primary dark:bg-slate-800/50 border border-border dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 mb-8">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -77,7 +77,7 @@ const Hero = ({ variant = "home" }) => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-slate-900 dark:text-white mb-6 max-w-4xl mx-auto leading-[1.1]">
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-text-primary dark:text-white mb-6 max-w-4xl mx-auto leading-[1.1]">
           {variant === "courses" ? (
             <>
               Learn{" "}
@@ -103,7 +103,7 @@ const Hero = ({ variant = "home" }) => {
         )}
 
         {/* Description */}
-        <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
+        <p className="text-lg md:text-xl text-text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
           {variant === "courses"
             ? "Hands-on, project-based courses designed to make you job-ready — not just certificate-ready."
             : "Connect with classmates, share campus moments, and build your network in a clean, distraction-free environment designed for the next generation."}
@@ -120,7 +120,7 @@ const Hero = ({ variant = "home" }) => {
             {variant === "courses" ? "Explore Courses →" : "Join Your Campus →"}
           </button>
 
-          <button className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all active:scale-95">
+          <button className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-bg-secondary dark:bg-slate-800 text-text-secondary dark:text-slate-200 border border-border dark:border-slate-700 font-medium hover:bg-bg-primary dark:hover:bg-slate-700/50 transition-all active:scale-95">
             View Demo
           </button>
         </div>
@@ -128,10 +128,10 @@ const Hero = ({ variant = "home" }) => {
         {/* UI Mockup (Home only) */}
         {variant === "home" && (
           <div className="relative max-w-5xl mx-auto perspective-1000">
-            <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200/60 dark:border-slate-700/60 overflow-hidden transform rotate-x-12 hover:rotate-0 transition-transform duration-700 p-1">
+            <div className="relative bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-2xl border border-border/60 dark:border-slate-700/60 overflow-hidden transform rotate-x-12 hover:rotate-0 transition-transform duration-700 p-1">
               {variant === "home" && (
                 <div className="relative max-w-5xl mx-auto">
-                  <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200/60 dark:border-slate-700/60 overflow-hidden p-2">
+                  <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-2xl border border-border/60 dark:border-slate-700/60 overflow-hidden p-2">
                     <DashboardPreview />
                   </div>
                 </div>
@@ -145,3 +145,4 @@ const Hero = ({ variant = "home" }) => {
 };
 
 export default Hero;
+

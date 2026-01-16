@@ -102,8 +102,8 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
   }, []); // runAccessibilityAudit is stable, no need to include
 
   return (
-    <div className="accessibility-audit p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+    <div className="accessibility-audit p-6 bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-lg">
+      <h2 className="text-xl font-bold mb-4 text-text-primary dark:text-white">
         Accessibility Audit (WCAG 2.1 AA)
       </h2>
 
@@ -122,8 +122,8 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
       {auditResults && (
         <div className="audit-results space-y-6">
           {/* Overall Score */}
-          <div className="overall-score p-4 bg-gray-50 dark:bg-gray-700 rounded">
-            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+          <div className="overall-score p-4 bg-bg-primary dark:bg-gray-700 rounded">
+            <h3 className="text-lg font-semibold mb-2 text-text-primary dark:text-white">
               Overall Score: {auditResults.overall.score}%
             </h3>
             <div className="flex space-x-4 text-sm">
@@ -136,7 +136,7 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
           {/* Contrast Issues */}
           {auditResults.contrast.filter(item => item.status === 'fail').length > 0 && (
             <div className="contrast-issues">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold mb-2 text-text-primary dark:text-white">
                 Color Contrast Issues
               </h3>
               <ul className="space-y-1">
@@ -155,7 +155,7 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
           {/* Form Issues */}
           {auditResults.forms.filter(form => !form.valid).length > 0 && (
             <div className="form-issues">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold mb-2 text-text-primary dark:text-white">
                 Form Accessibility Issues
               </h3>
               <ul className="space-y-1">
@@ -173,7 +173,7 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
           {/* Touch Target Issues */}
           {auditResults.touchTargets.length > 0 && (
             <div className="touch-issues">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold mb-2 text-text-primary dark:text-white">
                 Touch Target Issues
               </h3>
               <ul className="space-y-1">

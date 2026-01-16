@@ -92,8 +92,8 @@ class ErrorBoundary extends React.Component {
       const headerColor = isNetworkError ? 'from-blue-500 to-indigo-600' : 'from-red-500 to-orange-500';
 
       return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-          <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in">
+        <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+          <div className="max-w-2xl w-full bg-bg-secondary rounded-2xl shadow-xl overflow-hidden animate-fade-in">
             {/* Header */}
             <div className={`bg-gradient-to-r ${headerColor} p-8 text-white transition-colors duration-300`}>
               <div className="flex items-center gap-4">
@@ -125,7 +125,7 @@ class ErrorBoundary extends React.Component {
                   <h2 className="text-xl font-semibold text-gray-800 mb-3">
                     Suggested Actions
                   </h2>
-                  <ul className="space-y-3 text-gray-600 bg-gray-50 p-4 rounded-xl">
+                  <ul className="space-y-3 text-gray-600 bg-bg-primary p-4 rounded-xl">
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                       Try refreshing the page
@@ -175,7 +175,7 @@ class ErrorBoundary extends React.Component {
                   </button>
                   <button
                     onClick={this.handleGoHome}
-                    className="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg border border-gray-300 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+                    className="flex-1 bg-bg-secondary hover:bg-bg-primary text-text-secondary font-semibold py-3 px-6 rounded-lg border border-gray-300 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
                   >
                     <Home className="w-5 h-5" />
                     Go Home
@@ -186,7 +186,7 @@ class ErrorBoundary extends React.Component {
                 {isDevelopment && error && (
                   <div className="mt-8 border-t pt-6">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+                      <h3 className="text-sm font-bold text-text-muted uppercase tracking-wider">
                         Developer Details
                       </h3>
                       <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
@@ -214,7 +214,7 @@ class ErrorBoundary extends React.Component {
             </div>
 
             {/* Footer */}
-            <div className="bg-gray-50 px-8 py-4 border-t flex justify-between items-center text-xs text-gray-500">
+            <div className="bg-bg-primary px-8 py-4 border-t flex justify-between items-center text-xs text-text-muted">
               <p>Error ID: {Date.now().toString(36).toUpperCase()}</p>
               {errorCount > 1 && <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">Occurrence: {errorCount}</span>}
             </div>
@@ -228,3 +228,4 @@ class ErrorBoundary extends React.Component {
 }
 
 export default ErrorBoundary;
+

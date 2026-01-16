@@ -66,13 +66,13 @@ const AlumniResumeReview = () => {
       <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Resume Review Requests</h1>
       
       {resumes.length === 0 ? (
-        <div className="text-center p-10 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <p className="text-gray-500">No pending resume reviews at the moment.</p>
+        <div className="text-center p-10 bg-bg-primary dark:bg-gray-800 rounded-lg">
+          <p className="text-text-muted">No pending resume reviews at the moment.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {resumes.map(resume => (
-            <div key={resume._id} className="card bg-white dark:bg-gray-800 p-6 border dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div key={resume._id} className="card bg-bg-secondary dark:bg-gray-800 p-6 border dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4 text-indigo-600 font-bold text-xl overflow-hidden">
@@ -83,10 +83,10 @@ const AlumniResumeReview = () => {
                    )}
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">
+                  <h3 className="font-bold text-lg text-text-primary dark:text-white">
                     {resume.student?.firstName} {resume.student?.lastName}
                   </h3>
-                  <p className="text-sm text-gray-500">@{resume.student?.username}</p>
+                  <p className="text-sm text-text-muted">@{resume.student?.username}</p>
                 </div>
                 <span className="ml-auto text-xs font-medium px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full capitalize">
                   {resume.status}
@@ -99,12 +99,12 @@ const AlumniResumeReview = () => {
                      href={resume.fileUrl} 
                      target="_blank" 
                      rel="noreferrer"
-                     className="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded text-blue-600 hover:underline"
+                     className="flex items-center p-3 bg-bg-primary dark:bg-gray-700 rounded text-blue-600 hover:underline"
                    >
                      <FileText size={18} className="mr-2" /> View Attached Resume PDF
                    </a>
                 ) : (
-                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-sm text-gray-600 dark:text-gray-300">
+                  <div className="p-3 bg-bg-primary dark:bg-gray-700 rounded text-sm text-gray-600 dark:text-gray-300">
                     <p><strong>Experience:</strong> {resume.content?.experience?.[0]?.title} at {resume.content?.experience?.[0]?.company}...</p>
                     <p className="mt-1"><strong>Skills:</strong> {resume.content?.skills?.slice(0, 5).join(', ')}...</p>
                   </div>
@@ -124,17 +124,17 @@ const AlumniResumeReview = () => {
 
       {selectedResume && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-bg-primary dark:bg-gray-900">
               <h2 className="font-bold text-lg dark:text-white">Reviewing {selectedResume.student?.firstName}'s Resume</h2>
-              <button onClick={() => setSelectedResume(null)} className="text-gray-500 hover:text-gray-700">
+              <button onClick={() => setSelectedResume(null)} className="text-text-muted hover:text-text-secondary">
                 <X size={24} />
               </button>
             </div>
             
             <form onSubmit={handleSubmitReview} className="p-6 overflow-y-auto">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rating</label>
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">Rating</label>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
@@ -150,7 +150,7 @@ const AlumniResumeReview = () => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">General Feedback</label>
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">General Feedback</label>
                 <textarea
                   className="w-full p-3 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white min-h-[100px]"
                   placeholder="Great structure, but try to quantify your achievements..."
@@ -161,7 +161,7 @@ const AlumniResumeReview = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Actionable Suggestions (One per line)</label>
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">Actionable Suggestions (One per line)</label>
                 <textarea
                   className="w-full p-3 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white min-h-[100px]"
                   placeholder="- Use active verbs&#10;- Remove high school education&#10;- Add link to portfolio"

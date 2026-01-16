@@ -104,7 +104,7 @@ const CoursesLanding = () => {
             </div>
             
             <ScrollFloat 
-              containerClassName="text-5xl md:text-7xl font-bold text-slate-900 leading-tight"
+              containerClassName="text-5xl md:text-7xl font-bold text-text-primary leading-tight"
               textClassName="inline-block"
               animationDuration={1.2}
               ease="back.out(1.7)"
@@ -122,7 +122,7 @@ const CoursesLanding = () => {
               <button className="px-8 py-4 bg-slate-900 text-white rounded-xl font-semibold hover:bg-slate-800 hover:scale-105 transition-all shadow-lg hover:shadow-xl">
                 Start Learning
               </button>
-              <button className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-semibold hover:border-coral-300 hover:bg-coral-50 transition-all">
+              <button className="px-8 py-4 bg-bg-secondary text-text-primary border border-border rounded-xl font-semibold hover:border-coral-300 hover:bg-coral-50 transition-all">
                 View Syllabus
               </button>
             </div>
@@ -131,13 +131,13 @@ const CoursesLanding = () => {
           <div className="relative z-10 flex justify-center perspective-1000 order-1 md:order-2">
             <div 
               ref={cardRef}
-              className="w-full max-w-md bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl p-6 shadow-2xl relative"
+              className="w-full max-w-md bg-bg-secondary/80 backdrop-blur-xl border border-white/50 rounded-3xl p-6 shadow-2xl relative"
             >
               <div className="relative z-10 space-y-4 pointer-events-none">
                 <div className="h-48 rounded-2xl bg-gradient-to-tr from-coral-400 to-purple-500 relative overflow-hidden group">
                   <div className="absolute inset-0 bg-black/10"></div>
                   <div className="absolute bottom-4 left-4 text-white">
-                    <span className="text-xs font-mono bg-white/20 px-2 py-1 rounded backdrop-blur-md">
+                    <span className="text-xs font-mono bg-bg-secondary/20 px-2 py-1 rounded backdrop-blur-md">
                       CERTIFIED
                     </span>
                     <h3 className="text-2xl font-bold mt-2">Full Stack Pro</h3>
@@ -145,7 +145,7 @@ const CoursesLanding = () => {
                 </div>
                 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm text-slate-500">
+                  <div className="flex items-center justify-between text-sm text-text-muted">
                     <span className="flex items-center gap-1">
                        <Icon icon="lucide:book-open" /> 12 Modules
                     </span>
@@ -162,7 +162,7 @@ const CoursesLanding = () => {
                            <div key={i} className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
                         ))}
                      </div>
-                     <span className="text-slate-900 font-bold">$499</span>
+                     <span className="text-text-primary font-bold">$499</span>
                   </div>
                 </div>
               </div>
@@ -181,25 +181,25 @@ const CoursesLanding = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-on-scroll">
              <ScrollFloat 
-              containerClassName="text-3xl md:text-5xl font-bold text-slate-900 mb-6"
+              containerClassName="text-3xl md:text-5xl font-bold text-text-primary mb-6"
               animationDuration={1}
               ease="power2.out"
             >
               What You'll Learn
             </ScrollFloat>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+            <p className="text-lg text-text-muted max-w-2xl mx-auto">
               A curriculum designed for modern engineering, covering everything from frontend aesthetics to backend scalability.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[280px]">
             
-            <div className="md:col-span-2 md:row-span-2 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between overflow-hidden group animate-on-scroll">
+            <div className="md:col-span-2 md:row-span-2 bg-bg-secondary rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between overflow-hidden group animate-on-scroll">
               <div className="z-10 relative">
                 <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-6 text-indigo-600">
                   <Icon icon="lucide:layers" width="32" />
                 </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-4">System Architecture</h3>
+                <h3 className="text-3xl font-bold text-text-primary mb-4">System Architecture</h3>
                 <p className="text-slate-600 leading-relaxed">
                   Learn to design scalable systems. We cover microservices, load balancing, and database optimization strategies used by top tech companies.
                 </p>
@@ -216,7 +216,7 @@ const CoursesLanding = () => {
             </div>
 
             <div className="md:row-span-2 bg-gradient-to-b from-orange-300 to-red-300 rounded-3xl p-8 text-white flex flex-col items-center text-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-on-scroll">
-               <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm">
+               <div className="w-20 h-20 bg-bg-secondary/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm">
                  <Icon icon="lucide:trophy" width="40" />
                </div>
                <h3 className="text-2xl font-bold mb-2">Career Ready</h3>
@@ -225,16 +225,16 @@ const CoursesLanding = () => {
                </p>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:border-purple-200 group transition-colors duration-300 animate-on-scroll">
+            <div className="bg-bg-secondary rounded-3xl p-8 border border-slate-100 hover:border-purple-200 group transition-colors duration-300 animate-on-scroll">
                <Icon icon="lucide:database" className="w-10 h-10 text-purple-500 mb-4 group-hover:scale-110 transition-transform" />
-               <h3 className="text-xl font-bold text-slate-900">Backend Logic</h3>
-               <p className="text-sm text-slate-500 mt-2">Node.js, Express & PostgreSQL mastery.</p>
+               <h3 className="text-xl font-bold text-text-primary">Backend Logic</h3>
+               <p className="text-sm text-text-muted mt-2">Node.js, Express & PostgreSQL mastery.</p>
             </div>
 
-             <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:border-pink-200 group transition-colors duration-300 animate-on-scroll">
+             <div className="bg-bg-secondary rounded-3xl p-8 border border-slate-100 hover:border-pink-200 group transition-colors duration-300 animate-on-scroll">
                <Icon icon="lucide:palette" className="w-10 h-10 text-pink-500 mb-4 group-hover:scale-110 transition-transform" />
-               <h3 className="text-xl font-bold text-slate-900">UI/UX Design</h3>
-               <p className="text-sm text-slate-500 mt-2">Figma to React workflow.</p>
+               <h3 className="text-xl font-bold text-text-primary">UI/UX Design</h3>
+               <p className="text-sm text-text-muted mt-2">Figma to React workflow.</p>
             </div>
 
           </div>
@@ -242,9 +242,9 @@ const CoursesLanding = () => {
       </section>
 
       <section className="py-20 px-6 text-center animate-on-scroll">
-        <div className="max-w-4xl mx-auto bg-white rounded-[3rem] p-12 shadow-2xl border border-slate-100 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-bg-secondary rounded-[3rem] p-12 shadow-2xl border border-slate-100 relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">Ready to start your journey?</h2>
+            <h2 className="text-4xl font-bold text-text-primary mb-6">Ready to start your journey?</h2>
             <p className="text-slate-600 mb-8 max-w-xl mx-auto">
               Join 10,000+ students already learning on College Media. Access course materials instantly.
             </p>

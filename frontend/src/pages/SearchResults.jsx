@@ -104,7 +104,7 @@ useEffect(() => {
 
   if (!query) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="min-h-screen bg-bg-primary dark:bg-gray-950">
         <div className="max-w-5xl mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center py-16">
             <Icon
@@ -112,7 +112,7 @@ useEffect(() => {
               width={64}
               className="text-gray-400 mb-4"
             />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-2xl font-bold text-text-primary dark:text-white mb-2">
               Search College Media
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-center max-w-md">
@@ -128,7 +128,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-bg-primary dark:bg-gray-950">
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Search Bar */}
         <div className="mb-6">
@@ -137,7 +137,7 @@ useEffect(() => {
 
         {/* Search Info */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-text-primary dark:text-white mb-2">
             Search Results for "{query}"
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
@@ -157,7 +157,7 @@ useEffect(() => {
               className={`px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${
                 filters.type === type
                   ? "bg-blue-600 text-white"
-                  : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  : "bg-bg-secondary dark:bg-gray-900 text-text-secondary dark:text-gray-300 border border-border dark:border-gray-800 hover:bg-bg-primary dark:hover:bg-gray-800"
               }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -184,7 +184,7 @@ useEffect(() => {
               width={64}
               className="text-gray-400 mb-4"
             />
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-xl font-semibold text-text-primary dark:text-white mb-2">
               No results found
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-center max-w-md mb-4">
@@ -232,7 +232,7 @@ useEffect(() => {
 
             {/* End Message */}
             {!hasMore && results.length > 0 && (
-              <div className="mt-8 text-center text-gray-500 dark:text-gray-400">
+              <div className="mt-8 text-center text-text-muted dark:text-gray-400">
                 <p>You've reached the end of the results</p>
               </div>
             )}
@@ -244,3 +244,4 @@ useEffect(() => {
 };
 
 export default SearchResults;
+

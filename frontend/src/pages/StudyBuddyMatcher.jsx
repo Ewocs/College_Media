@@ -54,7 +54,7 @@ const StudyBuddyMatcher = () => {
   if (!currentProfile) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="text-xl font-bold text-gray-500">No more matches found.</div>
+        <div className="text-xl font-bold text-text-muted">No more matches found.</div>
       </div>
     );
   }
@@ -84,7 +84,7 @@ const StudyBuddyMatcher = () => {
                 rotate: direction === "left" ? -20 : 20,
               }}
               transition={{ duration: 0.4 }}
-              className="absolute w-full h-full bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 profile-card-entrance"
+              className="absolute w-full h-full bg-bg-secondary dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-border dark:border-slate-700 profile-card-entrance"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               onDragEnd={(e, { offset }) => {
@@ -123,7 +123,7 @@ const StudyBuddyMatcher = () => {
               {/* Details Area */}
               <div className="p-6 h-2/5 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                  <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
                     Shared Interests
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -150,7 +150,7 @@ const StudyBuddyMatcher = () => {
                                     stroke="currentColor"
                                     strokeWidth="6"
                                     fill="none"
-                                    className="text-slate-200 dark:text-slate-700"
+                                    className="text-slate-200 dark:text-text-secondary"
                                 />
                                 <circle
                                     ref={scoreRef}
@@ -178,7 +178,7 @@ const StudyBuddyMatcher = () => {
                         </div>
                         <div>
                             <p className="font-bold text-slate-800 dark:text-white">Match Score</p>
-                            <p className="text-xs text-slate-500">Based on interests</p>
+                            <p className="text-xs text-text-muted">Based on interests</p>
                         </div>
                     </div>
 
@@ -186,7 +186,7 @@ const StudyBuddyMatcher = () => {
                     <div className="flex gap-4">
                         <button
                             onClick={() => handleSwipe("left")}
-                            className="p-4 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-red-100 hover:text-red-500 dark:hover:bg-red-900/30 dark:hover:text-red-400 transition-colors shadow-sm"
+                            className="p-4 rounded-full bg-slate-100 dark:bg-slate-700 text-text-muted hover:bg-red-100 hover:text-red-500 dark:hover:bg-red-900/30 dark:hover:text-red-400 transition-colors shadow-sm"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -217,3 +217,4 @@ const StudyBuddyMatcher = () => {
 };
 
 export default StudyBuddyMatcher;
+

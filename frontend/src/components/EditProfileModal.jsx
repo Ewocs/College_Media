@@ -160,11 +160,11 @@ const EditProfileModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between">
+        <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 p-6 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold text-text-primary dark:text-white">
               Edit Profile
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -173,7 +173,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={handleCancel}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="text-text-muted hover:text-text-secondary dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
             <svg
               className="w-6 h-6"
@@ -216,7 +216,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
             <form className="space-y-4">
               {/* First Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   First Name
                 </label>
                 <input
@@ -224,14 +224,14 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
                   placeholder="Enter your first name"
                 />
               </div>
 
               {/* Last Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Last Name
                 </label>
                 <input
@@ -239,14 +239,14 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
                   placeholder="Enter your last name"
                 />
               </div>
 
               {/* Username */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Username <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -254,7 +254,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white ${
                     validationErrors.username
                       ? "border-red-500"
                       : "border-gray-300 dark:border-gray-600"
@@ -266,14 +266,14 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                     {validationErrors.username}
                   </p>
                 )}
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-xs text-text-muted dark:text-gray-400">
                   3-30 characters
                 </p>
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -281,7 +281,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white ${
                     validationErrors.email
                       ? "border-red-500"
                       : "border-gray-300 dark:border-gray-600"
@@ -297,7 +297,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
 
               {/* Bio */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Bio
                 </label>
                 <textarea
@@ -305,7 +305,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   value={formData.bio}
                   onChange={handleInputChange}
                   rows="4"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none ${
+                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white resize-none ${
                     validationErrors.bio
                       ? "border-red-500"
                       : "border-gray-300 dark:border-gray-600"
@@ -317,14 +317,14 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                     {validationErrors.bio}
                   </p>
                 )}
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-xs text-text-muted dark:text-gray-400">
                   {formData.bio.length}/500 characters
                 </p>
               </div>
 
               {/* Profile Picture URL */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Profile Picture URL
                 </label>
                 <input
@@ -332,14 +332,14 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="profilePicture"
                   value={formData.profilePicture}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
 
               {/* Profile Banner URL */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-1">
                   Profile Banner URL
                 </label>
                 <input
@@ -347,7 +347,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                   name="profileBanner"
                   value={formData.profileBanner}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
                   placeholder="https://example.com/banner.jpg"
                 />
               </div>
@@ -356,10 +356,10 @@ const EditProfileModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 p-6 border-t border-gray-200 dark:border-gray-700 flex gap-3">
+        <div className="sticky bottom-0 bg-bg-primary dark:bg-gray-900 p-6 border-t border-border dark:border-gray-700 flex gap-3">
           <button
             onClick={handleCancel}
-            className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-medium"
+            className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors font-medium"
             disabled={saving}
           >
             Cancel
@@ -385,3 +385,4 @@ const EditProfileModal = ({ isOpen, onClose }) => {
 };
 
 export default EditProfileModal;
+

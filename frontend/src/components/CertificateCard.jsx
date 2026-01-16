@@ -81,7 +81,7 @@ const CertificateCard = ({ studentName, courseName, completionDate, grade }) => 
 
         {/* Main Certificate Card */}
         <div
-          className="relative w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden"
+          className="relative w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl border border-border dark:border-slate-700 shadow-2xl overflow-hidden"
           style={{
             transformStyle: 'preserve-3d',
           }}
@@ -102,7 +102,7 @@ const CertificateCard = ({ studentName, courseName, completionDate, grade }) => 
             {/* Student Info */}
             <div className="text-center mb-8 flex-1 flex flex-col justify-center">
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">This certifies that</p>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-text-primary dark:text-white mb-4">
                 {studentName || 'Student Name'}
               </h2>
               <p className="text-slate-600 dark:text-slate-400 mb-1">has successfully completed</p>
@@ -113,13 +113,13 @@ const CertificateCard = ({ studentName, courseName, completionDate, grade }) => 
               {/* Grade and Date */}
               <div className="flex justify-center gap-8 mt-4">
                 <div>
-                  <p className="text-xs text-slate-500 dark:text-slate-500">Grade</p>
+                  <p className="text-xs text-text-muted dark:text-text-muted">Grade</p>
                   <p className="text-lg font-bold text-coral-600 dark:text-coral-400">
                     {grade || 'A+'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 dark:text-slate-500">Completed On</p>
+                  <p className="text-xs text-text-muted dark:text-text-muted">Completed On</p>
                   <p className="text-lg font-bold text-purple-600 dark:text-purple-400">
                     {completionDate || new Date().toLocaleDateString()}
                   </p>
@@ -128,7 +128,7 @@ const CertificateCard = ({ studentName, courseName, completionDate, grade }) => 
             </div>
 
             {/* Footer */}
-            <div className="flex justify-between w-full text-xs text-slate-500 dark:text-slate-500 mt-6">
+            <div className="flex justify-between w-full text-xs text-text-muted dark:text-text-muted mt-6">
               <span>College Media Platform</span>
               <span>🎓 Verified Certificate</span>
             </div>
@@ -160,3 +160,4 @@ const CertificateCard = ({ studentName, courseName, completionDate, grade }) => 
 }
 
 export default CertificateCard
+

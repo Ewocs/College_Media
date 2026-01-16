@@ -125,23 +125,23 @@ function Messages() {
         keywords="college messages, student chat, campus communication, direct messages"
       />
       
-      <div className="flex flex-col h-[calc(100vh-180px)] bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
+      <div className="flex flex-col h-[calc(100vh-180px)] bg-bg-secondary dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
         {/* Messages Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-slate-700">
+        <div className="p-4 border-b border-border dark:border-slate-700">
           <h2 className="text-xl font-bold text-gray-800 dark:text-slate-100">Messages</h2>
         </div>
 
         <div className="flex flex-1 overflow-hidden">
           {/* Conversations List */}
-          <div className={`w-full lg:w-2/5 border-r border-gray-200 dark:border-slate-700 flex flex-col ${activeConversationId ? 'hidden lg:flex' : 'flex'}`}>
+          <div className={`w-full lg:w-2/5 border-r border-border dark:border-slate-700 flex flex-col ${activeConversationId ? 'hidden lg:flex' : 'flex'}`}>
             <div className="flex-1 overflow-y-auto">
               {loading && conversations.length === 0 ? (
                 <div className="p-8 text-center">
-                  <p className="text-gray-500 dark:text-slate-400">Loading conversations...</p>
+                  <p className="text-text-muted dark:text-slate-400">Loading conversations...</p>
                 </div>
               ) : conversations.length === 0 ? (
                 <div className="p-8 text-center">
-                  <p className="text-gray-500 dark:text-slate-400">No conversations yet</p>
+                  <p className="text-text-muted dark:text-slate-400">No conversations yet</p>
                 </div>
               ) : (
                 conversations.map(conv => {
@@ -152,7 +152,7 @@ function Messages() {
                     <div
                       key={conv.conversationId}
                       onClick={() => setActiveConversationId(userId)}
-                      className={`p-4 cursor-pointer transition-colors border-b border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800 ${
+                      className={`p-4 cursor-pointer transition-colors border-b border-gray-100 dark:border-slate-800 hover:bg-bg-primary dark:hover:bg-slate-800 ${
                         activeConversationId === userId ? "bg-purple-100 dark:bg-slate-800 border-l-4 border-l-purple-500" : ""
                       }`}
                     >
@@ -174,7 +174,7 @@ function Messages() {
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-gray-500 dark:text-slate-400 truncate">
+                          <p className="text-sm text-text-muted dark:text-slate-400 truncate">
                             {conv.lastMessage?.content || 'No messages yet'}
                           </p>
                         </div>
@@ -191,7 +191,7 @@ function Messages() {
           {activeConversation ? (
             <>
               {/* Chat Header */}
-              <div className="p-4 border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+              <div className="p-4 border-b border-border dark:border-slate-700 bg-bg-secondary dark:bg-slate-900">
                 <div className="flex items-center space-x-3">
                   {/* Back Button (Mobile Only) */}
                   <button
@@ -221,7 +221,7 @@ function Messages() {
                     <h3 className="font-semibold text-gray-800 dark:text-slate-100">
                       {activeConversation?.otherUser?.firstName} {activeConversation?.otherUser?.lastName}
                     </h3>
-                    <p className="text-xs text-gray-500 dark:text-slate-400">
+                    <p className="text-xs text-text-muted dark:text-slate-400">
                       {activeConversation?.otherUser?.username || 'User'}
                     </p>
                   </div>
@@ -229,11 +229,11 @@ function Messages() {
               </div>
 
               {/* Messages Area */}
-              <div className="flex-1 p-4 overflow-y-auto bg-gray-50 dark:bg-slate-800">
+              <div className="flex-1 p-4 overflow-y-auto bg-bg-primary dark:bg-slate-800">
                 <div className="space-y-4">
                   {messages.length === 0 ? (
                     <div className="text-center py-8">
-                      <p className="text-gray-500 dark:text-slate-400">No messages yet. Start the conversation!</p>
+                      <p className="text-text-muted dark:text-slate-400">No messages yet. Start the conversation!</p>
                     </div>
                   ) : (
                     messages.map(msg => {
@@ -249,12 +249,12 @@ function Messages() {
                               className={`p-3 rounded-lg ${
                                 isSentByMe
                                   ? "bg-purple-500 text-white rounded-br-none"
-                                  : "bg-white dark:bg-slate-700 text-gray-800 dark:text-slate-100 border border-gray-200 dark:border-slate-600 rounded-bl-none"
+                                  : "bg-bg-secondary dark:bg-slate-700 text-gray-800 dark:text-slate-100 border border-border dark:border-slate-600 rounded-bl-none"
                               }`}
                             >
                               <p className="text-sm break-words">{msg.content}</p>
                             </div>
-                            <span className={`text-xs text-gray-400 dark:text-slate-500 mt-1 ${
+                            <span className={`text-xs text-gray-400 dark:text-text-muted mt-1 ${
                               isSentByMe ? "text-right" : "text-left"
                             }`}>
                               {formatTime(msg.createdAt)}
@@ -269,7 +269,7 @@ function Messages() {
               </div>
 
               {/* Message Input */}
-              <div className="p-4 border-t border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+              <div className="p-4 border-t border-border dark:border-slate-700 bg-bg-secondary dark:bg-slate-900">
                 {error && (
                   <div className="mb-2 p-2 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm rounded">
                     {error}
@@ -295,9 +295,9 @@ function Messages() {
               </div>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-slate-800">
+            <div className="flex-1 flex items-center justify-center bg-bg-primary dark:bg-slate-800">
               <div className="text-center">
-                <p className="text-gray-500 dark:text-slate-400 text-lg">Select a conversation to start chatting</p>
+                <p className="text-text-muted dark:text-slate-400 text-lg">Select a conversation to start chatting</p>
               </div>
             </div>
           )}
@@ -309,3 +309,4 @@ function Messages() {
 }
 
 export default Messages
+

@@ -65,13 +65,13 @@ const Collections = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-bg-primary dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-text-primary dark:text-white flex items-center gap-2">
                 <Icon icon="mdi:bookmark-multiple" className="w-8 h-8" />
                 My Collections
               </h1>
@@ -100,13 +100,13 @@ const Collections = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search collections..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
             <select
               value={sortBy}
               onChange={(e) => changeSortBy(e.target.value)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:ring-2 focus:ring-blue-500"
             >
               <option value="alphabetical">Alphabetical</option>
               <option value="dateCreated">Date Created</option>
@@ -126,7 +126,7 @@ const Collections = () => {
         ) : displayCollections.length === 0 ? (
           <div className="text-center py-12">
             <Icon icon="mdi:bookmark-outline" className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
               {searchQuery ? 'No collections found' : 'No collections yet'}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -160,15 +160,15 @@ const Collections = () => {
       {/* Create Collection Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full">
+          <div className="bg-bg-secondary dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full">
             <div className="p-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-xl font-bold text-text-primary dark:text-white mb-4">
                 Create New Collection
               </h2>
 
               <form onSubmit={handleCreateCollection} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                     Name *
                   </label>
                   <input
@@ -178,12 +178,12 @@ const Collections = () => {
                     placeholder="e.g., Design Inspiration"
                     maxLength={50}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                     Description
                   </label>
                   <textarea
@@ -192,7 +192,7 @@ const Collections = () => {
                     placeholder="What's this collection about?"
                     rows={3}
                     maxLength={200}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white focus:ring-2 focus:ring-blue-500 resize-none"
                   />
                 </div>
 
@@ -204,7 +204,7 @@ const Collections = () => {
                     onChange={(e) => setNewCollectionPublic(e.target.checked)}
                     className="rounded"
                   />
-                  <label htmlFor="publicCheckbox" className="text-sm text-gray-700 dark:text-gray-300">
+                  <label htmlFor="publicCheckbox" className="text-sm text-text-secondary dark:text-gray-300">
                     Make this collection public
                   </label>
                 </div>
@@ -214,7 +214,7 @@ const Collections = () => {
                     type="button"
                     onClick={() => setShowCreateModal(false)}
                     disabled={isCreating}
-                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors"
                   >
                     Cancel
                   </button>
@@ -249,7 +249,7 @@ const CollectionCard = ({ collection, onDelete }) => {
   return (
     <Link
       to={`/collections/${collection.id}`}
-      className="block group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all"
+      className="block group bg-bg-secondary dark:bg-gray-800 rounded-lg border border-border dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all"
     >
       {/* Thumbnail Preview (first 4 posts) */}
       <div className="aspect-square bg-gray-100 dark:bg-gray-700 relative overflow-hidden">
@@ -286,7 +286,7 @@ const CollectionCard = ({ collection, onDelete }) => {
       {/* Info */}
       <div className="p-4">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+          <h3 className="font-semibold text-text-primary dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
             {collection.name}
           </h3>
           {!collection.isDefault && (
@@ -309,7 +309,7 @@ const CollectionCard = ({ collection, onDelete }) => {
           </p>
         )}
 
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between text-xs text-text-muted dark:text-gray-400">
           <span>{collection.postIds?.length || 0} posts</span>
           {collection.updatedAt && (
             <span>{format(new Date(collection.updatedAt), 'MMM d, yyyy')}</span>

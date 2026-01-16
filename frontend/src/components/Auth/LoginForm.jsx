@@ -84,8 +84,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900 p-4 transition-colors duration-300">
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-slate-200 dark:border-slate-700 shadow-xl relative transition-colors duration-300">
+    <div className="min-h-screen flex items-center justify-center bg-bg-secondary dark:bg-slate-900 p-4 transition-colors duration-300">
+      <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl p-8 w-full max-w-md border border-border dark:border-slate-700 shadow-xl relative transition-colors duration-300">
         {/* Close Button */}
         <button
           type="button"
@@ -94,14 +94,14 @@ const LoginForm = () => {
           aria-label="Close login form"
           title="Close"
         >
-          <span className="text-xl text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200 font-semibold transition-colors">
+          <span className="text-xl text-text-muted dark:text-slate-400 group-hover:text-text-secondary dark:group-hover:text-slate-200 font-semibold transition-colors">
             ×
           </span>
         </button>
 
         {/* HEADER */}
         <div className="text-center mb-8 mt-2">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-text-primary dark:text-white mb-2">
             Welcome Back
           </h1>
           <p className="text-slate-600 dark:text-slate-300">
@@ -120,7 +120,7 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* EMAIL FIELD */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label className="block text-sm font-medium text-text-secondary mb-2">
               Email
             </label>
             <input
@@ -130,13 +130,13 @@ const LoginForm = () => {
               onChange={handleChange}
               required
               placeholder="your@email.com"
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
+              className="w-full px-4 py-3 bg-bg-primary dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-text-primary dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
             />
           </div>
 
           {/* PASSWORD FIELD */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label className="block text-sm font-medium text-text-secondary mb-2">
               Password
             </label>
 
@@ -148,7 +148,7 @@ const LoginForm = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
+                className="w-full px-4 py-3 bg-bg-primary dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg pr-12 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-text-primary dark:text-white placeholder-slate-500 dark:placeholder-slate-400"
               />
 
               <button
@@ -197,3 +197,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

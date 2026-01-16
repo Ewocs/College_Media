@@ -217,7 +217,7 @@ const AlumniConnect = () => {
       <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-sm border border-blue-200 dark:border-gray-600 p-8">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 dark:text-white">Alumni Connect</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 text-text-primary dark:text-white">Alumni Connect</h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">Connect with successful alumni, get mentorship, and accelerate your career</p>
           </div>
           {user && userHasProfile && !checkingProfile && (
@@ -234,13 +234,13 @@ const AlumniConnect = () => {
           {statsDisplay.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <div key={index} className="bg-white dark:bg-gray-700 rounded-xl p-4 shadow-sm">
+              <div key={index} className="bg-bg-secondary dark:bg-gray-700 rounded-xl p-4 shadow-sm">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
                     <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                    <p className="text-2xl font-bold text-text-primary dark:text-white">{stat.value}</p>
                     <p className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</p>
                   </div>
                 </div>
@@ -251,7 +251,7 @@ const AlumniConnect = () => {
       </div>
 
       {/* Search and Filter */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6">
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search Bar */}
           <div className="flex-1 relative">
@@ -261,7 +261,7 @@ const AlumniConnect = () => {
               placeholder="Search by name, company, or position..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+              className="w-full pl-12 pr-4 py-3 bg-bg-primary dark:bg-gray-700 border border-border dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
 
@@ -272,7 +272,7 @@ const AlumniConnect = () => {
               className={`px-6 py-3 rounded-xl font-medium transition-all ${
                 selectedFilter === 'all'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-text-secondary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               All Alumni
@@ -282,7 +282,7 @@ const AlumniConnect = () => {
               className={`px-6 py-3 rounded-xl font-medium transition-all ${
                 selectedFilter === 'available'
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-text-secondary dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Available Now
@@ -305,7 +305,7 @@ const AlumniConnect = () => {
           {alumni.map((person) => (
             <div
               key={person._id}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-200"
+              className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-200"
             >
             {/* Header with Image and Status */}
             <div className="flex items-start justify-between mb-4">
@@ -316,8 +316,8 @@ const AlumniConnect = () => {
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{person.user?.name || 'Anonymous'}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                  <h3 className="text-lg font-bold text-text-primary dark:text-white">{person.user?.name || 'Anonymous'}</h3>
+                  <p className="text-sm text-text-muted dark:text-gray-400 flex items-center gap-1">
                     <GraduationCap className="w-4 h-4" />
                     Class of {person.graduationYear}
                   </p>
@@ -335,7 +335,7 @@ const AlumniConnect = () => {
               <div className="flex items-start gap-2">
                 <Briefcase className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{person.currentPosition || 'Position not specified'}</p>
+                  <p className="text-sm font-semibold text-text-primary dark:text-white">{person.currentPosition || 'Position not specified'}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-300">{person.currentCompany || 'Company not specified'}</p>
                 </div>
               </div>
@@ -345,7 +345,7 @@ const AlumniConnect = () => {
               </div>
               <div className="flex items-center gap-2">
                 <GraduationCap className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <p className="text-sm text-gray-900 dark:text-white font-medium">{person.major} • {person.degree}</p>
+                <p className="text-sm text-text-primary dark:text-white font-medium">{person.major} • {person.degree}</p>
               </div>
             </div>
 
@@ -384,7 +384,7 @@ const AlumniConnect = () => {
               </button>
               <button 
                 onClick={() => handleViewProfile(person)}
-                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-text-secondary dark:text-gray-300 rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
                 Profile
               </button>
@@ -396,11 +396,11 @@ const AlumniConnect = () => {
 
       {/* No Results */}
       {!loading && alumni.length === 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-12 text-center">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-12 text-center">
           <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
             <Users className="w-8 h-8 text-gray-400" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-text-primary dark:text-white mb-2">
             {searchQuery || selectedFilter !== 'all' ? 'No alumni found' : 'No Alumni Profiles Yet'}
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-6">

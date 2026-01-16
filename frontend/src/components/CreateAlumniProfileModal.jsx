@@ -136,20 +136,20 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between">
+        <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
               <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Create Alumni Profile</h2>
+            <h2 className="text-2xl font-bold text-text-primary dark:text-white">Create Alumni Profile</h2>
           </div>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
           >
-            <X className="w-6 h-6 text-gray-500" />
+            <X className="w-6 h-6 text-text-muted" />
           </button>
         </div>
 
@@ -157,14 +157,14 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Education Details */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white flex items-center gap-2">
               <GraduationCap className="w-5 h-5" />
               Education Details
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Graduation Year *
                 </label>
                 <input
@@ -180,7 +180,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Degree *
                 </label>
                 <input
@@ -195,7 +195,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Major *
                 </label>
                 <input
@@ -213,14 +213,14 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
           {/* Current Work */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white flex items-center gap-2">
               <Briefcase className="w-5 h-5" />
               Current Work
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Company
                 </label>
                 <input
@@ -234,7 +234,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Position
                 </label>
                 <input
@@ -248,7 +248,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Industry
                 </label>
                 <input
@@ -265,14 +265,14 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
           {/* Location */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white flex items-center gap-2">
               <MapPin className="w-5 h-5" />
               Location
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   City
                 </label>
                 <input
@@ -286,7 +286,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   State
                 </label>
                 <input
@@ -300,7 +300,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Country
                 </label>
                 <input
@@ -317,7 +317,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
           {/* Bio */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
               Bio
             </label>
             <textarea
@@ -329,12 +329,12 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               placeholder="Tell us about yourself..."
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white resize-none"
             />
-            <p className="text-xs text-gray-500 mt-1">{formData.bio.length}/500 characters</p>
+            <p className="text-xs text-text-muted mt-1">{formData.bio.length}/500 characters</p>
           </div>
 
           {/* Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
               Skills
             </label>
             <div className="flex gap-2 mb-2">
@@ -375,7 +375,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
           {/* Mentorship */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white flex items-center gap-2">
               <Target className="w-5 h-5" />
               Mentorship
             </h3>
@@ -388,12 +388,12 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Available for mentorship</span>
+              <span className="text-sm text-text-secondary dark:text-gray-300">Available for mentorship</span>
             </label>
 
             {formData.mentorshipAvailable && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   Mentorship Areas
                 </label>
                 <div className="flex gap-2 mb-2">
@@ -444,7 +444,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Looking for job opportunities</span>
+              <span className="text-sm text-text-secondary dark:text-gray-300">Looking for job opportunities</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer">
@@ -455,17 +455,17 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
                 onChange={handleChange}
                 className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
               />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Willing to hire from the network</span>
+              <span className="text-sm text-text-secondary dark:text-gray-300">Willing to hire from the network</span>
             </label>
           </div>
 
           {/* Social Media */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Social Media Links</h3>
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white">Social Media Links</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   <Linkedin className="w-4 h-4" />
                   LinkedIn
                 </label>
@@ -480,7 +480,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   <Twitter className="w-4 h-4" />
                   Twitter
                 </label>
@@ -495,7 +495,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   <Github className="w-4 h-4" />
                   GitHub
                 </label>
@@ -510,7 +510,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
                   <Globe className="w-4 h-4" />
                   Website
                 </label>
@@ -528,7 +528,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 
           {/* Privacy */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
               Profile Visibility
             </label>
             <select
@@ -544,11 +544,11 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
           </div>
 
           {/* Submit Buttons */}
-          <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex gap-3 pt-4 border-t border-border dark:border-gray-700">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-xl font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors"
             >
               Cancel
             </button>
@@ -567,3 +567,4 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
 };
 
 export default CreateAlumniProfileModal;
+

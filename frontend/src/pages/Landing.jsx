@@ -62,8 +62,8 @@ const TestimonialCarousel = () => {
           <button
             key={idx}
             onClick={() => setActiveIndex(idx)}
-            className={`text-gray-600 hover:text-gray-900 transition relative pb-2 ${
-              idx === activeIndex ? 'text-gray-900 font-medium' : ''
+            className={`text-gray-600 hover:text-text-primary transition relative pb-2 ${
+              idx === activeIndex ? 'text-text-primary font-medium' : ''
             }`}
           >
             {test.college}
@@ -75,7 +75,7 @@ const TestimonialCarousel = () => {
       </div>
 
       {/* Testimonial Card */}
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div className="bg-bg-secondary rounded-3xl shadow-2xl overflow-hidden">
         <div className="grid md:grid-cols-5 gap-0">
           {/* Image Section */}
           <div className="md:col-span-2 h-full">
@@ -89,7 +89,7 @@ const TestimonialCarousel = () => {
           {/* Content Section */}
           <div className="md:col-span-3 p-10 md:p-12 flex flex-col justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">
+              <h3 className="text-lg font-semibold text-text-primary mb-6">
                 {currentTestimonial.college}
               </h3>
               <blockquote className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8">
@@ -97,11 +97,11 @@ const TestimonialCarousel = () => {
               </blockquote>
             </div>
 
-            <div className="border-t border-gray-200 pt-6">
-              <div className="font-semibold text-gray-900 text-lg">
+            <div className="border-t border-border pt-6">
+              <div className="font-semibold text-text-primary text-lg">
                 {currentTestimonial.name}
               </div>
-              <div className="text-gray-500 mt-1">
+              <div className="text-text-muted mt-1">
                 {currentTestimonial.role}
               </div>
             </div>
@@ -168,12 +168,12 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="min-h-screen bg-bg-secondary overflow-x-hidden">
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 w-full z-50 px-2 md:px-4 py-2 md:py-4 bg-white">
+      <nav className="fixed top-0 left-0 right-0 w-full z-50 px-2 md:px-4 py-2 md:py-4 bg-bg-secondary">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white/95 backdrop-blur-md rounded-full shadow-lg px-3 md:px-6 py-2 md:py-3 flex justify-between items-center border border-gray-200">
+          <div className="bg-bg-secondary/95 backdrop-blur-md rounded-full shadow-lg px-3 md:px-6 py-2 md:py-3 flex justify-between items-center border border-border">
             <div className="flex items-center gap-1.5 md:gap-2">
               <div className="w-7 h-7 md:w-8 md:h-8 bg-gray-900 rounded-lg flex items-center justify-center">
                 <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-white" />
@@ -181,10 +181,10 @@ const Landing = () => {
               <span className="text-base md:text-lg font-bold text-black">College Media</span>
             </div>
 
-            <div className="hidden lg:flex gap-6 text-gray-700 text-sm font-medium">
-              <a href="#features" className="hover:text-gray-900 transition">Features</a>
-              <a href="#community" className="hover:text-gray-900 transition">Community</a>
-              <a href="#testimonials" className="hover:text-gray-900 transition">Stories</a>
+            <div className="hidden lg:flex gap-6 text-text-secondary text-sm font-medium">
+              <a href="#features" className="hover:text-text-primary transition">Features</a>
+              <a href="#community" className="hover:text-text-primary transition">Community</a>
+              <a href="#testimonials" className="hover:text-text-primary transition">Stories</a>
             </div>
 
             <div className="flex items-center gap-2 md:gap-3">
@@ -208,7 +208,7 @@ const Landing = () => {
             Built for college communities - 10,000+ students sharing daily
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-gray-900">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-text-primary">
             Turn Everyday College Moments
             <br className="hidden md:block" />
             into Stories Everyone Feels
@@ -228,7 +228,7 @@ const Landing = () => {
             </Link>
             <button
               onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-block px-8 py-3.5 rounded-full bg-white/80 text-gray-700 font-medium hover:bg-white transition shadow-sm"
+              className="inline-block px-8 py-3.5 rounded-full bg-bg-secondary/80 text-text-secondary font-medium hover:bg-bg-secondary transition shadow-sm"
             >
               Explore Campus Feed
             </button>
@@ -247,7 +247,7 @@ const Landing = () => {
               {[...videos, ...videos].map((src, i) => (
                 <div
                   key={i}
-                  className="w-[240px] h-[340px] rounded-2xl overflow-hidden bg-white shadow-md flex-shrink-0 hover:scale-[1.03] transition"
+                  className="w-[240px] h-[340px] rounded-2xl overflow-hidden bg-bg-secondary shadow-md flex-shrink-0 hover:scale-[1.03] transition"
                 >
                   <img src={src} alt={`Campus moment ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
@@ -258,7 +258,7 @@ const Landing = () => {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="py-20 bg-white">
+      <section id="features" className="py-20 bg-bg-secondary">
         <div className="max-w-7xl mx-auto px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-black ">
             Built for College Life
@@ -269,7 +269,7 @@ const Landing = () => {
             <div className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 flex flex-col justify-between border-2 border-black">
               <div>
                 <Video className="w-12 h-12 mb-4 text-blue-600" />
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Share Moments</h3>
+                <h3 className="text-2xl font-bold mb-3 text-text-primary">Share Moments</h3>
                 <p className="text-gray-600 text-lg">Post photos & videos from campus life</p>
               </div>
             </div>
@@ -277,7 +277,7 @@ const Landing = () => {
             {/* Campus Network */}
             <div className="md:col-span-2 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-8 flex items-start justify-between border-2 border-black">
               <div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Campus Network</h3>
+                <h3 className="text-xl font-bold mb-2 text-text-primary">Campus Network</h3>
                 <p className="text-gray-600">Connect with students from your college</p>
               </div>
               <Users className="w-10 h-10 text-purple-600" />
@@ -293,14 +293,14 @@ const Landing = () => {
             {/* Events */}
             <div className="md:col-span-1 bg-gradient-to-br from-amber-50 to-amber-100 rounded-3xl p-6 flex flex-col border-2 border-black">
               <Calendar className="w-10 h-10 mb-3 text-amber-600" />
-              <h3 className="text-lg font-bold text-gray-900">Events</h3>
+              <h3 className="text-lg font-bold text-text-primary">Events</h3>
               <p className="text-sm text-gray-600 mt-2">Never miss college fests & workshops</p>
             </div>
 
             {/* Study Groups - Large */}
             <div className="md:col-span-2 md:row-span-1 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 flex items-center justify-between border-2 border-black">
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Study Groups</h3>
+                <h3 className="text-2xl font-bold mb-3 text-text-primary">Study Groups</h3>
                 <p className="text-gray-600">Collaborate and share notes</p>
               </div>
               <BookOpen className="w-12 h-12 text-green-600" />
@@ -310,7 +310,7 @@ const Landing = () => {
             <div className="md:col-span-2 bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl p-8 flex flex-col justify-center border-2 border-black">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">Trending</h3>
+                  <h3 className="text-xl font-bold mb-2 text-text-primary">Trending</h3>
                   <p className="text-gray-600">See what's popular on campus</p>
                 </div>
                 <TrendingUp className="w-10 h-10 text-pink-600" />
@@ -323,7 +323,7 @@ const Landing = () => {
       {/* TESTIMONIALS */}
       <section id="testimonials" className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #fef5f3 0%, #fde7d9 50%, #fee5d5 100%)" }}>
         <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-text-primary">
             Loved by Students Everywhere
           </h2>
 
@@ -338,7 +338,7 @@ const Landing = () => {
         </h2>
         <Link
           to="/explore-hub"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full font-medium hover:bg-gray-100 transition"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-bg-secondary text-black rounded-full font-medium hover:bg-gray-100 transition"
         >
           Get Started Free <ArrowRight />
         </Link>
@@ -357,11 +357,11 @@ const Landing = () => {
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-6 py-4 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 outline-none focus:bg-white/30 transition"
+                  className="flex-1 px-6 py-4 rounded-full bg-bg-secondary/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 outline-none focus:bg-bg-secondary/30 transition"
                 />
                 <Link
                   to="/contact"
-                  className="px-8 py-4 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold hover:bg-white/30 transition flex items-center gap-2 whitespace-nowrap"
+                  className="px-8 py-4 rounded-full bg-bg-secondary/20 backdrop-blur-sm border border-white/30 text-white font-semibold hover:bg-bg-secondary/30 transition flex items-center gap-2 whitespace-nowrap"
                 >
                   Contact
                   <ArrowRight className="w-5 h-5" />
@@ -376,16 +376,16 @@ const Landing = () => {
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <a href="#" className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-white/20 transition">
+                <a href="#" className="px-4 py-2 bg-bg-secondary/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-bg-secondary/20 transition">
                   [ INSTAGRAM ]
                 </a>
-                <a href="#" className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-white/20 transition">
+                <a href="#" className="px-4 py-2 bg-bg-secondary/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-bg-secondary/20 transition">
                   [ TWITTER ]
                 </a>
-                <a href="#" className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-white/20 transition">
+                <a href="#" className="px-4 py-2 bg-bg-secondary/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-bg-secondary/20 transition">
                   [ LINKEDIN ]
                 </a>
-                <a href="#" className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-white/20 transition">
+                <a href="#" className="px-4 py-2 bg-bg-secondary/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-mono hover:bg-bg-secondary/20 transition">
                   [ FACEBOOK ]
                 </a>
               </div>
@@ -451,3 +451,4 @@ const Landing = () => {
 };
 
 export default Landing;
+

@@ -18,15 +18,15 @@ const HomeCTA = () => {
     <>
       <section
         id="community"
-        className="py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+        className="py-24 bg-bg-primary dark:bg-slate-900 overflow-hidden transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-end justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
+              <h2 className="text-3xl font-semibold tracking-tight text-text-primary dark:text-white">
                 Loved by students everywhere
               </h2>
-              <p className="mt-2 text-slate-500 dark:text-slate-400">
+              <p className="mt-2 text-text-muted dark:text-slate-400">
                 Join the fastest growing centralized platform across 50+
                 campuses.
               </p>
@@ -34,7 +34,7 @@ const HomeCTA = () => {
 
             <div className="flex gap-2 mt-4 md:mt-0">
               <button
-                className="p-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-full border border-border dark:border-slate-700 hover:bg-bg-secondary dark:hover:bg-slate-800 transition-colors"
                 aria-label="Previous testimonial"
               >
                 <Icon
@@ -44,7 +44,7 @@ const HomeCTA = () => {
               </button>
 
               <button
-                className="p-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-full border border-border dark:border-slate-700 hover:bg-bg-secondary dark:hover:bg-slate-800 transition-colors"
                 aria-label="Next testimonial"
               >
                 <Icon
@@ -79,7 +79,7 @@ const HomeCTA = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-indigo-100 dark:hover:border-indigo-900 transition-colors"
+                className="bg-bg-secondary dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-indigo-100 dark:hover:border-indigo-900 transition-colors"
               >
                 <div
                   className="flex gap-1 text-yellow-400 mb-4"
@@ -94,7 +94,7 @@ const HomeCTA = () => {
                   ))}
                 </div>
 
-                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                <p className="text-text-secondary dark:text-slate-300 text-sm leading-relaxed mb-6">
                   “{item.text}”
                 </p>
 
@@ -103,10 +103,10 @@ const HomeCTA = () => {
                     className={`w-10 h-10 rounded-full bg-gradient-to-r ${item.gradient}`}
                   />
                   <div>
-                    <div className="text-sm font-semibold text-slate-900 dark:text-white">
+                    <div className="text-sm font-semibold text-text-primary dark:text-white">
                       {item.name}
                     </div>
-                    <div className="text-xs text-slate-400 dark:text-slate-500">
+                    <div className="text-xs text-slate-400 dark:text-text-muted">
                       {item.meta}
                     </div>
                   </div>
@@ -141,12 +141,12 @@ const HomeCTA = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => navigate("/login")}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-purple-600 font-semibold hover:bg-slate-50 transition-all shadow-xl active:scale-95"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-bg-secondary text-purple-600 font-semibold hover:bg-bg-primary transition-all shadow-xl active:scale-95"
               >
                 Login
               </button>
               <button
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-purple-600 font-semibold hover:bg-slate-50 transition-all shadow-xl active:scale-95"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-bg-secondary text-purple-600 font-semibold hover:bg-bg-primary transition-all shadow-xl active:scale-95"
                 aria-label="Get started with UniHub now"
               >
                 Get Started Now
@@ -163,3 +163,4 @@ const HomeCTA = () => {
 };
 
 export default HomeCTA;
+

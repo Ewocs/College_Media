@@ -112,7 +112,7 @@ const AchievementTimeline = ({ milestones }) => {
                   {index % 2 === 0 && (
                     <div className="text-right pr-8">
                       <div className="inline-block bg-gradient-to-r from-coral-500/10 to-purple-500/10 border border-coral-200 dark:border-coral-800 rounded-lg p-4">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                        <h3 className="text-xl font-bold text-text-primary dark:text-white mb-2">
                           {milestone.title}
                         </h3>
                         <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
@@ -146,7 +146,7 @@ const AchievementTimeline = ({ milestones }) => {
                   {index % 2 === 1 && (
                     <div className="pl-8">
                       <div className="inline-block bg-gradient-to-r from-coral-500/10 to-purple-500/10 border border-coral-200 dark:border-coral-800 rounded-lg p-4">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                        <h3 className="text-xl font-bold text-text-primary dark:text-white mb-2">
                           {milestone.title}
                         </h3>
                         <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
@@ -163,7 +163,7 @@ const AchievementTimeline = ({ milestones }) => {
                 {/* Mobile Layout - Both sides hidden on mobile */}
                 <div className="md:hidden flex-1">
                   <div className="bg-gradient-to-r from-coral-500/10 to-purple-500/10 border border-coral-200 dark:border-coral-800 rounded-lg p-4">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-bold text-text-primary dark:text-white mb-2">
                       {milestone.title}
                     </h3>
                     <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
@@ -182,7 +182,7 @@ const AchievementTimeline = ({ milestones }) => {
         {/* Bottom Badge */}
         <div className="flex justify-center mt-16">
           <div className="inline-block bg-gradient-to-r from-coral-500/20 to-purple-500/20 border border-coral-300 dark:border-coral-700 rounded-full px-8 py-4">
-            <p className="text-center text-slate-900 dark:text-white font-semibold">
+            <p className="text-center text-text-primary dark:text-white font-semibold">
               🎉 Journey Complete! You've achieved your goals.
             </p>
           </div>
@@ -193,3 +193,4 @@ const AchievementTimeline = ({ milestones }) => {
 }
 
 export default AchievementTimeline
+

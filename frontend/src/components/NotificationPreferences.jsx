@@ -58,11 +58,11 @@ const NotificationPreferences = () => {
   const notificationPermission = 'Notification' in window ? Notification.permission : 'unsupported';
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-bg-primary dark:bg-gray-950">
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-text-primary dark:text-white flex items-center gap-2">
             <Icon icon="mdi:cog" width={28} />
             Notification Preferences
           </h1>
@@ -72,8 +72,8 @@ const NotificationPreferences = () => {
         </div>
 
         {/* General Settings */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="bg-bg-secondary dark:bg-gray-900 rounded-lg shadow-sm border border-border dark:border-gray-800 p-6 mb-6">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-white mb-4">
             General Settings
           </h2>
 
@@ -83,10 +83,10 @@ const NotificationPreferences = () => {
               <div className="flex items-center gap-3">
                 <Icon icon="mdi:volume-high" width={24} className="text-gray-600 dark:text-gray-400" />
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-text-primary dark:text-white">
                     Sound notifications
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-text-muted dark:text-gray-400">
                     Play a sound when you receive a notification
                   </p>
                 </div>
@@ -98,7 +98,7 @@ const NotificationPreferences = () => {
                   onChange={() => handleToggle('soundEnabled')}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
               </label>
             </div>
 
@@ -107,10 +107,10 @@ const NotificationPreferences = () => {
               <div className="flex items-center gap-3">
                 <Icon icon="mdi:monitor" width={24} className="text-gray-600 dark:text-gray-400" />
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-text-primary dark:text-white">
                     Desktop notifications
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-text-muted dark:text-gray-400">
                     Show browser notifications
                     {notificationPermission === 'denied' && (
                       <span className="text-red-500 ml-1">(Blocked by browser)</span>
@@ -134,7 +134,7 @@ const NotificationPreferences = () => {
                     disabled={notificationPermission !== 'granted'}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 peer-disabled:opacity-50 peer-disabled:cursor-not-allowed"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 peer-disabled:opacity-50 peer-disabled:cursor-not-allowed"></div>
                 </label>
               )}
             </div>
@@ -144,10 +144,10 @@ const NotificationPreferences = () => {
               <div className="flex items-center gap-3">
                 <Icon icon="mdi:moon-waning-crescent" width={24} className="text-gray-600 dark:text-gray-400" />
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-text-primary dark:text-white">
                     Do not disturb
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-text-muted dark:text-gray-400">
                     Mute all notifications temporarily
                   </p>
                 </div>
@@ -159,15 +159,15 @@ const NotificationPreferences = () => {
                   onChange={() => handleToggle('doNotDisturb')}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
               </label>
             </div>
           </div>
         </div>
 
         {/* Notification Types */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="bg-bg-secondary dark:bg-gray-900 rounded-lg shadow-sm border border-border dark:border-gray-800 p-6">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-white mb-4">
             Notification Types
           </h2>
 
@@ -176,7 +176,7 @@ const NotificationPreferences = () => {
               <div key={type.key} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Icon icon={type.icon} width={24} className={type.color} />
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-text-primary dark:text-white">
                     {type.label}
                   </p>
                 </div>
@@ -187,7 +187,7 @@ const NotificationPreferences = () => {
                     onChange={() => handleTypeToggle(type.key)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-bg-secondary after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 </label>
               </div>
             ))}
@@ -213,3 +213,4 @@ const NotificationPreferences = () => {
 };
 
 export default NotificationPreferences;
+

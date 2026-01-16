@@ -1,6 +1,6 @@
 const EngineeredConnection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-slate-50 dark:bg-slate-950 py-24 selection:bg-purple-100 selection:text-purple-900 transition-colors duration-300">
+    <section className="relative w-full overflow-hidden bg-bg-primary dark:bg-slate-950 py-24 selection:bg-purple-100 selection:text-purple-900 transition-colors duration-300">
       <style>{`
         :root {
           --loop-duration: 12s;
@@ -91,7 +91,7 @@ const EngineeredConnection = () => {
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="anim-intro mb-16 text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-text-primary dark:text-white sm:text-5xl">
             Engineered for{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
               connection
@@ -106,9 +106,9 @@ const EngineeredConnection = () => {
         </div>
 
         <div className="anim-intro mx-auto grid max-w-4xl grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-          <div className="anim-card-left lg:col-span-7 relative overflow-hidden rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 ring-1 ring-slate-200/50 dark:ring-slate-700/50">
+          <div className="anim-card-left lg:col-span-7 relative overflow-hidden rounded-2xl bg-bg-secondary dark:bg-slate-800 p-6 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 ring-1 ring-slate-200/50 dark:ring-slate-700/50">
             <div className="mb-6 flex items-center justify-between border-b border-slate-50 dark:border-slate-700 pb-4">
-              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <h3 className="text-sm font-semibold text-text-muted dark:text-slate-400 uppercase tracking-wider">
                 Campus Feed
               </h3>
               <div className="flex gap-1.5">
@@ -118,7 +118,7 @@ const EngineeredConnection = () => {
               </div>
             </div>
 
-            <div className="anim-post-1 mb-4 space-y-4 rounded-xl bg-slate-50/50 dark:bg-slate-700/30 p-4 border border-slate-100 dark:border-slate-700">
+            <div className="anim-post-1 mb-4 space-y-4 rounded-xl bg-bg-primary/50 dark:bg-slate-700/30 p-4 border border-slate-100 dark:border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 shadow-sm" />
                 <div className="space-y-1.5">
@@ -147,7 +147,7 @@ const EngineeredConnection = () => {
             </div>
 
             <div
-              className="anim-post-2 rounded-xl bg-slate-50/50 dark:bg-slate-700/30 p-4 border border-slate-100 dark:border-slate-700"
+              className="anim-post-2 rounded-xl bg-bg-primary/50 dark:bg-slate-700/30 p-4 border border-slate-100 dark:border-slate-700"
               style={{ animationDelay: "0.4s" }}
             >
               <div className="flex items-center gap-3 mb-3">
@@ -155,11 +155,11 @@ const EngineeredConnection = () => {
                 <div className="h-2.5 w-20 rounded bg-slate-200 dark:bg-slate-600" />
               </div>
               <div className="space-y-2">
-                <div className="flex items-center justify-between rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-xs text-slate-600 dark:text-slate-300 shadow-sm">
+                <div className="flex items-center justify-between rounded-lg border border-border dark:border-slate-600 bg-bg-secondary dark:bg-slate-800 px-3 py-2 text-xs text-slate-600 dark:text-slate-300 shadow-sm">
                   <span>Library Study Group</span>
                   <div className="h-3 w-3 rounded-full border-2 border-indigo-500 bg-indigo-500" />
                 </div>
-                <div className="flex items-center justify-between rounded-lg border border-slate-200 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 px-3 py-2 text-xs text-slate-400 dark:text-slate-500">
+                <div className="flex items-center justify-between rounded-lg border border-border dark:border-slate-600 bg-bg-secondary/50 dark:bg-slate-800/50 px-3 py-2 text-xs text-slate-400 dark:text-text-muted">
                   <span>Coffee Shop Meetup</span>
                   <div className="h-3 w-3 rounded-full border-2 border-slate-300 dark:border-slate-600" />
                 </div>
@@ -167,9 +167,9 @@ const EngineeredConnection = () => {
             </div>
 
             <div className="anim-cursor pointer-events-none absolute bottom-1/3 right-1/4 z-20">
-              <div className="h-6 w-6 rounded-full bg-slate-900/20 dark:bg-white/20 backdrop-blur-sm ring-1 ring-white/50" />
+              <div className="h-6 w-6 rounded-full bg-slate-900/20 dark:bg-bg-secondary/20 backdrop-blur-sm ring-1 ring-white/50" />
               <svg
-                className="absolute -top-1 -left-1 h-8 w-8 text-slate-900 dark:text-white drop-shadow-md"
+                className="absolute -top-1 -left-1 h-8 w-8 text-text-primary dark:text-white drop-shadow-md"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -179,7 +179,7 @@ const EngineeredConnection = () => {
                   strokeWidth="2"
                 />
               </svg>
-              <div className="absolute left-6 top-0 w-32 overflow-hidden whitespace-nowrap rounded-lg bg-slate-900 dark:bg-white px-2 py-1 text-[10px] text-white dark:text-slate-900 shadow-lg">
+              <div className="absolute left-6 top-0 w-32 overflow-hidden whitespace-nowrap rounded-lg bg-slate-900 dark:bg-bg-secondary px-2 py-1 text-[10px] text-white dark:text-text-primary shadow-lg">
                 <div className="anim-comment-box overflow-hidden">
                   See you at 5pm! 🚀
                 </div>
@@ -188,9 +188,9 @@ const EngineeredConnection = () => {
           </div>
 
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="anim-card-top-right relative flex-1 overflow-hidden rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 transition-transform">
+            <div className="anim-card-top-right relative flex-1 overflow-hidden rounded-2xl bg-bg-secondary dark:bg-slate-800 p-6 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 transition-transform">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
+                <h3 className="text-sm font-semibold text-text-primary dark:text-white">
                   Student Profiles
                 </h3>
                 <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium cursor-pointer hover:underline">
@@ -201,7 +201,7 @@ const EngineeredConnection = () => {
                 <div className="inline-block h-12 w-12 rounded-full ring-2 ring-white dark:ring-slate-800 bg-gradient-to-br from-purple-400 to-pink-400" />
                 <div className="inline-block h-12 w-12 rounded-full ring-2 ring-white dark:ring-slate-800 bg-gradient-to-br from-yellow-400 to-orange-400" />
                 <div className="inline-block h-12 w-12 rounded-full ring-2 ring-white dark:ring-slate-800 bg-gradient-to-br from-cyan-400 to-blue-400" />
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 ring-2 ring-white dark:ring-slate-800 text-xs font-medium text-slate-500 dark:text-slate-300">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-bg-primary dark:bg-slate-700 ring-2 ring-white dark:ring-slate-800 text-xs font-medium text-text-muted dark:text-slate-300">
                   +42
                 </div>
               </div>
@@ -223,7 +223,7 @@ const EngineeredConnection = () => {
                 </div>
               </div>
 
-              <div className="anim-toast absolute -right-4 -bottom-4 w-64 rounded-lg bg-white dark:bg-slate-800 p-3 shadow-2xl border border-slate-100 dark:border-slate-700 text-slate-900 dark:text-white flex items-center gap-3 z-30">
+              <div className="anim-toast absolute -right-4 -bottom-4 w-64 rounded-lg bg-bg-secondary dark:bg-slate-800 p-3 shadow-2xl border border-slate-100 dark:border-slate-700 text-text-primary dark:text-white flex items-center gap-3 z-30">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 dark:bg-red-500/20 text-red-500">
                   <svg
                     className="h-4 w-4"
@@ -243,7 +243,7 @@ const EngineeredConnection = () => {
                   <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                     Campus Alert
                   </p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                  <p className="text-[10px] text-text-muted dark:text-slate-400">
                     West Hall maintenance update
                   </p>
                 </div>
@@ -257,3 +257,4 @@ const EngineeredConnection = () => {
 };
 
 export default EngineeredConnection;
+

@@ -46,8 +46,8 @@ const OfflineQueueIndicator = () => {
             {isOpen && (
                 <>
                     <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-                    <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-200 dark:border-slate-700 z-50 p-4">
-                        <h3 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                    <div className="absolute right-0 mt-2 w-72 bg-bg-secondary dark:bg-slate-800 rounded-lg shadow-xl border border-border dark:border-slate-700 z-50 p-4">
+                        <h3 className="font-bold text-text-primary dark:text-white mb-2 flex items-center gap-2">
                             <Icon icon="mdi:cloud-sync" />
                             Pending Actions
                         </h3>
@@ -92,3 +92,4 @@ const OfflineQueueIndicator = () => {
 };
 
 export default OfflineQueueIndicator;
+

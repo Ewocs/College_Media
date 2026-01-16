@@ -101,23 +101,23 @@ const ForgotPassword = () => {
           <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
             <GraduationCap className="w-7 h-7 text-white" />
           </div>
-          <span className="text-2xl font-bold text-gray-900">College Media</span>
+          <span className="text-2xl font-bold text-text-primary">College Media</span>
         </Link>
 
         {/* Reset Password Card */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10">
+        <div className="bg-bg-secondary rounded-3xl shadow-xl p-8 md:p-10">
           {/* Step 1: Enter Email */}
           {step === 1 && (
             <>
               <div className="mb-6">
                 <Link 
                   to="/login" 
-                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition mb-4"
+                  className="inline-flex items-center gap-2 text-gray-600 hover:text-text-primary transition mb-4"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span className="text-sm">Back to login</span>
                 </Link>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Forgot password?</h1>
+                <h1 className="text-3xl font-bold text-text-primary mb-2">Forgot password?</h1>
                 <p className="text-gray-600">
                   Enter your email and we'll send you an OTP to reset your password.
                 </p>
@@ -125,7 +125,7 @@ const ForgotPassword = () => {
 
               <form onSubmit={handleSendOTP} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-2">
                     Email Address
                   </label>
                   <div className="relative">
@@ -135,7 +135,7 @@ const ForgotPassword = () => {
                       id="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-gray-900"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-text-primary"
                       placeholder="you@college.edu"
                       required
                       disabled={loading}
@@ -160,20 +160,20 @@ const ForgotPassword = () => {
               <div className="mb-6">
                 <button 
                   onClick={() => setStep(1)}
-                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition mb-4"
+                  className="inline-flex items-center gap-2 text-gray-600 hover:text-text-primary transition mb-4"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span className="text-sm">Change email</span>
                 </button>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Enter OTP</h1>
+                <h1 className="text-3xl font-bold text-text-primary mb-2">Enter OTP</h1>
                 <p className="text-gray-600">
-                  We've sent a 6-digit OTP to <span className="font-semibold text-gray-900">{email}</span>
+                  We've sent a 6-digit OTP to <span className="font-semibold text-text-primary">{email}</span>
                 </p>
               </div>
 
               <form onSubmit={handleVerifyOTP} className="space-y-6">
                 <div>
-                  <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="otp" className="block text-sm font-medium text-text-secondary mb-2">
                     OTP Code
                   </label>
                   <input
@@ -181,13 +181,13 @@ const ForgotPassword = () => {
                     id="otp"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-gray-900 text-center text-2xl font-mono tracking-widest"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-text-primary text-center text-2xl font-mono tracking-widest"
                     placeholder="000000"
                     maxLength={6}
                     required
                     disabled={loading}
                   />
-                  <p className="text-sm text-gray-500 mt-2 text-center">
+                  <p className="text-sm text-text-muted mt-2 text-center">
                     OTP expires in 10 minutes
                   </p>
                 </div>
@@ -216,7 +216,7 @@ const ForgotPassword = () => {
           {step === 3 && (
             <>
               <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Create new password</h1>
+                <h1 className="text-3xl font-bold text-text-primary mb-2">Create new password</h1>
                 <p className="text-gray-600">
                   Your new password must be different from previously used passwords.
                 </p>
@@ -224,7 +224,7 @@ const ForgotPassword = () => {
 
               <form onSubmit={handleResetPassword} className="space-y-6">
                 <div>
-                  <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="newPassword" className="block text-sm font-medium text-text-secondary mb-2">
                     New Password
                   </label>
                   <div className="relative">
@@ -234,7 +234,7 @@ const ForgotPassword = () => {
                       id="newPassword"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-gray-900"
+                      className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-text-primary"
                       placeholder="Enter new password"
                       required
                       disabled={loading}
@@ -252,7 +252,7 @@ const ForgotPassword = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-text-secondary mb-2">
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -262,7 +262,7 @@ const ForgotPassword = () => {
                       id="confirmPassword"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-gray-900"
+                      className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#e8684a] focus:border-transparent outline-none transition text-text-primary"
                       placeholder="Confirm new password"
                       required
                       disabled={loading}
@@ -292,7 +292,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Footer Link */}
-        <Link to="/" className="block text-center mt-6 text-gray-600 hover:text-gray-900 transition">
+        <Link to="/" className="block text-center mt-6 text-gray-600 hover:text-text-primary transition">
           ← Back to home
         </Link>
       </div>
@@ -301,3 +301,4 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+

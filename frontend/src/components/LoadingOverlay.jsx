@@ -15,7 +15,7 @@ const LoadingOverlay = ({ message = 'Loading...', progress = null }) => {
       aria-valuemax="100"
       aria-label={message}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl max-w-sm mx-4">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl p-8 shadow-2xl max-w-sm mx-4">
         <div className="flex flex-col items-center gap-4">
           {/* Spinner */}
           <div className="relative">
@@ -25,7 +25,7 @@ const LoadingOverlay = ({ message = 'Loading...', progress = null }) => {
 
           {/* Message */}
           <div className="text-center">
-            <p className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+            <p className="text-lg font-semibold text-text-primary dark:text-white mb-1">
               {message}
             </p>
             {progress !== null && (
@@ -102,7 +102,7 @@ export const LoadingState = ({ title = 'Loading', description }) => {
   return (
     <div className="flex flex-col items-center justify-center py-12">
       <LoadingSpinner size="lg" />
-      <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-white">
+      <h3 className="mt-4 text-lg font-semibold text-text-primary dark:text-white">
         {title}
       </h3>
       {description && (
@@ -113,3 +113,4 @@ export const LoadingState = ({ title = 'Loading', description }) => {
     </div>
   );
 };
+

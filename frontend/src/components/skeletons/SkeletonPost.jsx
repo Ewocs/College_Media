@@ -29,7 +29,7 @@ const SkeletonPost = ({ count = 1 }) => {
             {Array.from({ length: count }).map((_, index) => (
                 <div
                     key={index}
-                    className="bg-white rounded-lg shadow-md overflow-hidden mb-6"
+                    className="bg-bg-secondary rounded-lg shadow-md overflow-hidden mb-6"
                     role="status"
                     aria-busy="true"
                     aria-label="Loading post"
@@ -75,3 +75,4 @@ const SkeletonPost = ({ count = 1 }) => {
 };
 
 export default SkeletonPost;
+

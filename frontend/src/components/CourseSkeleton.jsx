@@ -1,6 +1,6 @@
 const CourseSkeleton = () => {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm animate-pulse">
+    <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm animate-pulse">
       {/* Thumbnail Skeleton */}
       <div className="h-48 bg-slate-200 dark:bg-slate-700 w-full relative">
         <div className="absolute top-3 right-3 w-16 h-6 bg-slate-300 dark:bg-slate-600 rounded-full" />
@@ -28,3 +28,4 @@ const CourseSkeleton = () => {
 };
 
 export default CourseSkeleton;
+

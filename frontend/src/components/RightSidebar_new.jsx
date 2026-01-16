@@ -50,7 +50,7 @@ function RightSidebar() {
   return (
     <div className="space-y-6">
       {/* Friend Suggestions */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-gray-800 text-lg">Friend Suggestions</h3>
           <button className="text-indigo-600 text-sm font-medium hover:text-indigo-700 flex items-center">
@@ -73,7 +73,7 @@ function RightSidebar() {
                   <p className="font-semibold text-gray-800 text-sm cursor-pointer hover:text-indigo-600 transition-colors duration-300">
                     {friend.name}
                   </p>
-                  <p className="text-gray-500 text-xs">
+                  <p className="text-text-muted text-xs">
                     {friend.followers} followers
                   </p>
                 </div>
@@ -89,7 +89,7 @@ function RightSidebar() {
       </div>
 
       {/* Trending Now */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-5">
         <div className="flex items-center mb-4">
           <svg className="w-5 h-5 text-orange-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -100,7 +100,7 @@ function RightSidebar() {
           {trendingHashtags.map((hashtag, index) => (
             <span
               key={index}
-              className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-300 cursor-pointer"
+              className="px-3 py-1.5 bg-gray-100 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-300 cursor-pointer"
             >
               {hashtag}
             </span>
@@ -111,7 +111,7 @@ function RightSidebar() {
       {/* Profile Activity */}
       <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl shadow-sm border border-indigo-700 p-5 text-white">
         <h3 className="font-bold text-lg mb-3">Profile Activity</h3>
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-3">
+        <div className="bg-bg-secondary/10 backdrop-blur-sm rounded-xl p-4 mb-3">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center space-x-2">
               <img src="https://placehold.co/32x32/6366F1/FFFFFF?text=U1" alt="User" className="w-8 h-8 rounded-full" />
@@ -133,7 +133,7 @@ function RightSidebar() {
       </div>
 
       {/* Online Friends */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-5">
         <h3 className="font-bold text-gray-800 text-lg mb-4">Online Friends</h3>
         <div className="flex items-center space-x-3">
           {onlineFriends.map((friend, index) => (
@@ -159,3 +159,4 @@ function RightSidebar() {
 }
 
 export default RightSidebar;
+

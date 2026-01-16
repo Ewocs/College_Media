@@ -3,7 +3,7 @@ import LeftSidebar from "./LeftSidebar";
 
 const PageLayout = ({ children, searchQuery, setSearchQuery, activeTab, setActiveTab }) => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg-primary">
       <LeftSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="ml-64">
@@ -18,3 +18,4 @@ const PageLayout = ({ children, searchQuery, setSearchQuery, activeTab, setActiv
 };
 
 export default PageLayout;
+

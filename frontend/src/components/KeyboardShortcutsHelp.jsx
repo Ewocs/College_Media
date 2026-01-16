@@ -48,13 +48,13 @@ const KeyboardShortcutsHelp = ({ isOpen, onClose }) => {
                 aria-labelledby="shortcuts-title"
                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
             >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+                <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col">
                     {/* Header */}
-                    <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                    <div className="p-6 border-b border-border dark:border-gray-700">
                         <div className="flex items-center justify-between mb-4">
                             <h2
                                 id="shortcuts-title"
-                                className="text-2xl font-bold text-gray-900 dark:text-gray-100"
+                                className="text-2xl font-bold text-text-primary dark:text-gray-100"
                             >
                                 ⌨️ Keyboard Shortcuts
                             </h2>
@@ -79,7 +79,7 @@ const KeyboardShortcutsHelp = ({ isOpen, onClose }) => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search shortcuts..."
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
                     </div>
@@ -87,23 +87,23 @@ const KeyboardShortcutsHelp = ({ isOpen, onClose }) => {
                     {/* Shortcuts List */}
                     <div className="flex-1 overflow-y-auto p-6">
                         {Object.keys(filteredShortcuts).length === 0 ? (
-                            <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                            <div className="text-center py-12 text-text-muted dark:text-gray-400">
                                 No shortcuts found matching "{searchQuery}"
                             </div>
                         ) : (
                             <div className="space-y-6">
                                 {Object.entries(filteredShortcuts).map(([category, shortcuts]) => (
                                     <div key={category}>
-                                        <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+                                        <h3 className="text-sm font-semibold text-text-muted dark:text-gray-400 uppercase tracking-wider mb-3">
                                             {category}
                                         </h3>
                                         <div className="space-y-2">
                                             {shortcuts.map((shortcut) => (
                                                 <div
                                                     key={shortcut.id}
-                                                    className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                                                    className="flex items-center justify-between p-3 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700/50 transition-colors"
                                                 >
-                                                    <span className="text-gray-700 dark:text-gray-300">
+                                                    <span className="text-text-secondary dark:text-gray-300">
                                                         {shortcut.description}
                                                     </span>
                                                     <div className="flex items-center gap-1">
@@ -131,7 +131,7 @@ const KeyboardShortcutsHelp = ({ isOpen, onClose }) => {
                     </div>
 
                     {/* Footer */}
-                    <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+                    <div className="p-4 border-t border-border dark:border-gray-700 bg-bg-primary dark:bg-gray-900/50">
                         <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
                             Press <kbd className="px-2 py-1 text-xs font-semibold bg-gray-200 dark:bg-gray-700 rounded">?</kbd> anytime to show this help
                         </p>
@@ -143,3 +143,4 @@ const KeyboardShortcutsHelp = ({ isOpen, onClose }) => {
 };
 
 export default KeyboardShortcutsHelp;
+

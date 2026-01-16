@@ -88,7 +88,7 @@ const ProgressIndicator = ({
           />
         </svg>
         {showPercentage && (
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <span className="text-sm font-medium text-text-secondary dark:text-gray-300">
             {percentage}%
           </span>
         )}
@@ -122,7 +122,7 @@ const ProgressIndicator = ({
             {currentLabel}
           </span>
           {showPercentage && (
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <span className="text-sm font-medium text-text-secondary dark:text-gray-300">
               {percentage}%
             </span>
           )}

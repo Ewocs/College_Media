@@ -7,7 +7,7 @@ import React from 'react';
 
 const NetworkError = () => {
     return (
-        <div className="min-h-[80vh] flex items-center justify-center bg-gray-50 px-4">
+        <div className="min-h-[80vh] flex items-center justify-center bg-bg-primary px-4">
             <div className="text-center max-w-lg">
                 <div className="flex justify-center mb-6">
                     <div className="bg-blue-100 p-4 rounded-full">
@@ -16,7 +16,7 @@ const NetworkError = () => {
                         </svg>
                     </div>
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Connection Issues</h1>
+                <h1 className="text-4xl font-bold text-text-primary mb-4">Connection Issues</h1>
                 <p className="text-lg text-gray-600 mb-8">
                     It looks like you're offline or having trouble connecting to our servers.
                     Please check your internet connection and try again.
@@ -33,3 +33,4 @@ const NetworkError = () => {
 };
 
 export default NetworkError;
+

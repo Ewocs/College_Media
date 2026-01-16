@@ -6,11 +6,11 @@ const ModerationWarning = ({ isOpen, onClose, onBypass, warnings }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all scale-100">
+            <div className="bg-bg-secondary dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all scale-100">
                 <div className="p-6">
                     <div className="flex items-center gap-3 mb-4 text-amber-500">
                         <Icon icon="mdi:alert-circle" className="w-8 h-8" />
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Content Warning</h3>
+                        <h3 className="text-xl font-bold text-text-primary dark:text-white">Content Warning</h3>
                     </div>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -26,14 +26,14 @@ const ModerationWarning = ({ isOpen, onClose, onBypass, warnings }) => {
                         ))}
                     </ul>
 
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    <p className="text-sm text-text-muted dark:text-gray-400 mb-6">
                         We want to keep our community safe and friendly. You can edit your post to resolve these issues, or proceed if you think this is a mistake.
                     </p>
 
                     <div className="flex gap-3 justify-end">
                         <button
                             onClick={onClose}
-                            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-200 rounded-lg font-medium transition-colors"
+                            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-text-secondary dark:text-gray-200 rounded-lg font-medium transition-colors"
                         >
                             Edit Post
                         </button>
@@ -51,3 +51,4 @@ const ModerationWarning = ({ isOpen, onClose, onBypass, warnings }) => {
 };
 
 export default ModerationWarning;
+

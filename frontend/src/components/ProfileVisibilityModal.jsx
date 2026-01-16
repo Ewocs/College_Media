@@ -93,11 +93,11 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between">
+        <div className="sticky top-0 bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700 p-6 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold text-text-primary dark:text-white">
               Profile Visibility
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -106,7 +106,7 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="text-text-muted hover:text-text-secondary dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
             <svg
               className="w-6 h-6"
@@ -154,7 +154,7 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
                   className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
                     profileVisibility === option.value
                       ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                      : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-800"
+                      : "border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-bg-secondary dark:bg-gray-800"
                   }`}
                   disabled={savingOption !== null}
                 >
@@ -162,7 +162,7 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
                     <span className="text-2xl">{option.icon}</span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-gray-900 dark:text-white">
+                        <span className="font-semibold text-text-primary dark:text-white">
                           {option.label}
                         </span>
                         {savingOption === option.value ? (
@@ -217,7 +217,7 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-gray-50 dark:bg-gray-900 p-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="sticky bottom-0 bg-bg-primary dark:bg-gray-900 p-6 border-t border-border dark:border-gray-700">
           <button
             onClick={onClose}
             className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
@@ -232,3 +232,4 @@ const ProfileVisibilityModal = ({ isOpen, onClose }) => {
 };
 
 export default ProfileVisibilityModal;
+

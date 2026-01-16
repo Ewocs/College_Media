@@ -31,11 +31,11 @@ const PollResults = ({ poll }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
+    <div className="bg-bg-secondary rounded-lg border border-border p-6">
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl font-bold text-text-primary mb-2">
             Poll Results
           </h2>
           <p className="text-gray-600">{poll.question}</p>
@@ -62,27 +62,27 @@ const PollResults = ({ poll }) => {
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-bg-primary rounded-lg p-4">
           <div className="flex items-center gap-2 text-gray-600 mb-1">
             <Icon icon="mdi:vote" className="text-lg" />
             <span className="text-sm">Total Votes</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-text-primary">
             {statistics.totalVotes}
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-bg-primary rounded-lg p-4">
           <div className="flex items-center gap-2 text-gray-600 mb-1">
             <Icon icon="mdi:account-group" className="text-lg" />
             <span className="text-sm">Participants</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-text-primary">
             {statistics.participationRate}
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-bg-primary rounded-lg p-4">
           <div className="flex items-center gap-2 text-gray-600 mb-1">
             <Icon icon="mdi:clock-outline" className="text-lg" />
             <span className="text-sm">Status</span>
@@ -92,12 +92,12 @@ const PollResults = ({ poll }) => {
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-bg-primary rounded-lg p-4">
           <div className="flex items-center gap-2 text-gray-600 mb-1">
             <Icon icon="mdi:chart-bar" className="text-lg" />
             <span className="text-sm">Avg. per Option</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-2xl font-bold text-text-primary">
             {statistics.averageVotesPerOption}
           </p>
         </div>
@@ -110,7 +110,7 @@ const PollResults = ({ poll }) => {
             <Icon icon="mdi:trophy" className="text-yellow-500 text-3xl" />
             <div>
               <p className="text-sm text-gray-600 mb-1">Leading Option</p>
-              <p className="text-lg font-bold text-gray-900">
+              <p className="text-lg font-bold text-text-primary">
                 {statistics.winningOption.text}
               </p>
               <p className="text-sm text-gray-600">
@@ -123,7 +123,7 @@ const PollResults = ({ poll }) => {
 
       {/* Detailed Results */}
       <div>
-        <h3 className="font-semibold text-gray-900 mb-3">
+        <h3 className="font-semibold text-text-primary mb-3">
           Detailed Breakdown
         </h3>
         <div className="space-y-3">
@@ -135,10 +135,10 @@ const PollResults = ({ poll }) => {
               <div key={option.id} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-500 font-medium">
+                    <span className="text-text-muted font-medium">
                       #{index + 1}
                     </span>
-                    <span className="font-medium text-gray-900">
+                    <span className="font-medium text-text-primary">
                       {option.text}
                     </span>
                     {isWinner && (
@@ -149,7 +149,7 @@ const PollResults = ({ poll }) => {
                     <span className="text-sm text-gray-600">
                       {option.votes} votes
                     </span>
-                    <span className="text-sm font-bold text-gray-900 min-w-[3rem] text-right">
+                    <span className="text-sm font-bold text-text-primary min-w-[3rem] text-right">
                       {percentage}%
                     </span>
                   </div>
@@ -172,7 +172,7 @@ const PollResults = ({ poll }) => {
 
       {/* Time Info */}
       {poll.endsAt && (
-        <div className="mt-6 pt-4 border-t border-gray-200">
+        <div className="mt-6 pt-4 border-t border-border">
           <p className="text-sm text-gray-600">
             {statistics.isExpired ? (
               <span className="flex items-center gap-1">
@@ -193,3 +193,4 @@ const PollResults = ({ poll }) => {
 };
 
 export default PollResults;
+

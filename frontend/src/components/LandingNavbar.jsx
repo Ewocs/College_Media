@@ -21,7 +21,7 @@ const LandingNavbar = () => {
 
   return (
     <nav
-      className="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-100/50 dark:border-slate-800/50"
+      className="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-bg-secondary/80 dark:bg-slate-900/80 border-b border-slate-100/50 dark:border-slate-800/50"
       aria-label="Main navigation"
       role="navigation"
     >
@@ -43,7 +43,7 @@ const LandingNavbar = () => {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-lg group-hover:shadow-purple-500/25 transition-all">
             🎓
           </div>
-          <span className="text-lg font-semibold tracking-tighter text-slate-900">
+          <span className="text-lg font-semibold tracking-tighter text-text-primary">
             UniHub
           </span>
         </a>
@@ -91,7 +91,7 @@ const LandingNavbar = () => {
             <>
               <button
                 onClick={() => navigate("/home")}
-                className="hidden md:block text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-purple-600 transition-colors"
+                className="hidden md:block text-sm font-medium text-text-secondary dark:text-slate-200 hover:text-purple-600 transition-colors"
               >
                 Dashboard
               </button>
@@ -107,7 +107,7 @@ const LandingNavbar = () => {
             <>
               <button
                 onClick={() => navigate("/login")}
-                className="hidden md:block text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-purple-600 transition-colors"
+                className="hidden md:block text-sm font-medium text-text-secondary dark:text-slate-200 hover:text-purple-600 transition-colors"
                 aria-label="Log in to UniHub"
               >
                 Log in
@@ -128,3 +128,4 @@ const LandingNavbar = () => {
 };
 
 export default LandingNavbar;
+

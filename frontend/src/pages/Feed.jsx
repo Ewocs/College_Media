@@ -152,8 +152,8 @@ const Feed = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Feed Header */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+      <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-sm border border-border dark:border-slate-700 p-6">
+        <h1 className="text-2xl font-bold text-text-primary dark:text-white mb-2">
           Your Feed
         </h1>
         <p className="text-slate-600 dark:text-slate-400">
@@ -162,7 +162,7 @@ const Feed = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+      <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-sm border border-border dark:border-slate-700 p-4">
         <div className="flex gap-2 overflow-x-auto">
           {filters.map((filter) => (
             <button
@@ -171,7 +171,7 @@ const Feed = () => {
               className={`px-4 py-2 rounded-full font-medium whitespace-nowrap transition-all duration-200 ${
                 activeFilter === filter.id
                   ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600"
+                  : "bg-slate-100 dark:bg-slate-700 text-text-secondary dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-600"
               }`}
             >
               <span className="mr-1">{filter.icon}</span>
@@ -182,7 +182,7 @@ const Feed = () => {
       </div>
 
       {/* Create Post Card */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+      <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-sm border border-border dark:border-slate-700 p-4">
         <div className="flex items-center gap-3">
           <img
             src="https://i.pravatar.cc/150?img=1"
@@ -191,12 +191,12 @@ const Feed = () => {
           />
           <button 
             onClick={() => setShowCreateModal(true)}
-            className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-full text-left hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+            className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-700 text-text-muted dark:text-slate-400 rounded-full text-left hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
           >
             What's on your mind?
           </button>
         </div>
-        <div className="flex items-center justify-around mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <div className="flex items-center justify-around mt-4 pt-4 border-t border-border dark:border-slate-700">
           <button 
             onClick={() => setShowCreateModal(true)}
             className="flex items-center gap-2 px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
@@ -230,14 +230,14 @@ const Feed = () => {
       {/* Create Post Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Create Post</h2>
+          <div className="bg-bg-secondary dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-bg-secondary dark:bg-slate-800 border-b border-border dark:border-slate-700 p-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-text-primary dark:text-white">Create Post</h2>
               <button
                 onClick={() => setShowCreateModal(false)}
                 className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
               >
-                <svg className="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -255,7 +255,7 @@ const Feed = () => {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden"
+          className="bg-bg-secondary dark:bg-slate-800 rounded-2xl shadow-sm border border-border dark:border-slate-700 overflow-hidden"
         >
           {/* Post Header */}
           <div className="p-4">
@@ -268,7 +268,7 @@ const Feed = () => {
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-slate-900 dark:text-white">
+                    <h3 className="font-bold text-text-primary dark:text-white">
                       {post.user.name}
                     </h3>
                     {post.user.verified && (
@@ -277,13 +277,13 @@ const Feed = () => {
                       </svg>
                     )}
                   </div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-text-muted dark:text-slate-400">
                     {post.user.username} • {post.timestamp}
                   </p>
                 </div>
               </div>
               <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors">
-                <svg className="w-5 h-5 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-text-muted dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                 </svg>
               </button>
@@ -317,7 +317,7 @@ const Feed = () => {
           )}
 
           {/* Post Actions */}
-          <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="p-4 border-t border-border dark:border-slate-700">
             <div className="flex items-center justify-between">
               <button className="flex items-center gap-2 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 rounded-lg transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,7 +349,7 @@ const Feed = () => {
 
       {/* Load More */}
       <div className="flex justify-center py-6">
-        <button className="px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-full font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+        <button className="px-6 py-3 bg-bg-secondary dark:bg-slate-800 text-text-secondary dark:text-slate-200 border border-border dark:border-slate-700 rounded-full font-medium hover:bg-bg-primary dark:hover:bg-slate-700 transition-colors shadow-sm">
           Load More Posts
         </button>
       </div>
@@ -358,3 +358,4 @@ const Feed = () => {
 };
 
 export default Feed;
+

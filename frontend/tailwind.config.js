@@ -4,6 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        bg: {
+          primary: 'rgb(var(--bg-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--bg-secondary) / <alpha-value>)',
+          tertiary: 'rgb(var(--bg-tertiary) / <alpha-value>)',
+        },
+        text: {
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--text-muted) / <alpha-value>)',
+        },
+        brand: {
+          primary: 'rgb(var(--brand-primary) / <alpha-value>)',
+        },
+        border: 'rgb(var(--border-color) / <alpha-value>)',
         coral: {
           50: "#fef5f3",
           100: "#fde9e5",

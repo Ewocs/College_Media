@@ -43,7 +43,7 @@ const AnalyticsDashboard = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gray-50">
+            <div className="flex justify-center items-center h-screen bg-bg-primary">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
         );
@@ -51,19 +51,19 @@ const AnalyticsDashboard = () => {
 
     if (error || !data) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gray-50">
+            <div className="flex justify-center items-center h-screen bg-bg-primary">
                 <div className="text-red-500 font-semibold">{error || 'No data available'}</div>
             </div>
         );
     }
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="p-6 bg-bg-primary min-h-screen">
             <h1 className="text-3xl font-bold mb-8 text-gray-800">Platform Analytics</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* 1. User Growth */}
-                <div className="bg-white p-6 rounded-lg shadow-md">
+                <div className="bg-bg-secondary p-6 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-6">User Growth (Daily)</h2>
                     <div style={{ height: 300 }}>
                         <ResponsiveContainer width="100%" height="100%">
@@ -80,7 +80,7 @@ const AnalyticsDashboard = () => {
                 </div>
 
                 {/* 2. Engagement */}
-                <div className="bg-white p-6 rounded-lg shadow-md">
+                <div className="bg-bg-secondary p-6 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-6">User Engagement Distribution</h2>
                     <div style={{ height: 300 }}>
                         <ResponsiveContainer width="100%" height="100%">
@@ -105,7 +105,7 @@ const AnalyticsDashboard = () => {
                 </div>
 
                 {/* 3. Activity Patterns */}
-                <div className="bg-white p-6 rounded-lg shadow-md col-span-1 lg:col-span-2">
+                <div className="bg-bg-secondary p-6 rounded-lg shadow-md col-span-1 lg:col-span-2">
                     <h2 className="text-xl font-semibold mb-6">Activity Patterns (Time of Day - UTC)</h2>
                     <div style={{ height: 350 }}>
                         <ResponsiveContainer width="100%" height="100%">
@@ -125,3 +125,4 @@ const AnalyticsDashboard = () => {
 };
 
 export default AnalyticsDashboard;
+

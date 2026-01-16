@@ -24,10 +24,10 @@ const UploadProgress = ({ fileName, progress, onCancel }) => {
     return (
         <div className="upload-progress fade-in">
             <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
+                <span className="text-sm font-medium text-text-secondary truncate max-w-[200px]">
                     {fileName}
                 </span>
-                <span className="text-xs text-gray-500 font-medium">
+                <span className="text-xs text-text-muted font-medium">
                     {Math.round(progress)}%
                 </span>
             </div>
@@ -52,3 +52,4 @@ const UploadProgress = ({ fileName, progress, onCancel }) => {
 };
 
 export default UploadProgress;
+

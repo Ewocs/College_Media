@@ -22,7 +22,7 @@ const NotificationItem = ({ notification, onClick }) => {
       share: { icon: 'mdi:share-variant', color: 'text-orange-500' },
       reply: { icon: 'mdi:reply', color: 'text-indigo-500' },
     };
-    return icons[type] || { icon: 'mdi:bell', color: 'text-gray-500' };
+    return icons[type] || { icon: 'mdi:bell', color: 'text-text-muted' };
   };
 
   const iconData = getNotificationIcon(notification.type);
@@ -31,7 +31,7 @@ const NotificationItem = ({ notification, onClick }) => {
     <Link
       to={notification.link || '#'}
       onClick={handleClick}
-      className={`block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${
+      className={`block px-4 py-3 hover:bg-bg-primary dark:hover:bg-gray-800 transition-colors ${
         !notification.read ? 'bg-blue-50 dark:bg-blue-900/10' : ''
       }`}
     >
@@ -53,17 +53,17 @@ const NotificationItem = ({ notification, onClick }) => {
 
         {/* Notification Content */}
         <div className="flex-1 min-w-0">
-          <p className="text-sm text-gray-900 dark:text-gray-100">
+          <p className="text-sm text-text-primary dark:text-gray-100">
             {notification.actor?.name && (
               <span className="font-semibold">{notification.actor.name}</span>
             )}{' '}
-            <span className="text-gray-700 dark:text-gray-300">
+            <span className="text-text-secondary dark:text-gray-300">
               {notification.message}
             </span>
           </p>
           
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-xs text-gray-500 dark:text-gray-400">
+            <span className="text-xs text-text-muted dark:text-gray-400">
               {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
             </span>
             
@@ -89,3 +89,4 @@ const NotificationItem = ({ notification, onClick }) => {
 };
 
 export default NotificationItem;
+

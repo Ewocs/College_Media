@@ -50,10 +50,10 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-bg-secondary p-6 shadow-xl dark:bg-gray-800">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
+          className="absolute top-3 right-3 text-text-muted hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"
           aria-label="Close"
         >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,7 +61,7 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
           </svg>
         </button>
 
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-2xl font-bold text-text-primary dark:text-white mb-2">
           Blocked Users
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -86,7 +86,7 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
                 <p className="text-gray-600 dark:text-gray-400 text-lg mb-2">
                   No blocked users
                 </p>
-                <p className="text-gray-500 dark:text-gray-500 text-sm">
+                <p className="text-text-muted dark:text-text-muted text-sm">
                   You haven't blocked anyone yet
                 </p>
               </div>
@@ -95,7 +95,7 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
                 {blockedUsers.map((user) => (
                   <div
                     key={user._id}
-                    className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                    className="flex items-center justify-between p-4 rounded-lg border border-border dark:border-gray-700 hover:bg-bg-primary dark:hover:bg-gray-700/50 transition-colors"
                   >
                     <div className="flex items-center flex-1">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg mr-4">
@@ -114,7 +114,7 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
                         )}
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white">
+                        <p className="font-semibold text-text-primary dark:text-white">
                           {user.firstName && user.lastName
                             ? `${user.firstName} ${user.lastName}`
                             : user.username}
@@ -136,10 +136,10 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
               </div>
             )}
 
-            <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="mt-6 pt-4 border-t border-border dark:border-gray-700">
               <button
                 onClick={onClose}
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 font-medium hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 Close
               </button>
@@ -152,3 +152,4 @@ const BlockedUsersModal = ({ isOpen, onClose }) => {
 };
 
 export default BlockedUsersModal;
+

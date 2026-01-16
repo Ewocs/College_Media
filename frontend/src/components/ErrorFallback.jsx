@@ -23,8 +23,8 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 text-center bg-white p-10 rounded-xl shadow-lg border border-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-bg-primary px-4 py-12 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8 text-center bg-bg-secondary p-10 rounded-xl shadow-lg border border-gray-100">
                 <div>
                     <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-100 mb-6">
                         <svg
@@ -42,10 +42,10 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
                             />
                         </svg>
                     </div>
-                    <h2 className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight">
+                    <h2 className="mt-2 text-3xl font-extrabold text-text-primary tracking-tight">
                         Something went wrong
                     </h2>
-                    <p className="mt-4 text-sm text-gray-500">
+                    <p className="mt-4 text-sm text-text-muted">
                         We apologize for the inconvenience. An unexpected error has occurred.
                     </p>
 
@@ -67,7 +67,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
                     </button>
                     <button
                         onClick={handleGoHome}
-                        className="w-full inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors shadow-sm"
+                        className="w-full inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-text-secondary bg-bg-secondary hover:bg-bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors shadow-sm"
                     >
                         Go Home
                     </button>
@@ -78,3 +78,4 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 };
 
 export default ErrorFallback;
+

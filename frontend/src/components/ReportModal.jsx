@@ -52,10 +52,10 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+        <div className="flex items-center justify-between p-6 border-b border-border dark:border-gray-700">
+          <h2 className="text-xl font-bold text-text-primary dark:text-white">
             Report {REPORT_CONTENT_TYPE_LABELS[contentType]}
           </h2>
           <button
@@ -76,7 +76,7 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
 
             {/* Reason Selection */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-3">
                 Select a reason *
               </label>
               
@@ -86,7 +86,7 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
                   className={`flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer transition-all ${
                     selectedReason === option.value
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                      : 'border-border dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   <input
@@ -103,11 +103,11 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <Icon icon={option.icon} className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                      <span className="font-medium text-gray-900 dark:text-white">
+                      <span className="font-medium text-text-primary dark:text-white">
                         {option.label}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-text-muted dark:text-gray-400">
                       {option.description}
                     </p>
                   </div>
@@ -118,7 +118,7 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
 
           {/* Additional Details */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
               Additional details (optional)
             </label>
             <textarea
@@ -127,9 +127,9 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
               placeholder="Provide any additional context that might help us review this report..."
               rows={4}
               maxLength={500}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-text-muted dark:text-gray-400 mt-1">
               {additionalDetails.length}/500 characters
             </p>
           </div>
@@ -158,7 +158,7 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-lg hover:bg-bg-primary dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -187,3 +187,4 @@ const ReportModal = ({ contentType, contentId, contentOwnerId, onClose, onSucces
 };
 
 export default ReportModal;
+

@@ -1,6 +1,6 @@
 const SkeletonPost = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm overflow-hidden animate-pulse">
+    <div className="bg-bg-secondary rounded-2xl shadow-sm overflow-hidden animate-pulse">
       {/* Header */}
       <div className="flex items-center p-4 space-x-3">
         <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
@@ -25,3 +25,4 @@ const SkeletonPost = () => {
 };
 
 export default SkeletonPost;
+

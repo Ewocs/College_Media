@@ -73,13 +73,13 @@ const ModerationDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-bg-primary dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-bg-secondary dark:bg-gray-800 border-b border-border dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-text-primary dark:text-white flex items-center gap-2">
                 <Icon icon="mdi:shield-check-outline" className="w-8 h-8" />
                 Content Moderation
               </h1>
@@ -129,9 +129,9 @@ const ModerationDashboard = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 mb-6">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-sm border border-border dark:border-gray-700 p-4 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-gray-900 dark:text-white">Filters</h2>
+            <h2 className="font-semibold text-text-primary dark:text-white">Filters</h2>
             <button
               onClick={clearFilters}
               className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
@@ -145,7 +145,7 @@ const ModerationDashboard = () => {
             <select
               value={filters.status}
               onChange={(e) => handleFilterChange('status', e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
             >
               <option value="all">All Status</option>
               {Object.entries(REPORT_STATUS_LABELS).map(([value, label]) => (
@@ -157,7 +157,7 @@ const ModerationDashboard = () => {
             <select
               value={filters.contentType}
               onChange={(e) => handleFilterChange('contentType', e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
             >
               <option value="all">All Types</option>
               {Object.entries(REPORT_CONTENT_TYPE_LABELS).map(([value, label]) => (
@@ -169,7 +169,7 @@ const ModerationDashboard = () => {
             <select
               value={filters.reason}
               onChange={(e) => handleFilterChange('reason', e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
             >
               <option value="all">All Reasons</option>
               {Object.entries(REPORT_REASON_LABELS).map(([value, label]) => (
@@ -181,7 +181,7 @@ const ModerationDashboard = () => {
             <select
               value={filters.sortBy}
               onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-white"
             >
               <option value="recent">Most Recent</option>
               <option value="oldest">Oldest First</option>
@@ -216,10 +216,10 @@ const ModerationDashboard = () => {
         )}
 
         {/* Reports Table */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-sm border border-border dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+              <thead className="bg-bg-primary dark:bg-gray-700 border-b border-border dark:border-gray-600">
                 <tr>
                   <th className="px-4 py-3 text-left">
                     <input
@@ -229,22 +229,22 @@ const ModerationDashboard = () => {
                       className="rounded"
                     />
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Content
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Reason
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Status
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Reports
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Date
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-text-muted dark:text-gray-400 uppercase">
                     Actions
                   </th>
                 </tr>
@@ -254,19 +254,19 @@ const ModerationDashboard = () => {
                   <tr>
                     <td colSpan="7" className="px-4 py-12 text-center">
                       <Icon icon="mdi:loading" className="w-8 h-8 animate-spin mx-auto text-gray-400" />
-                      <p className="text-gray-500 dark:text-gray-400 mt-2">Loading reports...</p>
+                      <p className="text-text-muted dark:text-gray-400 mt-2">Loading reports...</p>
                     </td>
                   </tr>
                 ) : reports.length === 0 ? (
                   <tr>
                     <td colSpan="7" className="px-4 py-12 text-center">
                       <Icon icon="mdi:inbox" className="w-12 h-12 mx-auto text-gray-400" />
-                      <p className="text-gray-500 dark:text-gray-400 mt-2">No reports found</p>
+                      <p className="text-text-muted dark:text-gray-400 mt-2">No reports found</p>
                     </td>
                   </tr>
                 ) : (
                   reports.map((report) => (
-                    <tr key={report._id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                    <tr key={report._id} className="hover:bg-bg-primary dark:hover:bg-gray-700/50">
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -277,16 +277,16 @@ const ModerationDashboard = () => {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                          <span className="text-sm font-medium text-text-primary dark:text-white">
                             {REPORT_CONTENT_TYPE_LABELS[report.contentType]}
                           </span>
-                          <span className="text-xs text-gray-500">#{report.contentId.slice(-6)}</span>
+                          <span className="text-xs text-text-muted">#{report.contentId.slice(-6)}</span>
                         </div>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <Icon icon={REPORT_REASON_ICONS[report.reason]} className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">
+                          <span className="text-sm text-text-secondary dark:text-gray-300">
                             {REPORT_REASON_LABELS[report.reason]}
                           </span>
                         </div>
@@ -297,11 +297,11 @@ const ModerationDashboard = () => {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                        <span className="text-sm font-semibold text-text-primary dark:text-white">
                           {report.reportCount || 1}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-3 text-sm text-text-muted dark:text-gray-400">
                         {format(new Date(report.createdAt), 'MMM d, yyyy')}
                       </td>
                       <td className="px-4 py-3">
@@ -321,7 +321,7 @@ const ModerationDashboard = () => {
 
           {/* Load More */}
           {pagination.hasMore && (
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 text-center">
+            <div className="p-4 border-t border-border dark:border-gray-700 text-center">
               <button
                 onClick={loadMore}
                 disabled={loading}
@@ -347,11 +347,11 @@ const StatCard = ({ icon, label, value, color }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+    <div className="bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-sm border border-border dark:border-gray-700 p-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{label}</p>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
+          <p className="text-2xl font-bold text-text-primary dark:text-white">{value}</p>
         </div>
         <div className={`p-3 rounded-lg ${colors[color]}`}>
           <Icon icon={icon} className="w-6 h-6" />
@@ -362,3 +362,4 @@ const StatCard = ({ icon, label, value, color }) => {
 };
 
 export default ModerationDashboard;
+

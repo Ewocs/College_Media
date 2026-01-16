@@ -139,7 +139,7 @@ const SearchBar = ({ className = '' }) => {
         <div className="relative">
           <Icon
             icon="mdi:magnify"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-text-muted"
             width={20}
           />
           <input
@@ -150,8 +150,8 @@ const SearchBar = ({ className = '' }) => {
               setIsOpen(true);
             }}
             onFocus={() => setIsOpen(true)}
-            placeholder={t('common.searchPlaceholder') + " (Ctrl+K)"}
-            className="w-full pl-10 pr-24 py-2.5 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
+            placeholder={t('common.searchPlaceholder') + t('common.searchShortcut')}
+            className="w-full pl-10 pr-24 py-2.5 rounded-full border border-border bg-bg-secondary text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-primary transition-all"
             aria-label={t('common.search')}
             autoComplete="off"
           />
@@ -164,11 +164,11 @@ const SearchBar = ({ className = '' }) => {
                 type="button"
                 onClick={isListening ? stopListening : startListening}
                 className={`p-1.5 rounded-full transition-colors ${isListening
-                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 animate-pulse'
-                  : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-status-error/10 text-status-error animate-pulse'
+                  : 'text-text-muted hover:text-brand-primary hover:bg-bg-tertiary'
                   }`}
-                aria-label={isListening ? 'Stop voice search' : 'Start voice search'}
-                title={isListening ? 'Listening...' : 'Voice search'}
+                aria-label={isListening ? t('common.stopVoiceSearch') : t('common.voiceSearch')}
+                title={isListening ? t('common.listening') : t('common.voiceSearch')}
               >
                 <Icon
                   icon={isListening ? 'mdi:microphone' : 'mdi:microphone-outline'}
@@ -182,11 +182,11 @@ const SearchBar = ({ className = '' }) => {
               type="button"
               onClick={() => setShowFilters(!showFilters)}
               className={`p-1.5 rounded-full transition-colors ${showFilters
-                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-brand-primary/10 text-brand-primary'
+                : 'text-text-muted hover:text-brand-primary hover:bg-bg-tertiary'
                 }`}
-              aria-label="Advanced filters"
-              title="Advanced filters"
+              aria-label={t('common.advancedFilters')}
+              title={t('common.advancedFilters')}
             >
               <Icon icon="mdi:filter-variant" width={20} />
             </button>
@@ -196,8 +196,8 @@ const SearchBar = ({ className = '' }) => {
               <button
                 type="button"
                 onClick={handleClear}
-                className="p-1.5 rounded-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Clear search"
+                className="p-1.5 rounded-full text-text-muted hover:text-text-primary hover:bg-bg-tertiary transition-colors"
+                aria-label={t('common.clearSearch')}
               >
                 <Icon icon="mdi:close" width={20} />
               </button>
@@ -229,3 +229,4 @@ const SearchBar = ({ className = '' }) => {
 };
 
 export default SearchBar;
+

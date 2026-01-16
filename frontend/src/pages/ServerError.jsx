@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const ServerError = () => {
     return (
-        <div className="min-h-[80vh] flex items-center justify-center bg-gray-50 px-4">
+        <div className="min-h-[80vh] flex items-center justify-center bg-bg-primary px-4">
             <div className="text-center max-w-lg">
                 <div className="flex justify-center mb-6">
                     <div className="bg-red-100 p-4 rounded-full">
@@ -17,7 +17,7 @@ const ServerError = () => {
                         </svg>
                     </div>
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Internal Server Error</h1>
+                <h1 className="text-4xl font-bold text-text-primary mb-4">Internal Server Error</h1>
                 <p className="text-lg text-gray-600 mb-8">
                     Oops! Something went wrong on our end. We're working to fix it.
                     Please try again later.
@@ -31,7 +31,7 @@ const ServerError = () => {
                     </button>
                     <Link
                         to="/"
-                        className="px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors shadow-sm"
+                        className="px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-text-secondary bg-bg-secondary hover:bg-bg-primary transition-colors shadow-sm"
                     >
                         Go Home
                     </Link>
@@ -42,3 +42,4 @@ const ServerError = () => {
 };
 
 export default ServerError;
+

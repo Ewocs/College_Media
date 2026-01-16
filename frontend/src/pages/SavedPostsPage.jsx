@@ -25,11 +25,11 @@ const SavedPostsPage = () => {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-4 mb-6 animate-pulse">
+        <div className="bg-bg-secondary rounded-lg shadow-md p-4 mb-6 animate-pulse">
           <div className="h-8 bg-gray-300 rounded w-1/3 mb-4"></div>
           <div className="h-4 bg-gray-300 rounded w-1/4"></div>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 animate-pulse">
+        <div className="bg-bg-secondary rounded-lg shadow-md p-4 animate-pulse">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
             <div className="flex-1">
@@ -57,3 +57,4 @@ const SavedPostsPage = () => {
 };
 
 export default SavedPostsPage;
+

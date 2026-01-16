@@ -56,7 +56,7 @@ const InstructorDashboard = () => {
       {/* LEFT COLUMN: Editor */}
       <div className="flex-1 space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-text-primary dark:text-white mb-2">
             Instructor Dashboard
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
@@ -97,10 +97,10 @@ const InstructorDashboard = () => {
                 />
               </svg>
             </div>
-            <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
+            <p className="text-lg font-medium text-text-secondary dark:text-slate-300">
               Drag & Drop files here
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+            <p className="text-sm text-text-muted dark:text-slate-400 mt-2">
               or click to browse (PDF, MP4)
             </p>
           </motion.div>
@@ -110,7 +110,7 @@ const InstructorDashboard = () => {
             {files.map((file) => (
               <div
                 key={file.id}
-                className="flex items-center justify-between p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg"
+                className="flex items-center justify-between p-3 bg-bg-secondary dark:bg-slate-800 border border-border dark:border-slate-700 rounded-lg"
               >
                 <div className="flex items-center gap-3">
                   <div
@@ -160,7 +160,7 @@ const InstructorDashboard = () => {
                     <p className="font-medium text-slate-800 dark:text-slate-200 text-sm">
                       {file.name}
                     </p>
-                    <p className="text-xs text-slate-500">{file.size}</p>
+                    <p className="text-xs text-text-muted">{file.size}</p>
                   </div>
                 </div>
                 <button className="text-slate-400 hover:text-red-500 transition-colors">
@@ -188,9 +188,9 @@ const InstructorDashboard = () => {
             <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
                 Curriculum Timeline
             </h2>
-            <p className="text-sm text-slate-500">Drag to reorder lessons</p>
+            <p className="text-sm text-text-muted">Drag to reorder lessons</p>
 
-            <Reorder.Group axis="y" values={lessons} onReorder={setLessons} className="space-y-2 relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 ml-4">
+            <Reorder.Group axis="y" values={lessons} onReorder={setLessons} className="space-y-2 relative pl-8 border-l-2 border-border dark:border-slate-700 ml-4">
                 {lessons.map((lesson) => (
                     <LessonItem key={lesson.id} lesson={lesson} />
                 ))}
@@ -200,7 +200,7 @@ const InstructorDashboard = () => {
 
       {/* RIGHT COLUMN: Real-time Preview */}
       <div className="w-full xl:w-96 shrink-0">
-        <div className="sticky top-24 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-lg p-6">
+        <div className="sticky top-24 bg-bg-secondary dark:bg-slate-800 border border-border dark:border-slate-700 rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-slate-700 pb-4">
                 <h3 className="font-bold text-slate-800 dark:text-white">Live Preview</h3>
                 <span className="animate-pulse flex h-3 w-3 rounded-full bg-green-500"></span>
@@ -208,32 +208,32 @@ const InstructorDashboard = () => {
 
             <div className="space-y-4">
                 <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Course Title</label>
+                    <label className="block text-xs font-semibold text-text-muted uppercase mb-1">Course Title</label>
                     <input
                         type="text"
                         value={courseTitle}
                         onChange={(e) => setCourseTitle(e.target.value)}
                         placeholder="Enter course title..."
-                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none"
+                        className="w-full px-3 py-2 bg-bg-primary dark:bg-slate-900 border border-border dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Description</label>
+                    <label className="block text-xs font-semibold text-text-muted uppercase mb-1">Description</label>
                     <textarea
                         value={courseDescription}
                         onChange={(e) => setCourseDescription(e.target.value)}
                         placeholder="Type course description..."
                         rows={6}
-                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
+                        className="w-full px-3 py-2 bg-bg-primary dark:bg-slate-900 border border-border dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
                     />
                 </div>
 
                 {/* Preview Box */}
                 <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
                     <p className="text-xs text-slate-400 mb-2">Student View Preview</p>
-                    <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <h4 className="font-bold text-lg text-slate-900 dark:text-white mb-2">
+                    <div className="bg-bg-primary dark:bg-slate-900 p-4 rounded-xl border border-border dark:border-slate-700">
+                        <h4 className="font-bold text-lg text-text-primary dark:text-white mb-2">
                             {courseTitle || "Course Title"}
                         </h4>
                         <div ref={previewRef} className="text-sm text-slate-600 dark:text-slate-300">
@@ -263,9 +263,9 @@ const LessonItem = ({ lesson }) => {
             className="relative"
         >
             {/* Timeline Dot */}
-            <div className="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white dark:bg-slate-800 border-2 border-indigo-500 z-10"></div>
+            <div className="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-bg-secondary dark:bg-slate-800 border-2 border-indigo-500 z-10"></div>
 
-            <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-4 group hover:border-indigo-500/50 transition-colors">
+            <div className="bg-bg-secondary dark:bg-slate-800 p-4 rounded-xl border border-border dark:border-slate-700 shadow-sm flex items-center gap-4 group hover:border-indigo-500/50 transition-colors">
                 <div
                     className="cursor-grab active:cursor-grabbing p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                     onPointerDown={(e) => controls.start(e)}
@@ -277,7 +277,7 @@ const LessonItem = ({ lesson }) => {
 
                 <div className="flex-1">
                     <h4 className="font-semibold text-slate-800 dark:text-slate-200">{lesson.title}</h4>
-                    <p className="text-xs text-slate-500">{lesson.duration} • {lesson.type}</p>
+                    <p className="text-xs text-text-muted">{lesson.duration} • {lesson.type}</p>
                 </div>
 
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
@@ -293,3 +293,4 @@ const LessonItem = ({ lesson }) => {
 };
 
 export default InstructorDashboard;
+

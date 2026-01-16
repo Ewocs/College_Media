@@ -9,7 +9,7 @@ const DeveloperIntro = () => {
         {/* Greeting Badge */}
         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-800 dark:bg-slate-900 border border-slate-700 dark:border-slate-800 mb-8 hover:border-purple-500/50 transition-colors">
           <span className="text-slate-300 dark:text-slate-400">Hello! I Am</span>
-          <span className="px-3 py-1 rounded-full bg-yellow-400 text-slate-900 font-bold text-sm">Abhishek !!</span>
+          <span className="px-3 py-1 rounded-full bg-yellow-400 text-text-primary font-bold text-sm">Abhishek !!</span>
         </div>
 
         {/* Main Heading */}
@@ -23,7 +23,7 @@ const DeveloperIntro = () => {
         </p>
 
         {/* Quote */}
-        <p className="text-base md:text-lg text-slate-400 dark:text-slate-500 max-w-2xl mx-auto mb-12 italic font-light">
+        <p className="text-base md:text-lg text-slate-400 dark:text-text-muted max-w-2xl mx-auto mb-12 italic font-light">
           Because if the experience doesn't impress you, what else can?
         </p>
 
@@ -45,3 +45,4 @@ const DeveloperIntro = () => {
 }
 
 export default DeveloperIntro
+

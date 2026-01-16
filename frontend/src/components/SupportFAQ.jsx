@@ -78,8 +78,8 @@ const SupportFAQ = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8">
-      <h2 className="text-xl font-bold text-gray-900 mb-2">
+    <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6 md:p-8">
+      <h2 className="text-xl font-bold text-text-primary mb-2">
         Frequently Asked Questions
       </h2>
       <p className="text-gray-600 text-sm mb-6">
@@ -95,7 +95,7 @@ const SupportFAQ = () => {
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+              className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-bg-primary transition-colors"
               aria-expanded={openIndex === index}
               aria-controls={`faq-answer-${index}`}
             >
@@ -103,10 +103,10 @@ const SupportFAQ = () => {
                 <span className="text-xs font-medium px-2 py-1 bg-purple-100 text-purple-700 rounded-full">
                   {faq.category}
                 </span>
-                <span className="font-medium text-gray-900">{faq.question}</span>
+                <span className="font-medium text-text-primary">{faq.question}</span>
               </div>
               <svg
-                className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+                className={`w-5 h-5 text-text-muted transition-transform duration-200 ${
                   openIndex === index ? 'rotate-180' : ''
                 }`}
                 fill="none"
@@ -140,32 +140,32 @@ const SupportFAQ = () => {
 
       {/* Quick Links Section */}
       <div className="mt-8 pt-6 border-t border-gray-100">
-        <h3 className="text-sm font-semibold text-gray-900 mb-4">Quick Links</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-4">Quick Links</h3>
         <div className="grid grid-cols-2 gap-3">
           <a
             href="/settings"
-            className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 p-3 rounded-xl bg-bg-primary hover:bg-gray-100 transition-colors text-sm font-medium text-text-secondary"
           >
             <span>⚙️</span>
             Account Settings
           </a>
           <a
             href="#"
-            className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 p-3 rounded-xl bg-bg-primary hover:bg-gray-100 transition-colors text-sm font-medium text-text-secondary"
           >
             <span>📜</span>
             Community Guidelines
           </a>
           <a
             href="#"
-            className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 p-3 rounded-xl bg-bg-primary hover:bg-gray-100 transition-colors text-sm font-medium text-text-secondary"
           >
             <span>🔒</span>
             Privacy Policy
           </a>
           <a
             href="#"
-            className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 p-3 rounded-xl bg-bg-primary hover:bg-gray-100 transition-colors text-sm font-medium text-text-secondary"
           >
             <span>📋</span>
             Terms of Service
@@ -177,3 +177,4 @@ const SupportFAQ = () => {
 };
 
 export default SupportFAQ;
+

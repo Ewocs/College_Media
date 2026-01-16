@@ -92,14 +92,14 @@ const ProfileEditForm = () => {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Please log in to view your profile</p>
+        <p className="text-text-muted">Please log in to view your profile</p>
       </div>
     );
   }
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Profile</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Edit Profile</h1>
 
       {error && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700">
@@ -113,7 +113,7 @@ const ProfileEditForm = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-xl">
+      <div className="bg-bg-secondary rounded-2xl p-6 border border-border shadow-xl">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Profile Picture Section */}
           <div className="flex flex-col items-center">
@@ -150,7 +150,7 @@ const ProfileEditForm = () => {
           <div className="flex-1">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium text-text-secondary mb-2">
                   First Name
                 </label>
                 <input
@@ -159,13 +159,13 @@ const ProfileEditForm = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                  className="w-full px-4 py-3 bg-bg-primary border border-gray-300 rounded-lg text-text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                   placeholder="First name"
                 />
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium text-text-secondary mb-2">
                   Last Name
                 </label>
                 <input
@@ -174,13 +174,13 @@ const ProfileEditForm = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                  className="w-full px-4 py-3 bg-bg-primary border border-gray-300 rounded-lg text-text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                   placeholder="Last name"
                 />
               </div>
 
               <div>
-                <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="bio" className="block text-sm font-medium text-text-secondary mb-2">
                   Bio
                 </label>
                 <textarea
@@ -189,7 +189,7 @@ const ProfileEditForm = () => {
                   value={formData.bio}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all resize-none"
+                  className="w-full px-4 py-3 bg-bg-primary border border-gray-300 rounded-lg text-text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all resize-none"
                   placeholder="Tell us about yourself..."
                 />
               </div>

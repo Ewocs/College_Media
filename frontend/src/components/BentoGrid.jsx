@@ -15,7 +15,7 @@ const BentoGrid = () => {
   return (
     <section
       id="how-it-works"
-      className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors duration-300"
+      className="py-24 bg-bg-secondary dark:bg-slate-950 relative overflow-hidden transition-colors duration-300"
     >
       <div
         className="absolute top-1/4 right-0 w-64 h-64 bg-indigo-50 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-60"
@@ -28,10 +28,10 @@ const BentoGrid = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-text-primary dark:text-white mb-4">
             More Than Just Social Media
           </h2>
-          <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-text-muted dark:text-slate-400 max-w-2xl mx-auto">
             UniHub brings all your college needs together in one powerful,
             intuitive platform
           </p>
@@ -41,12 +41,12 @@ const BentoGrid = () => {
           {/* Feature 1: Academic Hub - Large */}
           <div className="md:col-span-2 row-span-1 md:row-span-2 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50 rounded-2xl p-8 border border-indigo-100 dark:border-indigo-900 flex flex-col justify-between overflow-hidden group hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors relative">
             <div className="z-10">
-              <div className="w-12 h-12 rounded-full bg-white dark:bg-white/10 flex items-center justify-center shadow-sm mb-4">
+              <div className="w-12 h-12 rounded-full bg-bg-secondary dark:bg-bg-secondary/10 flex items-center justify-center shadow-sm mb-4">
                 <span className="text-2xl" aria-hidden="true">
                   📚
                 </span>
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-3">
+              <h3 className="text-2xl font-semibold text-text-primary dark:text-white mb-3">
                 Academic Excellence Hub
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md leading-relaxed">
@@ -56,7 +56,7 @@ const BentoGrid = () => {
                 space.
               </p>
             </div>
-            <div className="absolute bottom-0 right-0 w-3/4 h-3/4 bg-white dark:bg-slate-800 rounded-tl-2xl shadow-xl translate-y-4 translate-x-4 border border-slate-100 dark:border-slate-700 p-4 transition-transform group-hover:translate-x-2 group-hover:translate-y-2">
+            <div className="absolute bottom-0 right-0 w-3/4 h-3/4 bg-bg-secondary dark:bg-slate-800 rounded-tl-2xl shadow-xl translate-y-4 translate-x-4 border border-slate-100 dark:border-slate-700 p-4 transition-transform group-hover:translate-x-2 group-hover:translate-y-2">
               {/* Visual abstraction of academic interface */}
               <div className="flex gap-3 mb-3">
                 <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-xs">
@@ -64,7 +64,7 @@ const BentoGrid = () => {
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="w-32 h-2.5 bg-slate-100 dark:bg-slate-700 rounded"></div>
-                  <div className="w-24 h-2 bg-slate-50 dark:bg-slate-700/50 rounded"></div>
+                  <div className="w-24 h-2 bg-bg-primary dark:bg-slate-700/50 rounded"></div>
                 </div>
               </div>
               <div className="space-y-2 mt-4">
@@ -81,16 +81,16 @@ const BentoGrid = () => {
           </div>
 
           {/* Feature 2: Events & Calendar - Small */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex flex-col hover:border-purple-200 dark:hover:border-purple-800 transition-colors relative overflow-hidden group">
+          <div className="bg-bg-secondary dark:bg-slate-900 rounded-2xl p-8 border border-border dark:border-slate-800 flex flex-col hover:border-purple-200 dark:hover:border-purple-800 transition-colors relative overflow-hidden group">
             <div className="w-12 h-12 rounded-full bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl" aria-hidden="true">
                 📅
               </span>
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
               Event Manager
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-auto leading-relaxed">
+            <p className="text-xs text-text-muted dark:text-slate-400 mt-auto leading-relaxed">
               Discover campus events, manage RSVPs, and never miss club
               meetings. Your complete social calendar.
             </p>
@@ -98,16 +98,16 @@ const BentoGrid = () => {
           </div>
 
           {/* Feature 3: Career Network - Small */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex flex-col hover:border-blue-200 dark:hover:border-blue-800 transition-colors relative overflow-hidden group">
+          <div className="bg-bg-secondary dark:bg-slate-900 rounded-2xl p-8 border border-border dark:border-slate-800 flex flex-col hover:border-blue-200 dark:hover:border-blue-800 transition-colors relative overflow-hidden group">
             <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl" aria-hidden="true">
                 💼
               </span>
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
               Career Network
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-auto leading-relaxed">
+            <p className="text-xs text-text-muted dark:text-slate-400 mt-auto leading-relaxed">
               Connect with alumni, explore internships, and access career
               services for your future success.
             </p>
@@ -117,12 +117,12 @@ const BentoGrid = () => {
           {/* Feature 4: Student Profiles - Medium */}
           <div className="md:col-span-2 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-950/50 dark:to-rose-950/50 rounded-2xl p-8 border border-pink-100 dark:border-pink-900 flex flex-col md:flex-row items-center justify-between relative overflow-hidden group hover:border-pink-300 dark:hover:border-pink-700 transition-colors">
             <div className="relative z-10 max-w-md">
-              <div className="w-12 h-12 rounded-full bg-white dark:bg-white/10 flex items-center justify-center shadow-sm mb-4">
+              <div className="w-12 h-12 rounded-full bg-bg-secondary dark:bg-bg-secondary/10 flex items-center justify-center shadow-sm mb-4">
                 <span className="text-2xl" aria-hidden="true">
                   👥
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+              <h3 className="text-xl font-semibold text-text-primary dark:text-white mb-2">
                 Verified Student Profiles
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -143,16 +143,16 @@ const BentoGrid = () => {
           </div>
 
           {/* Feature 5: Achievements - Small */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex flex-col hover:border-amber-200 dark:hover:border-amber-800 transition-colors relative overflow-hidden group">
+          <div className="bg-bg-secondary dark:bg-slate-900 rounded-2xl p-8 border border-border dark:border-slate-800 flex flex-col hover:border-amber-200 dark:hover:border-amber-800 transition-colors relative overflow-hidden group">
             <div className="w-12 h-12 rounded-full bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl" aria-hidden="true">
                 🏆
               </span>
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
               Track Achievements
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-auto leading-relaxed">
+            <p className="text-xs text-text-muted dark:text-slate-400 mt-auto leading-relaxed">
               Earn badges, track milestones, and get recognized for your campus
               contributions.
             </p>
@@ -162,7 +162,7 @@ const BentoGrid = () => {
           {/* Feature 6: Real-time Updates - Wide */}
           <div className="md:col-span-3 bg-slate-900 dark:bg-slate-950 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between relative overflow-hidden group border border-slate-700">
             <div className="relative z-10 max-w-lg">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-bg-secondary/10 flex items-center justify-center mb-4">
                 <Icon icon="lucide:zap" className="w-6 h-6 text-white" />
               </div>
 
@@ -212,3 +212,4 @@ const BentoGrid = () => {
 };
 
 export default BentoGrid;
+

@@ -42,15 +42,15 @@ const CreateStory = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Create a Story</h1>
+            <h1 className="text-2xl font-bold text-text-primary mb-2">Create a Story</h1>
             <p className="text-gray-600">Share a moment with your friends and classmates</p>
           </div>
           <Link
             to="/stories"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-gray-600 hover:text-text-primary transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -63,8 +63,8 @@ const CreateStory = () => {
         {/* Story Type Selection */}
         <div className="space-y-6">
           {/* Type Selector */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Story Type</h2>
+          <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
+            <h2 className="text-lg font-bold text-text-primary mb-4">Story Type</h2>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -72,7 +72,7 @@ const CreateStory = () => {
                 className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   storyType === 'photo'
                     ? 'border-indigo-600 bg-indigo-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    : 'border-border hover:border-gray-300'
                 }`}
               >
                 <svg className={`w-8 h-8 mx-auto mb-2 ${storyType === 'photo' ? 'text-indigo-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ const CreateStory = () => {
                 className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   storyType === 'text'
                     ? 'border-indigo-600 bg-indigo-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    : 'border-border hover:border-gray-300'
                 }`}
               >
                 <svg className={`w-8 h-8 mx-auto mb-2 ${storyType === 'text' ? 'text-indigo-600' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,8 +99,8 @@ const CreateStory = () => {
 
           {/* Upload Section */}
           {storyType === 'photo' ? (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Upload Media</h2>
+            <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
+              <h2 className="text-lg font-bold text-text-primary mb-4">Upload Media</h2>
               <div className="space-y-4">
                 <label className="block">
                   <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-indigo-400 transition-colors">
@@ -113,15 +113,15 @@ const CreateStory = () => {
                     <svg className="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
-                    <p className="font-medium text-gray-900 mb-1">Click to upload</p>
-                    <p className="text-sm text-gray-500">PNG, JPG, GIF or MP4 up to 10MB</p>
+                    <p className="font-medium text-text-primary mb-1">Click to upload</p>
+                    <p className="text-sm text-text-muted">PNG, JPG, GIF or MP4 up to 10MB</p>
                   </div>
                 </label>
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Text Story</h2>
+            <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
+              <h2 className="text-lg font-bold text-text-primary mb-4">Text Story</h2>
               <textarea
                 value={storyText}
                 onChange={(e) => setStoryText(e.target.value)}
@@ -130,11 +130,11 @@ const CreateStory = () => {
                 rows={6}
                 maxLength={200}
               />
-              <p className="text-xs text-gray-500 mt-2">{storyText.length}/200 characters</p>
+              <p className="text-xs text-text-muted mt-2">{storyText.length}/200 characters</p>
 
               {/* Background Color Selector */}
               <div className="mt-6">
-                <h3 className="font-medium text-gray-900 mb-3">Background Color</h3>
+                <h3 className="font-medium text-text-primary mb-3">Background Color</h3>
                 <div className="grid grid-cols-8 gap-2">
                   {backgroundColors.map((color) => (
                     <button
@@ -153,21 +153,21 @@ const CreateStory = () => {
           )}
 
           {/* Privacy Settings */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Privacy</h2>
+          <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
+            <h2 className="text-lg font-bold text-text-primary mb-4">Privacy</h2>
             <div className="space-y-3">
               <label className="flex items-center space-x-3 cursor-pointer">
                 <input type="radio" name="privacy" defaultChecked className="w-4 h-4 text-indigo-600" />
                 <div>
-                  <p className="font-medium text-gray-900">Everyone</p>
-                  <p className="text-sm text-gray-500">All your friends can see this story</p>
+                  <p className="font-medium text-text-primary">Everyone</p>
+                  <p className="text-sm text-text-muted">All your friends can see this story</p>
                 </div>
               </label>
               <label className="flex items-center space-x-3 cursor-pointer">
                 <input type="radio" name="privacy" className="w-4 h-4 text-indigo-600" />
                 <div>
-                  <p className="font-medium text-gray-900">Close Friends</p>
-                  <p className="text-sm text-gray-500">Only your close friends can see this</p>
+                  <p className="font-medium text-text-primary">Close Friends</p>
+                  <p className="text-sm text-text-muted">Only your close friends can see this</p>
                 </div>
               </label>
             </div>
@@ -176,8 +176,8 @@ const CreateStory = () => {
 
         {/* Preview Section */}
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Preview</h2>
+          <div className="bg-bg-secondary rounded-2xl shadow-sm border border-border p-6">
+            <h2 className="text-lg font-bold text-text-primary mb-4">Preview</h2>
             <div className="max-w-xs mx-auto">
               <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg">
                 {storyType === 'photo' ? (
@@ -189,7 +189,7 @@ const CreateStory = () => {
                         <svg className="w-16 h-16 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <p className="text-gray-500">Upload a photo or video</p>
+                        <p className="text-text-muted">Upload a photo or video</p>
                       </div>
                     </div>
                   )
@@ -233,7 +233,7 @@ const CreateStory = () => {
             </button>
             <Link
               to="/stories"
-              className="block w-full py-3 bg-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-300 transition-all duration-200 text-center"
+              className="block w-full py-3 bg-gray-200 text-text-secondary rounded-xl font-medium hover:bg-gray-300 transition-all duration-200 text-center"
             >
               Cancel
             </Link>
@@ -245,3 +245,4 @@ const CreateStory = () => {
 };
 
 export default CreateStory;
+

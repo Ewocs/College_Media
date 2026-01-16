@@ -89,7 +89,7 @@ const Profile = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       {/* Profile Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700 p-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Profile Picture */}
           <div className="flex justify-center md:justify-start">
@@ -106,10 +106,10 @@ const Profile = () => {
           <div className="flex-1 space-y-4">
             {/* Username and Edit Button */}
             <div className="flex items-center gap-6">
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{displayUser?.username || 'User'}</h2>
+              <h2 className="text-2xl font-semibold text-text-primary dark:text-gray-100">{displayUser?.username || 'User'}</h2>
               <Link 
                 to="/edit-profile"
-                className="px-5 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg font-semibold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                className="px-5 py-1.5 bg-gray-100 dark:bg-gray-700 text-text-primary dark:text-gray-100 rounded-lg font-semibold text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
               >
                 Edit Profile
               </Link>
@@ -118,28 +118,28 @@ const Profile = () => {
             {/* Stats */}
             <div className="flex items-center gap-10">
               <div className="flex items-center gap-1">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{userStats.posts}</span>
+                <span className="font-semibold text-text-primary dark:text-gray-100">{userStats.posts}</span>
                 <span className="text-gray-600 dark:text-gray-400">posts</span>
               </div>
               <button className="flex items-center gap-1 hover:opacity-70 transition-opacity">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{userStats.followers.toLocaleString()}</span>
+                <span className="font-semibold text-text-primary dark:text-gray-100">{userStats.followers.toLocaleString()}</span>
                 <span className="text-gray-600 dark:text-gray-400">followers</span>
               </button>
               <button className="flex items-center gap-1 hover:opacity-70 transition-opacity">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{userStats.following.toLocaleString()}</span>
+                <span className="font-semibold text-text-primary dark:text-gray-100">{userStats.following.toLocaleString()}</span>
                 <span className="text-gray-600 dark:text-gray-400">following</span>
               </button>
             </div>
 
             {/* Bio */}
             <div>
-              <p className="font-semibold text-gray-900 dark:text-gray-100">
+              <p className="font-semibold text-text-primary dark:text-gray-100">
                 {displayUser?.firstName || displayUser?.lastName 
                   ? `${displayUser?.firstName || ''} ${displayUser?.lastName || ''}`.trim()
                   : displayUser?.username || 'User'}
               </p>
               {displayUser?.bio && (
-                <p className="text-gray-700 dark:text-gray-300 text-sm mt-1 whitespace-pre-wrap">{displayUser.bio}</p>
+                <p className="text-text-secondary dark:text-gray-300 text-sm mt-1 whitespace-pre-wrap">{displayUser.bio}</p>
               )}
               {displayUser?.email && (
                 <a href={`mailto:${displayUser.email}`} className="text-indigo-600 dark:text-indigo-400 text-sm mt-1 block hover:underline">{displayUser.email}</a>
@@ -150,14 +150,14 @@ const Profile = () => {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="flex border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-bg-secondary dark:bg-gray-800 rounded-2xl shadow-sm border border-border dark:border-gray-700">
+        <div className="flex border-b border-border dark:border-gray-700">
           <button
             onClick={() => setActiveTab('posts')}
             className={`flex-1 py-4 px-6 font-medium transition-all duration-200 ${
               activeTab === 'posts'
                 ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                : 'text-gray-600 dark:text-gray-400 hover:text-text-primary dark:hover:text-gray-200'
             }`}
           >
             <div className="flex items-center justify-center space-x-2">
@@ -172,7 +172,7 @@ const Profile = () => {
             className={`flex-1 py-4 px-6 font-medium transition-all duration-200 ${
               activeTab === 'saved'
                 ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                : 'text-gray-600 dark:text-gray-400 hover:text-text-primary dark:hover:text-gray-200'
             }`}
           >
             <div className="flex items-center justify-center space-x-2">
@@ -187,7 +187,7 @@ const Profile = () => {
             className={`flex-1 py-4 px-6 font-medium transition-all duration-200 ${
               activeTab === 'tagged'
                 ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                : 'text-gray-600 dark:text-gray-400 hover:text-text-primary dark:hover:text-gray-200'
             }`}
           >
             <div className="flex items-center justify-center space-x-2">
@@ -205,11 +205,11 @@ const Profile = () => {
             <>
               {userPosts.length === 0 ? (
                 <div className="text-center py-12">
-                  <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <p className="text-gray-600 dark:text-gray-400 font-medium">No posts yet</p>
-                  <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">Start sharing your moments</p>
+                  <p className="text-text-muted dark:text-text-muted text-sm mt-2">Start sharing your moments</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-3 gap-1 md:gap-2">
@@ -245,21 +245,21 @@ const Profile = () => {
           
           {activeTab === 'saved' && (
             <div className="text-center py-12">
-              <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
               <p className="text-gray-600 dark:text-gray-400 font-medium">No saved posts yet</p>
-              <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">Save posts to see them here</p>
+              <p className="text-text-muted dark:text-text-muted text-sm mt-2">Save posts to see them here</p>
             </div>
           )}
           
           {activeTab === 'tagged' && (
             <div className="text-center py-12">
-              <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-16 h-16 mx-auto text-gray-400 dark:text-text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               <p className="text-gray-600 dark:text-gray-400 font-medium">No tagged posts yet</p>
-              <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">Photos and videos you're tagged in will appear here</p>
+              <p className="text-text-muted dark:text-text-muted text-sm mt-2">Photos and videos you're tagged in will appear here</p>
             </div>
           )}
         </div>
@@ -269,3 +269,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

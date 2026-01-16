@@ -28,7 +28,7 @@ const OfflineIndicator = () => {
         <div className="bg-yellow-500 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
           <Icon icon="mdi:wifi-off" width={20} />
           <span className="font-medium">You're Offline</span>
-          <div className="ml-2 w-2 h-2 bg-white rounded-full animate-pulse" />
+          <div className="ml-2 w-2 h-2 bg-bg-secondary rounded-full animate-pulse" />
         </div>
       </div>
     );
@@ -38,3 +38,4 @@ const OfflineIndicator = () => {
 };
 
 export default OfflineIndicator;
+

@@ -12,7 +12,7 @@ const BackButton = () => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className="fixed top-24 left-6 z-40 p-3 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-slate-700 shadow-lg transition-all duration-300 group hover:scale-110"
+      className="fixed top-24 left-6 z-40 p-3 rounded-full bg-bg-secondary/80 dark:bg-slate-800/80 backdrop-blur-md border border-border dark:border-slate-700 text-text-secondary dark:text-gray-200 hover:bg-bg-secondary dark:hover:bg-slate-700 shadow-lg transition-all duration-300 group hover:scale-110"
       aria-label="Go Back"
     >
       <FaArrowLeft className="text-lg group-hover:-translate-x-1 transition-transform" />
@@ -21,3 +21,4 @@ const BackButton = () => {
 };
 
 export default BackButton;
+

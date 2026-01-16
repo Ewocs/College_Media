@@ -102,22 +102,22 @@ const PricingPage = () => {
   const closeSuccess = () => setPaymentStatus('idle');
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-slate-50 relative overflow-hidden font-sans text-slate-900">
+    <div ref={containerRef} className="min-h-screen bg-bg-primary relative overflow-hidden font-sans text-text-primary">
       
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-br from-indigo-50 via-purple-50 to-coral-50 -z-10 rounded-b-[4rem]" />
       
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-12 text-center">
         <div ref={headerRef} className="mb-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-slate-900">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-text-primary">
             Invest in your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-coral-500">Future</span>
           </h1>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-text-muted max-w-2xl mx-auto">
             Choose the plan that fits your learning pace. Upgrade, downgrade, or cancel at any time.
           </p>
         </div>
 
         <div ref={toggleRef} className="flex justify-center mb-16">
-          <div className="bg-white p-1.5 rounded-full shadow-lg border border-slate-100 inline-flex relative cursor-pointer"
+          <div className="bg-bg-secondary p-1.5 rounded-full shadow-lg border border-slate-100 inline-flex relative cursor-pointer"
                onClick={() => setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly')}>
             
             <div className={`absolute top-1.5 bottom-1.5 rounded-full bg-slate-900 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-md
@@ -125,11 +125,11 @@ const PricingPage = () => {
             />
             
             <button className={`relative z-10 w-[100px] py-2 rounded-full font-semibold text-sm transition-colors duration-300 
-              ${billingCycle === 'monthly' ? 'text-white' : 'text-slate-500'}`}>
+              ${billingCycle === 'monthly' ? 'text-white' : 'text-text-muted'}`}>
               Monthly
             </button>
             <button className={`relative z-10 w-[100px] py-2 rounded-full font-semibold text-sm transition-colors duration-300
-              ${billingCycle === 'yearly' ? 'text-white' : 'text-slate-500'}`}>
+              ${billingCycle === 'yearly' ? 'text-white' : 'text-text-muted'}`}>
               Yearly
             </button>
           </div>
@@ -174,16 +174,16 @@ const PricingPage = () => {
           />
         </div>
 
-        <div ref={tableRef} className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
-          <div className="p-8 border-b border-slate-100 bg-slate-50/50">
-            <h3 className="text-2xl font-bold text-slate-900">Detailed Comparison</h3>
+        <div ref={tableRef} className="max-w-5xl mx-auto bg-bg-secondary rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+          <div className="p-8 border-b border-slate-100 bg-bg-primary/50">
+            <h3 className="text-2xl font-bold text-text-primary">Detailed Comparison</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr>
-                  <th className="p-6 text-slate-500 font-medium">Features</th>
-                  <th className="p-6 text-slate-900 font-bold">Basic</th>
+                  <th className="p-6 text-text-muted font-medium">Features</th>
+                  <th className="p-6 text-text-primary font-bold">Basic</th>
                   <th className="p-6 text-coral-600 font-bold">Pro</th>
                   <th className="p-6 text-purple-600 font-bold">Enterprise</th>
                 </tr>
@@ -191,10 +191,10 @@ const PricingPage = () => {
               <tbody>
                 {FEATURES.map((feature, idx) => (
                   <tr key={idx} className="border-t border-slate-100 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-50 hover:to-orange-50 group">
-                    <td className="p-6 font-medium text-slate-700 group-hover:translate-x-2 transition-transform">{feature.name}</td>
+                    <td className="p-6 font-medium text-text-secondary group-hover:translate-x-2 transition-transform">{feature.name}</td>
                     <td className="p-6 text-slate-600">{renderFeatureValue(feature.basic)}</td>
-                    <td className="p-6 text-slate-900 font-semibold">{renderFeatureValue(feature.pro)}</td>
-                    <td className="p-6 text-slate-900 font-semibold">{renderFeatureValue(feature.ent)}</td>
+                    <td className="p-6 text-text-primary font-semibold">{renderFeatureValue(feature.pro)}</td>
+                    <td className="p-6 text-text-primary font-semibold">{renderFeatureValue(feature.ent)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -206,12 +206,12 @@ const PricingPage = () => {
       {paymentStatus === 'success' && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
           <ConfettiExplosion />
-          <div className="success-modal bg-white rounded-[2rem] p-10 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
+          <div className="success-modal bg-bg-secondary rounded-[2rem] p-10 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
             <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Icon icon="lucide:check" width="40" strokeWidth="3" />
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Payment Successful!</h2>
-            <p className="text-slate-500 mb-8">
+            <h2 className="text-3xl font-bold text-text-primary mb-2">Payment Successful!</h2>
+            <p className="text-text-muted mb-8">
               Welcome to the future of learning. Your account has been upgraded instantly.
             </p>
             <button 
@@ -225,9 +225,9 @@ const PricingPage = () => {
       )}
 
       {paymentStatus === 'processing' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg-secondary/60 backdrop-blur-md">
            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 border-4 border-slate-200 border-t-coral-500 rounded-full animate-spin mb-4"></div>
+              <div className="w-16 h-16 border-4 border-border border-t-coral-500 rounded-full animate-spin mb-4"></div>
               <p className="font-semibold text-slate-600 animate-pulse">Processing Payment...</p>
            </div>
         </div>
@@ -239,8 +239,8 @@ const PricingPage = () => {
 const PricingCard = ({ title, icon, price, cycle, description, features, isPopular, onSelect }) => (
   <div className={`pricing-card relative p-8 rounded-[2rem] border transition-all duration-300 flex flex-col h-full
     ${isPopular 
-      ? 'bg-white border-coral-200 shadow-2xl scale-105 z-10 ring-4 ring-coral-50/50' 
-      : 'bg-white/80 border-slate-100 hover:border-purple-200 hover:shadow-xl backdrop-blur-sm'
+      ? 'bg-bg-secondary border-coral-200 shadow-2xl scale-105 z-10 ring-4 ring-coral-50/50' 
+      : 'bg-bg-secondary/80 border-slate-100 hover:border-purple-200 hover:shadow-xl backdrop-blur-sm'
     }`}>
     
     {isPopular && (
@@ -250,15 +250,15 @@ const PricingCard = ({ title, icon, price, cycle, description, features, isPopul
     )}
 
     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-2xl
-      ${isPopular ? 'bg-coral-50 text-coral-600' : 'bg-slate-50 text-slate-600'}`}>
+      ${isPopular ? 'bg-coral-50 text-coral-600' : 'bg-bg-primary text-slate-600'}`}>
       <Icon icon={icon} />
     </div>
 
-    <h3 className="text-2xl font-bold text-slate-900 mb-2">{title}</h3>
-    <p className="text-slate-500 text-sm mb-6 leading-relaxed">{description}</p>
+    <h3 className="text-2xl font-bold text-text-primary mb-2">{title}</h3>
+    <p className="text-text-muted text-sm mb-6 leading-relaxed">{description}</p>
 
     <div className="mb-8">
-      <span className="text-4xl font-bold text-slate-900">${price}</span>
+      <span className="text-4xl font-bold text-text-primary">${price}</span>
       <span className="text-slate-400 font-medium">{cycle}</span>
     </div>
 
@@ -276,7 +276,7 @@ const PricingCard = ({ title, icon, price, cycle, description, features, isPopul
       className={`w-full py-4 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95
       ${isPopular 
         ? 'bg-slate-900 text-white hover:bg-slate-800' 
-        : 'bg-white text-slate-900 border border-slate-200 hover:border-coral-300 hover:bg-coral-50'
+        : 'bg-bg-secondary text-text-primary border border-border hover:border-coral-300 hover:bg-coral-50'
       }`}>
       Choose {title}
     </button>

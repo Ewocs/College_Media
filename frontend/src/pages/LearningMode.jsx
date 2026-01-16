@@ -16,7 +16,7 @@ const CircularProgress = ({ percentage }) => {
           stroke="currentColor"
           strokeWidth="3"
           fill="transparent"
-          className="text-gray-700 dark:text-gray-700"
+          className="text-text-secondary dark:text-text-secondary"
         />
         <circle
           cx="24"
@@ -114,7 +114,7 @@ const LearningMode = () => {
           
           <button 
             onClick={() => setDrawerOpen(!drawerOpen)}
-            className="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+            className="p-2 rounded-lg hover:bg-bg-secondary/10 text-gray-400 hover:text-white transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
@@ -200,7 +200,7 @@ const LearningMode = () => {
              <div className="overflow-y-auto h-[calc(100vh-4rem)] p-2 space-y-4 pb-20">
                 {course.sections.map((section, idx) => (
                   <div key={idx} className="mb-4">
-                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-3 mt-4">
+                    <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3 px-3 mt-4">
                       {section.title}
                     </h4>
                     <div className="space-y-1">
@@ -216,7 +216,7 @@ const LearningMode = () => {
                               flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all
                               ${isActive 
                                 ? 'bg-indigo-600/20 border border-indigo-500/50' 
-                                : 'hover:bg-white/5 border border-transparent'}
+                                : 'hover:bg-bg-secondary/5 border border-transparent'}
                             `}
                           >
                             <div className="flex-shrink-0 w-6 flex justify-center">
@@ -230,7 +230,7 @@ const LearningMode = () => {
                                <p className={`text-sm font-medium truncate ${isActive ? 'text-indigo-300' : 'text-gray-300'}`}>
                                  {lesson.title}
                                </p>
-                               <span className="text-xs text-gray-500">{lesson.duration}</span>
+                               <span className="text-xs text-text-muted">{lesson.duration}</span>
                             </div>
                             {isActive && (
                                <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></div>

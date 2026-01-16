@@ -19,7 +19,7 @@ import '../../styles/skeleton.css';
 const SkeletonProfile = () => {
     return (
         <div
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-bg-secondary rounded-lg shadow-md overflow-hidden"
             role="status"
             aria-busy="true"
             aria-label="Loading profile"
@@ -72,3 +72,4 @@ const SkeletonProfile = () => {
 };
 
 export default SkeletonProfile;
+
