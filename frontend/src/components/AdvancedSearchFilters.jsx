@@ -139,3 +139,4 @@ const AdvancedSearchFilters = ({ onFilterChange, onClose }) => {
 };
 
 export default AdvancedSearchFilters;
+
