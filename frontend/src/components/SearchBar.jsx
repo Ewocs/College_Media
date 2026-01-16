@@ -11,6 +11,7 @@ import SearchSuggestions from './SearchSuggestions';
 import useVoiceSearch from '../hooks/useVoiceSearch';
 import AdvancedSearchFilters from './AdvancedSearchFilters';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Search Bar Component
@@ -149,9 +150,9 @@ const SearchBar = ({ className = '' }) => {
               setIsOpen(true);
             }}
             onFocus={() => setIsOpen(true)}
-            placeholder="Search posts, users, tags... (Ctrl+K)"
+            placeholder={t('common.searchPlaceholder') + " (Ctrl+K)"}
             className="w-full pl-10 pr-24 py-2.5 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
-            aria-label="Search"
+            aria-label={t('common.search')}
             autoComplete="off"
           />
 
@@ -163,8 +164,8 @@ const SearchBar = ({ className = '' }) => {
                 type="button"
                 onClick={isListening ? stopListening : startListening}
                 className={`p-1.5 rounded-full transition-colors ${isListening
-                    ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 animate-pulse'
-                    : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 animate-pulse'
+                  : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 aria-label={isListening ? 'Stop voice search' : 'Start voice search'}
                 title={isListening ? 'Listening...' : 'Voice search'}
@@ -181,8 +182,8 @@ const SearchBar = ({ className = '' }) => {
               type="button"
               onClick={() => setShowFilters(!showFilters)}
               className={`p-1.5 rounded-full transition-colors ${showFilters
-                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               aria-label="Advanced filters"
               title="Advanced filters"

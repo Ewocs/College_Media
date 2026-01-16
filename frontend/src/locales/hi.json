@@ -1,0 +1,38 @@
+{
+    "common": {
+        "search": "खोजें",
+        "searchPlaceholder": "पोस्ट, उपयोगकर्ता, टैग खोजें...",
+        "createPost": "पोस्ट करें",
+        "home": "होम",
+        "profile": "प्रोफ़ाइल",
+        "messages": "संदेश",
+        "notifications": "सूचनाएं",
+        "settings": "सेटिंग्स",
+        "logout": "लॉगआउट",
+        "loading": "लोड हो रहा है...",
+        "error": "कुछ गलत हो गया",
+        "retry": "पुनः प्रयास करें",
+        "cancel": "रद्द करें",
+        "save": "सहेजें",
+        "delete": "हटाएं"
+    },
+    "navbar": {
+        "toggleTheme": "थीम बदलें",
+        "selectLanguage": "भाषा चुनें"
+    },
+    "post": {
+        "like": "लाइक",
+        "comment": "कमेंट",
+        "share": "शेयर",
+        "report": "रिपोर्ट",
+        "views": "व्यूज"
+    },
+    "createPost": {
+        "placeholder": "आपके मन में क्या है?",
+        "tagPlaceholder": "टैग जोड़ें...",
+        "visibility": "दृश्यता",
+        "public": "सार्वजनिक",
+        "followers": "फॉलोअर्स",
+        "private": "निजी"
+    }
+}

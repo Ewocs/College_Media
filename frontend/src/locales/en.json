@@ -1,0 +1,38 @@
+{
+    "common": {
+        "search": "Search",
+        "searchPlaceholder": "Search posts, users, tags...",
+        "createPost": "Create Post",
+        "home": "Home",
+        "profile": "Profile",
+        "messages": "Messages",
+        "notifications": "Notifications",
+        "settings": "Settings",
+        "logout": "Logout",
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete"
+    },
+    "navbar": {
+        "toggleTheme": "Toggle Theme",
+        "selectLanguage": "Select Language"
+    },
+    "post": {
+        "like": "Like",
+        "comment": "Comment",
+        "share": "Share",
+        "report": "Report",
+        "views": "views"
+    },
+    "createPost": {
+        "placeholder": "What's on your mind?",
+        "tagPlaceholder": "Add tags...",
+        "visibility": "Visibility",
+        "public": "Public",
+        "followers": "Followers",
+        "private": "Private"
+    }
+}
