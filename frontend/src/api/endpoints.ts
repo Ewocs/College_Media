@@ -171,6 +171,15 @@ export const analyticsApi = {
   track: (data: any) => apiClient.post('/analytics/track', data),
 };
 
+// Collections endpoints
+export const collectionsApi = {
+  getAll: () => apiClient.get('/collections'),
+  create: (data: any) => apiClient.post('/collections', data),
+  addPost: (collectionId: string, postId: string) => apiClient.post('/collections/add-post', { collectionId, postId }),
+  removePost: (collectionId: string, postId: string) => apiClient.post('/collections/remove-post', { collectionId, postId }),
+  delete: (id: string) => apiClient.delete(`/collections/${id}`),
+};
+
 // Export all APIs
 export default {
   auth: authApi,
@@ -184,4 +193,5 @@ export default {
   moderation: moderationApi,
   polls: pollsApi,
   analytics: analyticsApi,
+  collections: collectionsApi,
 };
