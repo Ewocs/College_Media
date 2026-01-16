@@ -28,8 +28,8 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
   // Character counter configuration
   const maxLength = 500;
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       setImage(file);
       const reader = new FileReader();
@@ -40,7 +40,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
     }
   };
 
-  const handleCaptionChange = (e) => {
+  const handleCaptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
     if (text.length <= maxLength) {
       setCaption(text);
@@ -89,7 +89,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
     }, 1000);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!caption.trim() && !image && !pollData) return;
 
@@ -117,7 +117,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
     resetModeration(); // Reset so they can try again
   };
 
-  const handlePollCreate = (poll) => {
+  const handlePollCreate = (poll: any) => {
     setPollData(poll);
     setShowPollCreator(false);
   };
@@ -150,7 +150,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
               onChange={handleCaptionChange}
               placeholder={t('createPost.placeholder')}
               className="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-              rows="3"
+              rows={3}
               maxLength={maxLength}
               aria-describedby="char-counter"
               aria-invalid={caption.length > maxLength}
@@ -176,11 +176,13 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
 
           {imagePreview && (
             <div className="mt-3 relative">
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="w-full h-64 object-cover rounded-lg"
-              />
+              {imagePreview && typeof imagePreview === 'string' && (
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+              )}
               <button
                 type="button"
                 onClick={() => {
