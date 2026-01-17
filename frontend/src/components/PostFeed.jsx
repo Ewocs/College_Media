@@ -7,12 +7,15 @@ import SearchFilterBar from "./SearchFilterBar";
 import { mockPosts } from "../data/post";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
+const PAGE_SIZE = 10;
+
 const PostFeed = () => {
   const [posts, setPosts] = useState([]);
   const [newPosts, setNewPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [copiedLink, setCopiedLink] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,9 +40,8 @@ const PostFeed = () => {
 
       setPosts(mockPosts);
       setLoading(false);
-      if (initialPosts.length < PAGE_SIZE) setHasMore(false);
-    };
-    init();
+      if (mockPosts.length < PAGE_SIZE) setHasMore(false);
+    });
   }, [fetchPosts]);
 
   // Infinite Scroll Callback

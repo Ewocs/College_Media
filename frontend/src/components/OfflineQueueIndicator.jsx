@@ -6,9 +6,6 @@ const OfflineQueueIndicator = () => {
     const { queuedCount, processQueue, clearQueue } = useOfflineQueue();
     const [isOpen, setIsOpen] = useState(false);
 
-    // Only show if there are queued items or we are offline
-    const isOffline = !navigator.onLine;
-
     // We can use a window event listener to update offline state dynamically
     const [onlineStatus, setOnlineStatus] = React.useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
 

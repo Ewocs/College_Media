@@ -74,7 +74,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
     }));
   };
 
-  const addAchievement = () => {
+  const _addAchievement = () => {
     if (achievementInput.trim()) {
       setFormData(prev => ({
         ...prev,
@@ -84,7 +84,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
     }
   };
 
-  const removeAchievement = (index) => {
+  const _removeAchievement = (index) => {
     setFormData(prev => ({
       ...prev,
       achievements: prev.achievements.filter((_, i) => i !== index)
@@ -113,7 +113,7 @@ const CreateAlumniProfileModal = ({ isOpen, onClose, onSuccess }) => {
     setLoading(true);
 
     try {
-      const response = await createAlumniProfile(formData);
+      const _response = await createAlumniProfile(formData);
       toast.success('Alumni profile created successfully!');
       onSuccess?.();
       onClose();

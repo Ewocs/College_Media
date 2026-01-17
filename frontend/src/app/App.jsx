@@ -14,7 +14,6 @@ const App = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("Home");
-  const [showShortcutsHelp, setShowShortcutsHelp] = useState(false);
 
   const layoutState = {
     activeTab,

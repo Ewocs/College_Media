@@ -4,6 +4,7 @@ import ReportButton from "./ReportButton";
 import PollDisplay from "./PollDisplay";
 import { usePollByPost } from "../hooks/usePolls";
 import ProgressiveImage from "./ProgressiveImage";
+import useOptimisticUpdate from "../hooks/useOptimisticUpdate";
 
 /**
  * Post Component

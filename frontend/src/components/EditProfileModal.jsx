@@ -48,7 +48,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
         setFormData(profileData);
         setOriginalData(profileData);
       }
-    } catch (err) {
+    } catch {
       // Fallback to context user data
       if (contextUser) {
         const profileData = {

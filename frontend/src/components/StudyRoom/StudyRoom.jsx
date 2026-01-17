@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import './StudyRoom.css';
 import ChatInterface from './ChatInterface';
 import ActiveLearners from './ActiveLearners';
@@ -10,7 +10,7 @@ const StudyRoom = ({ roomId = 'room-1', courseName = 'Introduction to Web Develo
     { id: 2, user: 'Sarah', avatar: '👩‍💻', message: 'This topic is interesting', timestamp: '10:31 AM', reactions: [] },
   ]);
 
-  const [activeLearners, setActiveLearners] = useState([
+  const [activeLearners] = useState([
     { id: 1, name: 'You', avatar: '👨‍💻', isActive: true },
     { id: 2, name: 'John', avatar: '👨‍🎓', isActive: true },
     { id: 3, name: 'Sarah', avatar: '👩‍🎓', isActive: true },
