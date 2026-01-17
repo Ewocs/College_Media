@@ -40,6 +40,7 @@ const NotificationPreferences = lazy(() => import("../components/NotificationPre
 const SearchResults = lazy(() => import("../pages/SearchResults"));
 const GlobalSearch = lazy(() => import("../pages/GlobalSearch"));
 const ModerationDashboard = lazy(() => import("../pages/admin/ModerationDashboard"));
+const RoleManager = lazy(() => import("../pages/admin/RoleManager"));
 const ReportDetail = lazy(() => import("../pages/admin/ReportDetail"));
 const Settings = lazy(() => import("../pages/Settings"));
 const Profile = lazy(() => import("../pages/Profile"));
@@ -289,6 +290,17 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
             <LazyWrapper>
               <ModerationDashboard />
             </LazyWrapper>
+          }
+        />
+
+        <Route
+          path="admin/roles"
+          element={
+            <ProtectedRoute>
+              <LazyWrapper>
+                <RoleManager />
+              </LazyWrapper>
+            </ProtectedRoute>
           }
         />
 
