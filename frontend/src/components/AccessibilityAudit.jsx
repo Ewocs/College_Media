@@ -51,7 +51,7 @@ const AccessibilityAudit = ({ onAuditComplete }) => {
               status: 'pass'
             });
           }
-        } catch (_) {
+        } catch {
           // Skip invalid colors
         }
       }

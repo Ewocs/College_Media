@@ -51,7 +51,7 @@ const CollabEditor = ({ documentId, username = 'Anonymous' }) => {
 
         // 4. Bind Yjs to Quill
         const ytext = ydoc.getText('quill');
-        const binding = new QuillBinding(ytext, quill, provider.awareness);
+        new QuillBinding(ytext, quill, provider.awareness);
 
         // 5. Awareness / Presence
         const color = '#' + Math.floor(Math.random() * 16777215).toString(16);

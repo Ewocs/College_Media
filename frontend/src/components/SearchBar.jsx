@@ -231,7 +231,6 @@ const SearchBar = ({ className = '' }) => {
           query={query}
           history={getSearchHistory()}
           onSelect={handleSearch}
-          onClose={() => setIsOpen(false)}
         />
       )}
     </div>

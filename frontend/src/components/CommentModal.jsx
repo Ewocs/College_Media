@@ -103,7 +103,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
       await addOptimisticComment();
 
       // Make actual API call
-      const response = await commentsApi.create(postId, { content: commentText });
+      const response = await commentsApi.create(postId, { content: newComment });
       if (response?.data) {
         const addedComment = response.data.data || response.data;
         setComments((prev) => [...prev, addedComment]);
@@ -112,7 +112,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
       }
     } catch (error) {
       console.error("Error posting comment:", error);
-      setNewComment(commentText); // Restore comment text on error
+      setNewComment(newComment); // Restore comment text on error
     }
   };
 
@@ -147,6 +147,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
 
   return (
     <div
+      ref={modalRef}
       className={`fixed top-0 right-0 z-[1000] h-full w-full lg:w-[450px] shadow-2xl transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'
         } ${theme === 'dark' ? 'bg-slate-900 text-white' : 'bg-bg-secondary text-text-primary'}`}
     >
@@ -172,7 +173,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
         ) : comments.length === 0 ? (
           <div className="text-center py-20 text-text-muted"><p>No comments yet.</p></div>
         ) : (
-          comments.map((comment, idx) => (
+          optimisticComments.map((comment, idx) => (
             <div key={idx} className="flex gap-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shrink-0" />
               <div className="flex-1">

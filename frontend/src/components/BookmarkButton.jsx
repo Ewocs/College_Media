@@ -40,10 +40,6 @@ const BookmarkButton = ({ postId, className = '', showLabel = false }) => {
     setShowSelector(!showSelector);
   };
 
-  const handleLongPress = () => {
-    setShowSelector(true);
-  };
-
   // Close selector when clicking outside
   useEffect(() => {
     if (!showSelector) return;
