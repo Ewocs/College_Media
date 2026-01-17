@@ -5,6 +5,7 @@ import { useCreatePoll } from '../hooks/usePolls';
 import PollCreator from './PollCreator';
 import useContentModeration from '../hooks/useContentModeration';
 import ModerationWarning from './ModerationWarning';
+import { useTranslation } from 'react-i18next';
 
 const CreatePost = ({ onPostCreated }) => {
   const { user } = useAuth();
@@ -123,7 +124,7 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <div className="bg-bg-secondary rounded-lg shadow-md overflow-hidden mb-6">
       <div className="p-4">
-        <h2 id="create-post-heading" className="sr-only">Create New Post</h2>
+        <h2 id="create-post-heading" className="sr-only">{t('common.createPost')}</h2>
         <div className="flex items-center mb-4">
           <img
             src={user?.profilePicture || 'https://placehold.co/40x40/FF6B6B/FFFFFF?text=U'}
@@ -142,7 +143,7 @@ const CreatePost = ({ onPostCreated }) => {
               id="post-caption"
               value={caption}
               onChange={handleCaptionChange}
-              placeholder="What's happening?"
+              placeholder={t('createPost.placeholder')}
               className="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
               rows="3"
               maxLength={maxLength}
@@ -156,10 +157,10 @@ const CreatePost = ({ onPostCreated }) => {
             <span
               id="char-counter"
               className={`text-xs ${caption.length >= maxLength
-                  ? 'text-red-600 font-bold'
-                  : caption.length > maxLength * 0.8
-                    ? 'text-yellow-600 font-medium'
-                    : 'text-text-muted'
+                ? 'text-red-600 font-bold'
+                : caption.length > maxLength * 0.8
+                  ? 'text-yellow-600 font-medium'
+                  : 'text-text-muted'
                 }`}
               aria-live="polite"
               aria-atomic="true"
@@ -200,21 +201,22 @@ const CreatePost = ({ onPostCreated }) => {
 
           {/* Poll Preview */}
           {pollData && !showPollCreator && (
-            <div className="mt-3 bg-indigo-50 border border-indigo-200 rounded-lg p-3">
+            <div className="mt-3 bg-brand-primary/10 border border-brand-primary/20 rounded-lg p-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2 flex-1">
-                  <Icon icon="mdi:poll" className="text-indigo-500 text-xl" />
+                  <Icon icon="mdi:poll" className="text-brand-primary text-xl" />
                   <div>
                     <p className="font-medium text-text-primary">{pollData.question}</p>
-                    <p className="text-sm text-gray-600">
-                      {pollData.options.length} options • {pollData.duration && pollData.durationUnit ? `${pollData.duration} ${pollData.durationUnit}` : 'No expiry'}
+                    <p className="text-sm text-text-secondary">
+                      {t('poll.optionsCount', { count: pollData.options.length })} • {pollData.duration && pollData.durationUnit ? `${pollData.duration} ${pollData.durationUnit}` : t('poll.noExpiry')}
                     </p>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={handleRemovePoll}
-                  className="text-red-500 hover:text-red-700 p-1"
+                  className="text-status-error hover:text-red-700 p-1"
+                  aria-label={t('poll.remove')}
                 >
                   <Icon icon="mdi:close" className="text-xl" />
                 </button>
@@ -224,11 +226,11 @@ const CreatePost = ({ onPostCreated }) => {
 
           <div className="flex items-center justify-between mt-3">
             <div className="flex space-x-2">
-              <label 
+              <label
                 htmlFor="image-upload"
-                className="cursor-pointer text-gray-600 hover:text-purple-600 transition-colors p-2 rounded hover:bg-purple-50 focus-within:ring-2 focus-within:ring-purple-500"
-                title="Add image"
-                aria-label="Upload image"
+                className="cursor-pointer text-text-secondary hover:text-brand-primary transition-colors p-2 rounded hover:bg-bg-tertiary focus-within:ring-2 focus-within:ring-brand-primary"
+                title={t('createPost.addImage')}
+                aria-label={t('createPost.addImage')}
               >
                 <Icon icon="mdi:image" className="w-6 h-6" />
                 <input
@@ -240,15 +242,15 @@ const CreatePost = ({ onPostCreated }) => {
                   aria-describedby="image-upload-desc"
                 />
               </label>
-              <span id="image-upload-desc" className="sr-only">Select an image file to upload with your post</span>
+              <span id="image-upload-desc" className="sr-only">{t('createPost.imageUploadDesc')}</span>
 
               <button
                 type="button"
                 onClick={() => setShowPollCreator(!showPollCreator)}
                 disabled={!!pollData}
-                className="text-gray-600 hover:text-indigo-600 transition-colors p-2 rounded hover:bg-indigo-50 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500"
-                title="Add poll"
-                aria-label={pollData ? "Poll already added" : "Add poll to post"}
+                className="text-text-secondary hover:text-brand-primary transition-colors p-2 rounded hover:bg-bg-tertiary disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-brand-primary"
+                title={t('poll.title')}
+                aria-label={pollData ? t('poll.alreadyAdded') : t('poll.title')}
                 aria-expanded={showPollCreator}
                 aria-controls="poll-creator"
               >
@@ -259,12 +261,12 @@ const CreatePost = ({ onPostCreated }) => {
             <button
               type="submit"
               disabled={isCreating || (!caption.trim() && !image && !pollData)}
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:from-purple-700 hover:to-indigo-700 transition-all focus:ring-2 focus:ring-purple-500"
+              className="px-4 py-2 bg-brand-primary text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-brand-primary-hover transition-all focus:ring-2 focus:ring-brand-primary"
               aria-describedby={isCreating ? "posting-status" : undefined}
             >
-              {isCreating ? 'Posting...' : 'Post'}
+              {isCreating ? t('common.loading') : t('common.createPost')}
             </button>
-            {isCreating && <span id="posting-status" className="sr-only" aria-live="assertive">Creating your post, please wait</span>}
+            {isCreating && <span id="posting-status" className="sr-only" aria-live="assertive">{t('createPost.postingStatus')}</span>}
           </div>
         </form>
       </div>

@@ -18,6 +18,7 @@ import { PollProvider } from "./context/PollContext.jsx";
 import { register as registerServiceWorker } from "./utils/serviceWorkerRegistration";
 import "./index.css";
 import "./styles/accessibility.css";
+import "./i18n";
 import App from "./app/App.jsx";
 
 // Register service worker for PWA only in production
@@ -31,7 +32,7 @@ createRoot(document.getElementById("root")).render(
       <AccessibilityProvider>
         <AuthProvider>
           <SocketProvider>
-            <NotificationProvider> 
+            <NotificationProvider>
               <ThemeProvider>
                 <BookmarkProvider>
                   <PollProvider>

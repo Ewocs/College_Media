@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { commentsApi } from "../api/endpoints";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "../context/ThemeContext";
 import useTypingIndicator from "../hooks/useTypingIndicator";
 import useFocusTrap from "../hooks/useFocusTrap";
@@ -9,6 +10,7 @@ import useContentModeration from "../hooks/useContentModeration";
 import ModerationWarning from "./ModerationWarning";
 
 const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
+  const { t } = useTranslation();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,13 +29,13 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
       const tempComment = {
         id: `temp-${Date.now()}`,
         content: newComment,
-        user: { username: 'You' }, // Placeholder - should use actual user data
-        timestamp: 'Just now',
+        user: { username: t('common.profile') }, // Placeholder
+        timestamp: t('common.loading'),
         isOptimistic: true
       };
       return [...currentComments, tempComment];
     },
-    errorMessage: 'Failed to post comment. Please try again.'
+    errorMessage: t('comments.error')
   });
 
   const { analyze, bypass, resetModeration, warnings } = useContentModeration();
@@ -98,6 +100,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
     // Stop typing indicator
     stopTyping();
 
+    const commentText = newComment;
     try {
       // Add optimistic comment
       await addOptimisticComment();
@@ -149,15 +152,15 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
     <div
       ref={modalRef}
       className={`fixed top-0 right-0 z-[1000] h-full w-full lg:w-[450px] shadow-2xl transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'
-        } ${theme === 'dark' ? 'bg-slate-900 text-white' : 'bg-bg-secondary text-text-primary'}`}
+        } bg-bg-secondary text-text-primary`}
     >
       {/* Header */}
-      <div className="flex justify-between items-center p-6 border-b dark:border-slate-800 border-gray-100">
+      <div className="flex justify-between items-center p-6 border-b border-border">
         <div>
-          <h3 id="modal-title" className="text-xl font-bold">Comments</h3>
-          <p className="text-sm text-text-muted">{commentCount} responses</p>
+          <h3 id="modal-title" className="text-xl font-bold">{t('comments.title')}</h3>
+          <p className="text-sm text-text-muted">{t('comments.responses', { count: commentCount })}</p>
         </div>
-        <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full">
+        <button onClick={onClose} className="p-2 hover:bg-bg-tertiary rounded-full">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -168,17 +171,17 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {loading ? (
           <div className="flex justify-center py-10">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-primary"></div>
           </div>
         ) : comments.length === 0 ? (
-          <div className="text-center py-20 text-text-muted"><p>No comments yet.</p></div>
+          <div className="text-center py-20 text-text-muted"><p>{t('comments.noComments')}</p></div>
         ) : (
           optimisticComments.map((comment, idx) => (
             <div key={idx} className="flex gap-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shrink-0" />
               <div className="flex-1">
-                <div className={`p-4 rounded-2xl rounded-tl-none ${theme === 'dark' ? 'bg-slate-800' : 'bg-bg-primary'}`}>
-                  <p className="text-sm font-bold text-purple-600">@{comment.user?.username || "user"}</p>
+                <div className="p-4 rounded-2xl rounded-tl-none bg-bg-tertiary">
+                  <p className="text-sm font-bold text-brand-primary">@{comment.user?.username || "user"}</p>
                   <p className="text-sm mt-1 leading-relaxed">{comment.content}</p>
                 </div>
               </div>
@@ -188,7 +191,7 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
       </div>
 
       {/* Input Area */}
-      <div className="border-t dark:border-slate-800 border-gray-100">
+      <div className="border-t border-border">
         {/* Typing Indicator */}
         <TypingIndicator typingUsers={typingUsers} />
 
@@ -198,13 +201,12 @@ const CommentModal = ({ isOpen, onClose, postId, commentCount }) => {
               value={newComment}
               onChange={handleCommentChange}
               onBlur={stopTyping}
-              placeholder="Write a comment..."
-              className={`w-full p-4 h-24 rounded-2xl resize-none outline-none border-none text-sm ${theme === 'dark' ? 'bg-slate-800 text-white' : 'bg-gray-100 text-text-primary'
-                }`}
+              placeholder={t('comments.placeholder')}
+              className="w-full p-4 h-24 rounded-2xl resize-none outline-none border-none text-sm bg-bg-tertiary text-text-primary"
             />
             <div className="flex justify-end">
-              <button type="submit" disabled={!newComment.trim()} className="bg-purple-600 text-white px-8 py-2.5 rounded-full font-bold transition-all disabled:opacity-30">
-                Post
+              <button type="submit" disabled={!newComment.trim()} className="bg-brand-primary text-white px-8 py-2.5 rounded-full font-bold transition-all disabled:opacity-30">
+                {t('comments.post')}
               </button>
             </div>
           </form>

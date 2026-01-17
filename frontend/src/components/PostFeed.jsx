@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import CreatePost from "./CreatePost";
 import Post from "../components/Post";
@@ -7,12 +8,16 @@ import SearchFilterBar from "./SearchFilterBar";
 import { mockPosts } from "../data/post";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
+const PAGE_SIZE = 10;
+
 const PostFeed = () => {
+  const { t } = useTranslation();
   const [posts, setPosts] = useState([]);
   const [newPosts, setNewPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [copiedLink, setCopiedLink] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
 
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,9 +38,9 @@ const PostFeed = () => {
 
   // Initial Load
   useEffect(() => {
-    setTimeout(() => {
-
-      setPosts(mockPosts);
+    const init = async () => {
+      const initialPosts = await fetchPosts(0);
+      setPosts(initialPosts);
       setLoading(false);
       if (initialPosts.length < PAGE_SIZE) setHasMore(false);
     };
@@ -262,9 +267,9 @@ const PostFeed = () => {
       {/* Posts Display */}
       {filteredAndSortedPosts.length === 0 ? (
         <div className="bg-bg-secondary rounded-lg shadow-md p-8 text-center">
-          <p className="text-text-muted text-lg">No posts found</p>
+          <p className="text-text-muted text-lg">{t('postFeed.noPosts')}</p>
           <p className="text-gray-400 text-sm mt-2">
-            Try adjusting your search or filters
+            {t('postFeed.adjustFilters')}
           </p>
         </div>
       ) : (
@@ -300,7 +305,7 @@ const PostFeed = () => {
           {/* End of Feed Message */}
           {!hasMore && posts.length > 0 && (
             <div className="text-center py-8 text-text-muted text-sm">
-              You've reached the end of the feed! 🎉
+              {t('postFeed.endOfFeed')}
             </div>
           )}
         </>

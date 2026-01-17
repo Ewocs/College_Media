@@ -6,9 +6,11 @@
 
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
+import { useTranslation } from 'react-i18next';
 import * as pollHelpers from '../utils/pollHelpers';
 
 const PollCreator = ({ onPollCreate, onCancel }) => {
+  const { t } = useTranslation();
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState(['', '']);
   const [duration, setDuration] = useState({ value: 1, unit: 'days' });
@@ -71,16 +73,16 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
   };
 
   return (
-    <div className="bg-bg-secondary rounded-lg border-2 border-indigo-200 p-4 my-3">
+    <div className="bg-bg-secondary rounded-lg border-2 border-brand-primary/30 p-4 my-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Icon icon="mdi:poll" className="text-indigo-500 text-2xl" />
-          <h3 className="font-semibold text-text-primary">Create Poll</h3>
+          <Icon icon="mdi:poll" className="text-brand-primary text-2xl" />
+          <h3 className="font-semibold text-text-primary">{t('poll.title')}</h3>
         </div>
         <button
           onClick={onCancel}
-          className="text-gray-400 hover:text-gray-600 transition-colors"
+          className="text-text-muted hover:text-text-primary transition-colors"
         >
           <Icon icon="mdi:close" className="text-xl" />
         </button>
@@ -89,21 +91,21 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
       {/* Question Input */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-text-secondary mb-2">
-          Poll Question
+          {t('poll.questionLabel')}
         </label>
         <input
           type="text"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Ask a question..."
+          placeholder={t('poll.questionPlaceholder')}
           maxLength={200}
           className={`
-            w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent
-            ${errors.question ? 'border-red-500' : 'border-gray-300'}
+            w-full px-3 py-2 border rounded-lg bg-bg-primary text-text-primary focus:ring-2 focus:ring-brand-primary focus:border-transparent
+            ${errors.question ? 'border-status-error' : 'border-border'}
           `}
         />
         {errors.question && (
-          <p className="text-red-500 text-xs mt-1">{errors.question}</p>
+          <p className="text-status-error text-xs mt-1">{errors.question}</p>
         )}
         <div className="flex justify-between mt-1">
           <span className="text-xs text-text-muted">
@@ -115,7 +117,7 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
       {/* Options */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-text-secondary mb-2">
-          Poll Options (2-6)
+          {t('poll.optionsLabel')}
         </label>
         <div className="space-y-2">
           {options.map((option, index) => (
@@ -127,13 +129,13 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
                 type="text"
                 value={option}
                 onChange={(e) => handleOptionChange(index, e.target.value)}
-                placeholder={`Option ${index + 1}`}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                placeholder={t('poll.optionPlaceholder', { index: index + 1 })}
+                className="flex-1 px-3 py-2 border border-border bg-bg-primary text-text-primary rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
               />
               {options.length > 2 && (
                 <button
                   onClick={() => handleRemoveOption(index)}
-                  className="text-red-500 hover:text-red-700 p-1"
+                  className="text-status-error hover:text-red-700 p-1"
                 >
                   <Icon icon="mdi:delete" className="text-xl" />
                 </button>
@@ -142,17 +144,17 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
           ))}
         </div>
         {errors.options && (
-          <p className="text-red-500 text-xs mt-1">{errors.options}</p>
+          <p className="text-status-error text-xs mt-1">{errors.options}</p>
         )}
-        
+
         {/* Add Option Button */}
         {options.length < 6 && (
           <button
             onClick={handleAddOption}
-            className="mt-2 text-indigo-600 hover:text-indigo-700 text-sm font-medium flex items-center gap-1"
+            className="mt-2 text-brand-primary hover:underline text-sm font-medium flex items-center gap-1"
           >
             <Icon icon="mdi:plus-circle" className="text-lg" />
-            Add Option
+            {t('poll.addOption')}
           </button>
         )}
       </div>
@@ -162,14 +164,14 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
         {/* Duration */}
         <div>
           <label className="block text-sm font-medium text-text-secondary mb-2">
-            Poll Duration
+            {t('poll.durationLabel')}
           </label>
           <select
-            value={durationOptions.find(opt => 
+            value={durationOptions.find(opt =>
               opt.value === duration.value && opt.unit === duration.unit
             )?.label || '1 Day'}
             onChange={handleDurationChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-border bg-bg-primary text-text-primary rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent"
           >
             {durationOptions.map((opt) => (
               <option key={opt.label} value={opt.label}>
@@ -186,10 +188,10 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
             id="allowVoteChange"
             checked={allowVoteChange}
             onChange={(e) => setAllowVoteChange(e.target.checked)}
-            className="w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500"
+            className="w-4 h-4 text-brand-primary rounded focus:ring-2 focus:ring-brand-primary"
           />
           <label htmlFor="allowVoteChange" className="text-sm text-text-secondary">
-            Allow users to change their vote
+            {t('poll.allowVoteChange')}
           </label>
         </div>
       </div>
@@ -198,16 +200,16 @@ const PollCreator = ({ onPollCreate, onCancel }) => {
       <div className="flex items-center gap-2 pt-3 border-t border-border">
         <button
           onClick={handleSubmit}
-          className="flex-1 py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+          className="flex-1 py-2 px-4 bg-brand-primary hover:bg-brand-primary-hover text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
         >
           <Icon icon="mdi:check" className="text-xl" />
-          Create Poll
+          {t('poll.create')}
         </button>
         <button
           onClick={onCancel}
-          className="px-4 py-2 border border-gray-300 hover:bg-bg-primary text-text-secondary font-medium rounded-lg transition-colors"
+          className="px-4 py-2 border border-border hover:bg-bg-tertiary text-text-secondary font-medium rounded-lg transition-colors"
         >
-          Cancel
+          {t('common.cancel')}
         </button>
       </div>
     </div>

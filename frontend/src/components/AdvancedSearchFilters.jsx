@@ -8,10 +8,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
+import { useTranslation } from 'react-i18next';
 
 const FILTER_STORAGE_KEY = 'search_filters_preferences';
 
 const AdvancedSearchFilters = ({ onFilterChange, onClose }) => {
+    const { t } = useTranslation();
     const [filters, setFilters] = useState(() => {
         // Load saved preferences from localStorage
         const saved = localStorage.getItem(FILTER_STORAGE_KEY);
@@ -47,18 +49,18 @@ const AdvancedSearchFilters = ({ onFilterChange, onClose }) => {
     };
 
     return (
-        <div className="absolute top-full right-0 mt-2 w-80 bg-bg-secondary dark:bg-gray-800 rounded-lg shadow-xl border border-border dark:border-gray-700 z-50">
+        <div className="absolute top-full right-0 mt-2 w-80 bg-bg-secondary rounded-lg shadow-xl border border-border z-50">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border dark:border-gray-700">
-                <h3 className="text-lg font-semibold text-text-primary dark:text-gray-100">
-                    Advanced Filters
+            <div className="flex items-center justify-between p-4 border-b border-border">
+                <h3 className="text-lg font-semibold text-text-primary">
+                    {t('searchFilterBar.advancedFilters.title')}
                 </h3>
                 <button
                     onClick={onClose}
-                    className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-                    aria-label="Close filters"
+                    className="p-1 hover:bg-bg-tertiary rounded-full transition-colors"
+                    aria-label={t('searchFilterBar.advancedFilters.close')}
                 >
-                    <Icon icon="mdi:close" width={20} className="text-gray-600 dark:text-gray-400" />
+                    <Icon icon="mdi:close" width={20} className="text-text-muted" />
                 </button>
             </div>
 
@@ -66,71 +68,70 @@ const AdvancedSearchFilters = ({ onFilterChange, onClose }) => {
             <div className="p-4 space-y-4">
                 {/* Content Type Filter */}
                 <div>
-                    <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
-                        Content Type
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        {t('searchFilterBar.advancedFilters.contentType')}
                     </label>
                     <select
                         value={filters.contentType}
                         onChange={(e) => handleFilterChange('contentType', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-bg-primary text-text-primary focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                     >
-                        <option value="all">All Content</option>
-                        <option value="posts">Posts Only</option>
-                        <option value="users">Users Only</option>
-                        <option value="tags">Tags Only</option>
+                        <option value="all">{t('searchFilterBar.advancedFilters.allContent')}</option>
+                        <option value="posts">{t('searchFilterBar.advancedFilters.postsOnly')}</option>
+                        <option value="users">{t('searchFilterBar.advancedFilters.usersOnly')}</option>
+                        <option value="tags">{t('searchFilterBar.advancedFilters.tagsOnly')}</option>
                     </select>
                 </div>
 
                 {/* Date Range Filter */}
                 <div>
-                    <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
-                        Date Range
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        {t('searchFilterBar.advancedFilters.dateRange')}
                     </label>
                     <select
                         value={filters.dateRange}
                         onChange={(e) => handleFilterChange('dateRange', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-bg-primary text-text-primary focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                     >
-                        <option value="all">All Time</option>
-                        <option value="today">Today</option>
-                        <option value="week">This Week</option>
-                        <option value="month">This Month</option>
-                        <option value="year">This Year</option>
+                        <option value="all">{t('searchFilterBar.advancedFilters.allTime')}</option>
+                        <option value="today">{t('searchFilterBar.advancedFilters.today')}</option>
+                        <option value="week">{t('searchFilterBar.advancedFilters.week')}</option>
+                        <option value="month">{t('searchFilterBar.advancedFilters.month')}</option>
+                        <option value="year">{t('searchFilterBar.advancedFilters.year')}</option>
                     </select>
                 </div>
 
                 {/* Sort By Filter */}
                 <div>
-                    <label className="block text-sm font-medium text-text-secondary dark:text-gray-300 mb-2">
-                        Sort By
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        {t('searchFilterBar.advancedFilters.sortBy')}
                     </label>
                     <select
                         value={filters.sortBy}
                         onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-bg-secondary dark:bg-gray-700 text-text-primary dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-bg-primary text-text-primary focus:ring-2 focus:ring-brand-primary focus:border-transparent"
                     >
-                        <option value="relevance">Most Relevant</option>
-                        <option value="semantic">🧠 AI Semantic Match</option>
-                        <option value="newest">Newest First</option>
-                        <option value="oldest">Oldest First</option>
-                        <option value="popular">Most Popular</option>
+                        <option value="relevance">{t('searchFilterBar.advancedFilters.relevance')}</option>
+                        <option value="newest">{t('searchFilterBar.advancedFilters.newest')}</option>
+                        <option value="oldest">{t('searchFilterBar.advancedFilters.oldest')}</option>
+                        <option value="popular">{t('searchFilterBar.advancedFilters.popular')}</option>
                     </select>
                 </div>
             </div>
 
             {/* Footer Actions */}
-            <div className="flex items-center justify-between p-4 border-t border-border dark:border-gray-700">
+            <div className="flex items-center justify-between p-4 border-t border-border">
                 <button
                     onClick={handleReset}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-text-primary dark:hover:text-gray-100 transition-colors"
+                    className="text-sm text-text-muted hover:text-text-primary transition-colors"
                 >
-                    Reset Filters
+                    {t('searchFilterBar.advancedFilters.reset')}
                 </button>
                 <button
                     onClick={onClose}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                    className="px-4 py-2 bg-brand-primary hover:bg-brand-primary-hover text-white rounded-lg font-medium transition-colors"
                 >
-                    Apply
+                    {t('searchFilterBar.advancedFilters.apply')}
                 </button>
             </div>
         </div>

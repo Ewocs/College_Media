@@ -6,6 +6,8 @@ import ThemeToggle from "./ThemeToggle";
 import NotificationBell from "./NotificationBell";
 import SearchBar from "./SearchBar";
 import OfflineQueueIndicator from "./OfflineQueueIndicator";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 /**
  * Navigation Bar Component
@@ -15,12 +17,13 @@ import OfflineQueueIndicator from "./OfflineQueueIndicator";
 function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <nav
       className="sticky top-0 z-50 ml-20 bg-bg-secondary/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-border dark:border-gray-700 transition-colors duration-300"
       role="navigation"
-      aria-label="Main navigation"
+      aria-label={t('common.home')}
     >
       <div className="px-6 py-4">
         <div className="flex items-center justify-center gap-6">
@@ -31,6 +34,9 @@ function Navbar() {
 
           {/* ACTIONS */}
           <div className="flex items-center gap-3">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+
             {/* Offline Queue Indicator */}
             <OfflineQueueIndicator />
 
@@ -38,9 +44,9 @@ function Navbar() {
             <Link
               to="/create-post"
               className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full font-medium shadow-sm"
-              aria-label="Create a new post"
+              aria-label={t('common.createPost')}
             >
-              + Create Post
+              + {t('common.createPost')}
             </Link>
 
             {/* Notifications */}

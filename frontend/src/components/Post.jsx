@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaLink, FaEllipsisV } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import ReportButton from "./ReportButton";
 import PollDisplay from "./PollDisplay";
 import { usePollByPost } from "../hooks/usePolls";
 import ProgressiveImage from "./ProgressiveImage";
+import useOptimisticUpdate from "../hooks/useOptimisticUpdate"; // Added missing import
 
 /**
  * Post Component
@@ -21,6 +23,7 @@ const Post = ({
   onCopyLink,
   copiedLink
 }) => {
+  const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const { poll, hasPoll } = usePollByPost(post.id);
 
@@ -35,7 +38,7 @@ const Post = ({
       return newLikes;
     },
     optimisticUpdateFn: (currentLikes) => post.liked ? currentLikes - 1 : currentLikes + 1,
-    errorMessage: 'Failed to update like. Please try again.'
+    errorMessage: t('post.likeError')
   });
 
   const handleLikeClick = () => {
@@ -55,7 +58,7 @@ const Post = ({
             className="w-10 h-10 rounded-full mr-3"
           />
           <div>
-            <h3 className="font-semibold">{post.user.username}</h3>
+            <h3 className="font-semibold text-text-primary">{post.user.username}</h3>
             <p className="text-xs text-text-muted">{post.timestamp}</p>
           </div>
         </div>
@@ -64,10 +67,10 @@ const Post = ({
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            aria-label="More options"
+            className="p-2 hover:bg-bg-tertiary rounded-full transition-colors"
+            aria-label={t('post.moreOptions')}
           >
-            <FaEllipsisV className="text-gray-600" />
+            <FaEllipsisV className="text-text-secondary" />
           </button>
 
           {showMenu && (
@@ -113,7 +116,7 @@ const Post = ({
           <button
             onClick={handleLikeClick}
             className="flex items-center gap-2"
-            aria-label={post.liked ? "Unlike post" : "Like post"}
+            aria-label={post.liked ? t('post.unlike') : t('post.like')}
             disabled={isLiking}
           >
             {post.liked ? (
@@ -121,24 +124,24 @@ const Post = ({
             ) : (
               <FaRegHeart className="text-text-secondary" />
             )}
-            <span className={isLiking ? 'opacity-70' : ''}>{likes}</span>
+            <span className={isLiking ? 'opacity-70 text-text-primary' : 'text-text-primary'}>{likes}</span>
           </button>
 
           {/* Copy Link */}
           <button
             onClick={() => onCopyLink(post)}
-            className="flex items-center gap-2 text-sm text-blue-600"
-            aria-label="Copy post link"
+            className="flex items-center gap-2 text-sm text-brand-primary"
+            aria-label={t('post.copyLink')}
           >
             <FaLink />
-            {copiedLink === post.id ? "Link Copied" : "Copy Link"}
+            {copiedLink === post.id ? t('post.linkCopied') : t('post.copyLink')}
           </button>
         </div>
 
         {/* Caption */}
-        <p className="mt-3 text-sm">
-          <strong>{post.user.username}</strong>{" "}
-          {post.caption}
+        <p className="mt-3 text-sm text-text-primary">
+          <strong className="text-text-primary">{post.user.username}</strong>{" "}
+          <span className="text-text-secondary">{post.caption}</span>
         </p>
       </div>
     </div>
