@@ -38,6 +38,7 @@ const VerifyMFA = lazy(() => import("../pages/security/VerifyMFA"));
 const NotificationCenter = lazy(() => import("../components/NotificationCenter"));
 const NotificationPreferences = lazy(() => import("../components/NotificationPreferences"));
 const SearchResults = lazy(() => import("../pages/SearchResults"));
+const GlobalSearch = lazy(() => import("../pages/GlobalSearch"));
 const ModerationDashboard = lazy(() => import("../pages/admin/ModerationDashboard"));
 const ReportDetail = lazy(() => import("../pages/admin/ReportDetail"));
 const Settings = lazy(() => import("../pages/Settings"));
@@ -250,6 +251,17 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
             <LazyWrapper>
               <SearchResults />
             </LazyWrapper>
+          }
+        />
+
+        <Route
+          path="search/global"
+          element={
+            <ProtectedRoute>
+              <LazyWrapper>
+                <GlobalSearch />
+              </LazyWrapper>
+            </ProtectedRoute>
           }
         />
 
