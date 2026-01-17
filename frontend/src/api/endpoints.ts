@@ -175,13 +175,17 @@ export const collectionsApi = {
   delete: (id: string) => apiClient.delete(`/collections/${id}`),
 };
 
-// Mentorship endpoints
-export const mentorshipApi = {
-  upsertProfile: (data: any) => apiClient.post('/tutor/mentor/profile', data),
-  getMyProfile: () => apiClient.get('/tutor/mentor/profile/me'),
-  getMatches: () => apiClient.get('/tutor/mentor/matches'),
-  getMentorById: (id: string) => apiClient.get(`/tutor/mentor/${id}`),
-  bookSession: (id: string, data: { day: string, slotId: string }) => apiClient.post(`/tutor/mentor/${id}/book`, data),
+// Marketplace endpoints
+export const marketplaceApi = {
+  getProducts: (params: any) => apiClient.get('/marketplace/products', { params }),
+  getProduct: (id: string) => apiClient.get(`/marketplace/products/${id}`),
+  createProduct: (data: any) => apiClient.post('/marketplace/products', data),
+  updateProduct: (id: string, data: any) => apiClient.put(`/marketplace/products/${id}`, data),
+  deleteProduct: (id: string) => apiClient.delete(`/marketplace/products/${id}`),
+  createOrder: (productId: string) => apiClient.post('/marketplace/orders', { productId }),
+  getOrders: () => apiClient.get('/marketplace/orders'),
+  createPaymentIntent: (productId: string) => apiClient.post('/payment/create-payment-intent', { productId }),
+  confirmDelivery: (orderId: string) => apiClient.post(`/payment/confirm-delivery/${orderId}`),
 };
 
 // Export all APIs
@@ -197,5 +201,5 @@ export default {
   moderation: moderationApi,
   polls: pollsApi,
   collections: collectionsApi,
-  mentorship: mentorshipApi,
+  marketplace: marketplaceApi,
 };

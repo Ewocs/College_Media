@@ -53,7 +53,7 @@ const ResumeBuilder = lazy(() => import("../pages/ResumeBuilder"));
 const ATSResume = lazy(() => import("../pages/ATSResume"));
 const AlumniResumeReview = lazy(() => import("../pages/AlumniResumeReview"));
 const AlumniConnect = lazy(() => import("../pages/AlumniConnect"));
-const WhiteboardRoom = lazy(() => import("../pages/WhiteboardRoom"));
+const Marketplace = lazy(() => import("../pages/Marketplace"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 interface ProtectedRouteProps {
@@ -439,10 +439,10 @@ const AppRoutes: React.FC<AppRoutesProps> = ({
         />
 
         <Route
-          path="whiteboard/:roomId"
+          path="marketplace"
           element={
             <LazyWrapper>
-              <WhiteboardRoom />
+              <Marketplace />
             </LazyWrapper>
           }
         />

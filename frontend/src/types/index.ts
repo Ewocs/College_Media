@@ -74,25 +74,28 @@ export interface Collection {
     updatedAt: string;
 }
 
-export type WhiteboardElementType = 'pencil' | 'rect' | 'circle' | 'text' | 'line';
-
-export interface WhiteboardElement {
-    id: string;
-    type: WhiteboardElementType;
-    points?: number[];
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
-    fill?: string;
-    stroke?: string;
-    strokeWidth?: number;
-    text?: string;
-    rotation?: number;
+export interface Product {
+    _id: string;
+    seller: User;
+    title: string;
+    description: string;
+    price: number;
+    category: 'Books' | 'Electronics' | 'Dorm Essentials' | 'Clothing' | 'Services' | 'Other';
+    images: string[];
+    condition: 'New' | 'Like New' | 'Good' | 'Fair' | 'Poor';
+    status: 'Available' | 'Pending' | 'Sold';
+    location: string;
+    createdAt: string;
 }
 
-export interface WhiteboardParticipant {
-    user: string | User;
-    joinedAt: string;
-    isDrawing: boolean;
+export interface Order {
+    _id: string;
+    buyer: User | string;
+    seller: User | string;
+    product: Product | string;
+    amount: number;
+    currency: string;
+    status: 'Pending' | 'Paid' | 'Delivered' | 'Completed' | 'Cancelled' | 'Refunded';
+    escrowStatus: 'Held' | 'Released' | 'Refunded' | 'N/A';
+    createdAt: string;
 }
