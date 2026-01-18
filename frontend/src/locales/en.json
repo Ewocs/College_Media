@@ -36,6 +36,7 @@
         "moreOptions": "More options",
         "copyLink": "Copy Link",
         "linkCopied": "Link Copied",
+        "copyLinkError": "Failed to copy link. Please try again.",
         "likeError": "Failed to update like. Please try again."
     },
     "createPost": {

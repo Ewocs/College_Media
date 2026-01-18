@@ -7,7 +7,7 @@
 ### A Modern Social Media Dashboard Platform
 
 ![Project Status](https://img.shields.io/badge/Status-Development-green?style=for-the-badge)
-![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)
+![React](https://img.shields.io/badge/React-18.2.0-61dafb?style=for-the-badge&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7-646cff?style=for-the-badge&logo=vite)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-f7df1e?style=for-the-badge&logo=javascript)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -36,7 +36,7 @@ Whether you're sharing campus moments, connecting with classmates, or building y
 - 🎨 **Beautiful UI/UX** with modern design patterns and smooth animations
 - 📱 **Fully Responsive** - works perfectly on desktop, tablet, and mobile
 - 🔄 **Real-time Interactions** with instant feedback and engagement metrics
-- 🌐 **Modern Frontend Stack** - React 19 with ES6+ standards
+- 🌐 **Modern Frontend Stack** - React 18.2.0 with ES6+ standards
 - ♿ **Accessibility First** - WCAG compliant components
 - 🔐 **Developer Friendly** - Clean, well-documented codebase
 - 🎭 **Mock Data Driven** - Frontend-only with comprehensive mock API for development
@@ -62,7 +62,7 @@ Whether you're sharing campus moments, connecting with classmates, or building y
 
 | Category | Technology |
 |----------|-----------|
-| **Frontend Framework** | React 19 (Latest) |
+| **Frontend Framework** | React 18.2.0 (LTS) |
 | **Build Tool** | Vite 7 (Lightning fast) |
 | **Language** | JavaScript ES6+ |
 | **Styling** | CSS3 with Gradient Theme |
