@@ -1,421 +1,595 @@
-const Post = require('../models/Post');
-const User = require('../models/User');
-const Event = require('../models/Event');
-const logger = require('../utils/logger');
-
 /**
- * Global Full-Text Search Service
- * Aggregates results from multiple collections with advanced filtering
- * Issue #883: Global Full-Text Search with Filters
+ * Search Service
+ * Issue #934: Advanced Elasticsearch-Powered Search with Personalized Recommendations
+ * 
+ * Comprehensive Elasticsearch service layer with ML-based recommendations.
  */
+
+const { client, INDICES } = require('../config/elasticsearch');
+
 class SearchService {
+
   /**
-   * Parse filter query string
-   * @param {string} filterString - Filter string like "type:post date:last_week role:moderator"
-   * @returns {Object} Parsed filters
+   * Full-text search with faceted filtering
    */
-  static parseFilters(filterString) {
-    const filters = {
-      type: null,
-      date: null,
-      role: null,
-      sortBy: 'relevance',
-      verified: null,
-      limit: 20,
-      skip: 0
+  async search(query, options = {}) {
+    const {
+      type = 'all',
+      filters = {},
+      sort = 'relevance',
+      from = 0,
+      size = 20,
+      userId = null,
+      tenantId = null,
+      includeAggregations = true
+    } = options;
+
+    try {
+      const indices = this.getSearchIndices(type);
+      const esQuery = this.buildSearchQuery(query, filters, tenantId);
+      const sortConfig = this.buildSortConfig(sort);
+
+      const searchBody = {
+        query: esQuery,
+        from,
+        size,
+        sort: sortConfig,
+        highlight: {
+          fields: {
+            caption: { pre_tags: ['<mark>'], post_tags: ['</mark>'] },
+            content: { pre_tags: ['<mark>'], post_tags: ['</mark>'] },
+            bio: { pre_tags: ['<mark>'], post_tags: ['</mark>'] }
+          }
+        }
+      };
+
+      // Add aggregations for faceted search
+      if (includeAggregations) {
+        searchBody.aggs = this.buildAggregations(type);
+      }
+
+      const result = await client.search({
+        index: indices,
+        body: searchBody
+      });
+
+      // Track search for personalization
+      if (userId) {
+        this.trackSearch(userId, query, filters, result.hits.total.value, tenantId);
+      }
+
+      return this.formatSearchResults(result, type);
+    } catch (error) {
+      console.error('[SearchService] Search error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Autocomplete suggestions
+   */
+  async autocomplete(prefix, options = {}) {
+    const {
+      type = 'all',
+      size = 10,
+      tenantId = null
+    } = options;
+
+    try {
+      const suggestions = [];
+
+      // Post caption suggestions
+      if (type === 'all' || type === 'posts') {
+        const postSuggestions = await client.search({
+          index: INDICES.POSTS,
+          body: {
+            query: {
+              bool: {
+                must: [
+                  {
+                    multi_match: {
+                      query: prefix,
+                      type: 'phrase_prefix',
+                      fields: ['caption.autocomplete', 'tags']
+                    }
+                  }
+                ],
+                filter: tenantId ? [{ term: { tenantId } }] : []
+              }
+            },
+            size: size,
+            _source: ['caption', 'category']
+          }
+        });
+
+        suggestions.push(...postSuggestions.hits.hits.map(hit => ({
+          type: 'post',
+          text: hit._source.caption?.substring(0, 100),
+          category: hit._source.category
+        })));
+      }
+
+      // User suggestions
+      if (type === 'all' || type === 'users') {
+        const userSuggestions = await client.search({
+          index: INDICES.USERS,
+          body: {
+            query: {
+              bool: {
+                must: [
+                  {
+                    multi_match: {
+                      query: prefix,
+                      type: 'phrase_prefix',
+                      fields: ['username.autocomplete', 'displayName.autocomplete']
+                    }
+                  }
+                ],
+                filter: tenantId ? [{ term: { tenantId } }] : []
+              }
+            },
+            size: size,
+            _source: ['username', 'displayName', 'verified']
+          }
+        });
+
+        suggestions.push(...userSuggestions.hits.hits.map(hit => ({
+          type: 'user',
+          text: hit._source.username,
+          displayName: hit._source.displayName,
+          verified: hit._source.verified
+        })));
+      }
+
+      // Hashtag suggestions
+      if (type === 'all' || type === 'hashtags') {
+        const hashtagSuggestions = await client.search({
+          index: INDICES.HASHTAGS,
+          body: {
+            query: {
+              bool: {
+                must: [
+                  {
+                    prefix: {
+                      'tag.keyword': prefix.replace('#', '')
+                    }
+                  }
+                ],
+                filter: tenantId ? [{ term: { tenantId } }] : []
+              }
+            },
+            size: size,
+            sort: [{ count: 'desc' }],
+            _source: ['tag', 'count']
+          }
+        });
+
+        suggestions.push(...hashtagSuggestions.hits.hits.map(hit => ({
+          type: 'hashtag',
+          text: `#${hit._source.tag}`,
+          count: hit._source.count
+        })));
+      }
+
+      return suggestions.slice(0, size);
+    } catch (error) {
+      console.error('[SearchService] Autocomplete error:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get personalized recommendations using ML similarity
+   */
+  async getRecommendations(userId, options = {}) {
+    const {
+      type = 'posts',
+      size = 20,
+      tenantId = null
+    } = options;
+
+    try {
+      // Get user's embedding
+      const user = await client.get({
+        index: INDICES.USERS,
+        id: userId
+      }).catch(() => null);
+
+      if (!user || !user._source.embedding) {
+        // Fallback to popular content
+        return this.getPopularContent(type, size, tenantId);
+      }
+
+      const userEmbedding = user._source.embedding;
+
+      // KNN search for similar content
+      const result = await client.search({
+        index: type === 'posts' ? INDICES.POSTS : INDICES.USERS,
+        body: {
+          knn: {
+            field: 'embedding',
+            query_vector: userEmbedding,
+            k: size,
+            num_candidates: size * 5
+          },
+          _source: {
+            excludes: ['embedding']
+          }
+        }
+      });
+
+      return result.hits.hits.map(hit => ({
+        id: hit._id,
+        score: hit._score,
+        ...hit._source,
+        reason: 'personalized'
+      }));
+    } catch (error) {
+      console.error('[SearchService] Recommendations error:', error);
+      return this.getPopularContent(type, size, tenantId);
+    }
+  }
+
+  /**
+   * Find similar content using embeddings
+   */
+  async findSimilar(id, type = 'posts', size = 10) {
+    try {
+      const index = type === 'posts' ? INDICES.POSTS : INDICES.USERS;
+
+      // Get the source document
+      const doc = await client.get({ index, id });
+
+      if (!doc._source.embedding) {
+        return [];
+      }
+
+      // KNN search
+      const result = await client.search({
+        index,
+        body: {
+          knn: {
+            field: 'embedding',
+            query_vector: doc._source.embedding,
+            k: size + 1, // +1 to exclude self
+            num_candidates: size * 5
+          },
+          _source: {
+            excludes: ['embedding']
+          }
+        }
+      });
+
+      return result.hits.hits
+        .filter(hit => hit._id !== id)
+        .slice(0, size)
+        .map(hit => ({
+          id: hit._id,
+          score: hit._score,
+          ...hit._source
+        }));
+    } catch (error) {
+      console.error('[SearchService] Find similar error:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get trending content
+   */
+  async getTrending(options = {}) {
+    const {
+      type = 'posts',
+      size = 20,
+      hours = 24,
+      tenantId = null
+    } = options;
+
+    try {
+      const since = new Date(Date.now() - hours * 60 * 60 * 1000);
+
+      const result = await client.search({
+        index: type === 'posts' ? INDICES.POSTS : INDICES.HASHTAGS,
+        body: {
+          query: {
+            bool: {
+              must: [
+                { range: { createdAt: { gte: since.toISOString() } } }
+              ],
+              filter: tenantId ? [{ term: { tenantId } }] : []
+            }
+          },
+          sort: [
+            { engagementScore: 'desc' },
+            { likes: 'desc' }
+          ],
+          size,
+          _source: {
+            excludes: ['embedding']
+          }
+        }
+      });
+
+      return result.hits.hits.map(hit => ({
+        id: hit._id,
+        ...hit._source
+      }));
+    } catch (error) {
+      console.error('[SearchService] Trending error:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get popular content (fallback for cold start)
+   */
+  async getPopularContent(type = 'posts', size = 20, tenantId = null) {
+    try {
+      const result = await client.search({
+        index: type === 'posts' ? INDICES.POSTS : INDICES.USERS,
+        body: {
+          query: {
+            bool: {
+              filter: tenantId ? [{ term: { tenantId } }] : []
+            }
+          },
+          sort: [
+            { engagementScore: 'desc' },
+            { likes: 'desc' },
+            { createdAt: 'desc' }
+          ],
+          size,
+          _source: {
+            excludes: ['embedding']
+          }
+        }
+      });
+
+      return result.hits.hits.map(hit => ({
+        id: hit._id,
+        ...hit._source,
+        reason: 'popular'
+      }));
+    } catch (error) {
+      console.error('[SearchService] Popular content error:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Index a document
+   */
+  async indexDocument(index, id, document) {
+    try {
+      await client.index({
+        index,
+        id,
+        body: document,
+        refresh: true
+      });
+      return true;
+    } catch (error) {
+      console.error('[SearchService] Index error:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Update a document
+   */
+  async updateDocument(index, id, updates) {
+    try {
+      await client.update({
+        index,
+        id,
+        body: { doc: updates },
+        refresh: true
+      });
+      return true;
+    } catch (error) {
+      console.error('[SearchService] Update error:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Delete a document
+   */
+  async deleteDocument(index, id) {
+    try {
+      await client.delete({
+        index,
+        id,
+        refresh: true
+      });
+      return true;
+    } catch (error) {
+      console.error('[SearchService] Delete error:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Bulk index documents
+   */
+  async bulkIndex(index, documents) {
+    try {
+      const operations = documents.flatMap(doc => [
+        { index: { _index: index, _id: doc._id || doc.id } },
+        doc
+      ]);
+
+      const result = await client.bulk({ body: operations, refresh: true });
+
+      return {
+        success: !result.errors,
+        indexed: documents.length,
+        errors: result.errors ? result.items.filter(i => i.index.error) : []
+      };
+    } catch (error) {
+      console.error('[SearchService] Bulk index error:', error);
+      throw error;
+    }
+  }
+
+  // Private helper methods
+
+  getSearchIndices(type) {
+    switch (type) {
+      case 'posts': return INDICES.POSTS;
+      case 'users': return INDICES.USERS;
+      case 'comments': return INDICES.COMMENTS;
+      case 'hashtags': return INDICES.HASHTAGS;
+      case 'all':
+      default:
+        return [INDICES.POSTS, INDICES.USERS, INDICES.HASHTAGS];
+    }
+  }
+
+  buildSearchQuery(query, filters, tenantId) {
+    const must = [];
+    const filter = [];
+
+    // Main query
+    if (query) {
+      must.push({
+        multi_match: {
+          query,
+          fields: ['caption^3', 'content^2', 'username^2', 'displayName', 'bio', 'tags^2'],
+          type: 'best_fields',
+          fuzziness: 'AUTO'
+        }
+      });
+    }
+
+    // Apply filters
+    if (filters.category) {
+      filter.push({ term: { category: filters.category } });
+    }
+    if (filters.mediaType) {
+      filter.push({ term: { mediaType: filters.mediaType } });
+    }
+    if (filters.dateFrom) {
+      filter.push({ range: { createdAt: { gte: filters.dateFrom } } });
+    }
+    if (filters.dateTo) {
+      filter.push({ range: { createdAt: { lte: filters.dateTo } } });
+    }
+    if (filters.verified !== undefined) {
+      filter.push({ term: { verified: filters.verified } });
+    }
+    if (filters.hashtags && filters.hashtags.length > 0) {
+      filter.push({ terms: { hashtags: filters.hashtags } });
+    }
+    if (tenantId) {
+      filter.push({ term: { tenantId } });
+    }
+
+    return {
+      bool: {
+        must: must.length > 0 ? must : [{ match_all: {} }],
+        filter
+      }
+    };
+  }
+
+  buildSortConfig(sort) {
+    switch (sort) {
+      case 'date':
+        return [{ createdAt: 'desc' }];
+      case 'popular':
+        return [{ likes: 'desc' }, { createdAt: 'desc' }];
+      case 'engagement':
+        return [{ engagementScore: 'desc' }];
+      case 'relevance':
+      default:
+        return ['_score', { createdAt: 'desc' }];
+    }
+  }
+
+  buildAggregations(type) {
+    const aggs = {};
+
+    if (type === 'posts' || type === 'all') {
+      aggs.categories = {
+        terms: { field: 'category', size: 20 }
+      };
+      aggs.mediaTypes = {
+        terms: { field: 'mediaType', size: 10 }
+      };
+      aggs.hashtags = {
+        terms: { field: 'hashtags', size: 30 }
+      };
+      aggs.dateHistogram = {
+        date_histogram: {
+          field: 'createdAt',
+          calendar_interval: 'day',
+          min_doc_count: 1
+        }
+      };
+    }
+
+    if (type === 'users' || type === 'all') {
+      aggs.colleges = {
+        terms: { field: 'college', size: 20 }
+      };
+      aggs.departments = {
+        terms: { field: 'department', size: 20 }
+      };
+    }
+
+    return aggs;
+  }
+
+  formatSearchResults(result, type) {
+    const hits = result.hits.hits.map(hit => ({
+      id: hit._id,
+      index: hit._index,
+      score: hit._score,
+      ...hit._source,
+      highlights: hit.highlight
+    }));
+
+    const response = {
+      total: result.hits.total.value,
+      hits,
+      took: result.took
     };
 
-    if (!filterString) return filters;
+    // Include aggregations
+    if (result.aggregations) {
+      response.facets = {};
 
-    const filterPairs = filterString.match(/(\w+):(\w+)/g) || [];
-
-    filterPairs.forEach(pair => {
-      const [key, value] = pair.split(':');
-      switch (key) {
-        case 'type':
-          filters.type = ['post', 'user', 'event'].includes(value) ? value : null;
-          break;
-        case 'date':
-          filters.date = ['last_day', 'last_week', 'last_month', 'last_year'].includes(value) ? value : null;
-          break;
-        case 'role':
-          filters.role = ['admin', 'moderator', 'user'].includes(value) ? value : null;
-          break;
-        case 'sort':
-          filters.sortBy = ['relevance', 'recent', 'popular', 'trending'].includes(value) ? value : 'relevance';
-          break;
-        case 'verified':
-          filters.verified = value === 'true';
-          break;
-        case 'limit':
-          filters.limit = Math.min(parseInt(value) || 20, 100);
-          break;
-        case 'skip':
-          filters.skip = Math.max(parseInt(value) || 0, 0);
-          break;
-      }
-    });
-
-    return filters;
-  }
-
-  /**
-   * Build date range query
-   * @param {string} dateFilter - 'last_day', 'last_week', 'last_month', 'last_year'
-   * @returns {Object} MongoDB date range query
-   */
-  static getDateRange(dateFilter) {
-    const now = new Date();
-    let startDate;
-
-    switch (dateFilter) {
-      case 'last_day':
-        startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-        break;
-      case 'last_week':
-        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-        break;
-      case 'last_month':
-        startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-        break;
-      case 'last_year':
-        startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-        break;
-      default:
-        return {};
-    }
-
-    return { createdAt: { $gte: startDate } };
-  }
-
-  /**
-   * Search Posts with full-text search and filters
-   */
-  static async searchPosts(query, filters = {}) {
-    try {
-      let searchQuery = {
-        isDeleted: false,
-        visibility: 'public'
-      };
-
-      // Text search
-      if (query && query.trim()) {
-        searchQuery.$text = { $search: query };
-      }
-
-      // Date filter
-      if (filters.date) {
-        Object.assign(searchQuery, this.getDateRange(filters.date));
-      }
-
-      // Build sort
-      let sort = { createdAt: -1 };
-      if (query && filters.sortBy === 'relevance') {
-        sort = { score: { $meta: 'textScore' }, createdAt: -1 };
-      } else if (filters.sortBy === 'popular') {
-        sort = { likeCount: -1, createdAt: -1 };
-      } else if (filters.sortBy === 'trending') {
-        // Trending: Recent + Popular
-        sort = { likeCount: -1, createdAt: -1 };
-      }
-
-      // Execute query
-      let queryBuilder = Post.find(searchQuery)
-        .select('title caption content author likeCount commentCount visibility createdAt tags')
-        .populate('author', 'username profilePicture role')
-        .skip(filters.skip || 0)
-        .limit(filters.limit || 20);
-
-      // Add text score if searching
-      if (query && query.trim()) {
-        queryBuilder = queryBuilder.select({ score: { $meta: 'textScore' } });
-      }
-
-      const [posts, total] = await Promise.all([
-        queryBuilder.sort(sort).exec(),
-        Post.countDocuments(searchQuery)
-      ]);
-
-      return {
-        results: posts.map(post => ({
-          _id: post._id,
-          type: 'post',
-          title: post.title || post.caption,
-          description: post.content?.substring(0, 150),
-          author: post.author,
-          likes: post.likeCount,
-          comments: post.commentCount,
-          createdAt: post.createdAt,
-          score: post.score
-        })),
-        total,
-        type: 'post'
-      };
-    } catch (error) {
-      logger.error('Search posts error:', error);
-      return { results: [], total: 0, type: 'post' };
-    }
-  }
-
-  /**
-   * Search Users with full-text search and filters
-   */
-  static async searchUsers(query, filters = {}) {
-    try {
-      let searchQuery = {
-        isDeleted: false,
-        isActive: true
-      };
-
-      // Text search
-      if (query && query.trim()) {
-        searchQuery.$text = { $search: query };
-      }
-
-      // Role filter
-      if (filters.role) {
-        searchQuery.role = filters.role;
-      }
-
-      // Verified filter
-      if (filters.verified !== null && filters.verified !== undefined) {
-        searchQuery.isVerified = filters.verified;
-      }
-
-      // Build sort
-      let sort = { createdAt: -1 };
-      if (query && filters.sortBy === 'relevance') {
-        sort = { score: { $meta: 'textScore' }, followerCount: -1 };
-      } else if (filters.sortBy === 'popular') {
-        sort = { followerCount: -1 };
-      }
-
-      // Execute query
-      let queryBuilder = User.find(searchQuery)
-        .select('username firstName lastName bio profilePicture role isVerified followerCount createdAt')
-        .skip(filters.skip || 0)
-        .limit(filters.limit || 20);
-
-      if (query && query.trim()) {
-        queryBuilder = queryBuilder.select({ score: { $meta: 'textScore' } });
-      }
-
-      const [users, total] = await Promise.all([
-        queryBuilder.sort(sort).exec(),
-        User.countDocuments(searchQuery)
-      ]);
-
-      return {
-        results: users.map(user => ({
-          _id: user._id,
-          type: 'user',
-          title: `${user.firstName} ${user.lastName}`,
-          username: user.username,
-          description: user.bio,
-          profilePicture: user.profilePicture,
-          role: user.role,
-          verified: user.isVerified,
-          followers: user.followerCount,
-          createdAt: user.createdAt,
-          score: user.score
-        })),
-        total,
-        type: 'user'
-      };
-    } catch (error) {
-      logger.error('Search users error:', error);
-      return { results: [], total: 0, type: 'user' };
-    }
-  }
-
-  /**
-   * Search Events with full-text search and filters
-   */
-  static async searchEvents(query, filters = {}) {
-    try {
-      let searchQuery = {
-        isDeleted: false,
-        status: { $in: ['scheduled', 'ongoing'] }
-      };
-
-      // Text search
-      if (query && query.trim()) {
-        searchQuery.$text = { $search: query };
-      }
-
-      // Date filter (events happening)
-      if (filters.date) {
-        const dateRange = this.getDateRange(filters.date);
-        if (dateRange.createdAt) {
-          searchQuery.createdAt = dateRange.createdAt;
+      for (const [key, agg] of Object.entries(result.aggregations)) {
+        if (agg.buckets) {
+          response.facets[key] = agg.buckets.map(b => ({
+            value: b.key,
+            count: b.doc_count
+          }));
         }
       }
-
-      // Build sort
-      let sort = { startDate: 1 }; // Upcoming events first
-      if (query && filters.sortBy === 'relevance') {
-        sort = { score: { $meta: 'textScore' }, startDate: 1 };
-      } else if (filters.sortBy === 'popular') {
-        sort = { attendeeCount: -1, startDate: 1 };
-      }
-
-      // Execute query
-      let queryBuilder = Event.find(searchQuery)
-        .select('title description location startDate endDate attendeeCount creator category')
-        .populate('creator', 'username profilePicture')
-        .skip(filters.skip || 0)
-        .limit(filters.limit || 20);
-
-      if (query && query.trim()) {
-        queryBuilder = queryBuilder.select({ score: { $meta: 'textScore' } });
-      }
-
-      const [events, total] = await Promise.all([
-        queryBuilder.sort(sort).exec(),
-        Event.countDocuments(searchQuery)
-      ]);
-
-      return {
-        results: events.map(event => ({
-          _id: event._id,
-          type: 'event',
-          title: event.title,
-          description: event.description?.substring(0, 150),
-          location: event.location,
-          startDate: event.startDate,
-          creator: event.creator,
-          attendees: event.attendeeCount,
-          category: event.category,
-          createdAt: event.createdAt,
-          score: event.score
-        })),
-        total,
-        type: 'event'
-      };
-    } catch (error) {
-      logger.error('Search events error:', error);
-      return { results: [], total: 0, type: 'event' };
     }
+
+    return response;
   }
 
-  /**
-   * Global unified search across all types
-   */
-  static async globalSearch(query, filterString = '', options = {}) {
+  async trackSearch(userId, query, filters, resultCount, tenantId) {
     try {
-      const filters = this.parseFilters(filterString);
-      const { type = null } = options;
-
-      // Search based on type filter
-      if (type === 'post') {
-        return this.searchPosts(query, filters);
-      } else if (type === 'user') {
-        return this.searchUsers(query, filters);
-      } else if (type === 'event') {
-        return this.searchEvents(query, filters);
-      }
-
-      // Search all types if no type specified
-      const [posts, users, events] = await Promise.all([
-        this.searchPosts(query, { ...filters, limit: 5, skip: 0 }),
-        this.searchUsers(query, { ...filters, limit: 5, skip: 0 }),
-        this.searchEvents(query, { ...filters, limit: 5, skip: 0 })
-      ]);
-
-      return {
-        posts: posts.results,
-        users: users.results,
-        events: events.results,
-        total: posts.total + users.total + events.total,
-        aggregated: true
-      };
+      await client.index({
+        index: INDICES.SEARCH_HISTORY,
+        body: {
+          userId,
+          query,
+          filters,
+          resultCount,
+          tenantId,
+          timestamp: new Date().toISOString()
+        }
+      });
     } catch (error) {
-      logger.error('Global search error:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Get search suggestions (autocomplete)
-   */
-  static async getSuggestions(query, limit = 10) {
-    try {
-      if (!query || query.length < 2) {
-        return { suggestions: [] };
-      }
-
-      // Search for users
-      const userSuggestions = await User.find(
-        { $text: { $search: query }, isActive: true, isDeleted: false },
-        { score: { $meta: 'textScore' } }
-      )
-        .select('username firstName')
-        .limit(limit / 2)
-        .sort({ score: { $meta: 'textScore' } })
-        .exec();
-
-      // Search for posts
-      const postSuggestions = await Post.find(
-        { $text: { $search: query }, visibility: 'public', isDeleted: false },
-        { score: { $meta: 'textScore' } }
-      )
-        .select('title')
-        .limit(limit / 2)
-        .sort({ score: { $meta: 'textScore' } })
-        .exec();
-
-      const suggestions = [
-        ...userSuggestions.map(u => ({
-          text: u.username,
-          type: 'user',
-          icon: 'user'
-        })),
-        ...postSuggestions.map(p => ({
-          text: p.title,
-          type: 'post',
-          icon: 'file'
-        }))
-      ].slice(0, limit);
-
-      return { suggestions };
-    } catch (error) {
-      logger.error('Get suggestions error:', error);
-      return { suggestions: [] };
-    }
-  }
-
-  /**
-   * Advanced search with pagination
-   */
-  static async advancedSearch(query, filterString = '', page = 1, limit = 20) {
-    try {
-      const filters = this.parseFilters(filterString);
-      filters.skip = (page - 1) * limit;
-      filters.limit = limit;
-
-      // Get results based on type
-      let result;
-      if (filters.type === 'post') {
-        result = await this.searchPosts(query, filters);
-      } else if (filters.type === 'user') {
-        result = await this.searchUsers(query, filters);
-      } else if (filters.type === 'event') {
-        result = await this.searchEvents(query, filters);
-      } else {
-        result = await this.globalSearch(query, filterString, { type: null });
-      }
-
-      return {
-        ...result,
-        page,
-        limit,
-        totalPages: Math.ceil(result.total / limit)
-      };
-    } catch (error) {
-      logger.error('Advanced search error:', error);
-      throw error;
+      console.error('[SearchService] Track search error:', error);
     }
   }
 }
 
-module.exports = SearchService;
+module.exports = new SearchService();
